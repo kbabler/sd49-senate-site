@@ -1,20 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import React, { useState, useEffect } from 'react';
 import { 
   ShieldCheck, 
-  TrendingDown, 
   ArrowRight,
+  Calculator,
+  GraduationCap,
+  Home,
+  CheckCircle2,
+  UserPlus,
+  Heart,
+  ChevronLeft,
+  Users,
+  TrendingDown,
   Database,
   Scale,
-  ChevronLeft,
-  Heart,
   Target,
+  Award,
   Zap,
-  Award
+  Star
 } from 'lucide-react';
 
 /** * BRAND CONFIGURATION */
 const BRAND_COLOR = "#755FBE";
+
+// Your actual filenames (mapped to files in public/images)
+const ASSETS = {
+  hero: "kris-babler-portrait.jpg",
+  family: "kris-family.jpg",
+  community: "kris-lakes.jpg",
+  action: "kris-coaching-basketball.jpg"
+};
 
 const SITE_CONTENT = {
   branding: {
@@ -22,44 +36,65 @@ const SITE_CONTENT = {
     title: "Independent for Senate SD49",
     shortName: "KB"
   },
-  auditStats: [
-    { 
-      title: "Betrayal of Stewardship", 
-      value: "$250 Million", 
-      desc: "Stolen from vulnerable children in the Feeding Our Future fraud. A systemic failure of executive oversight.",
-      icon: <TrendingDown className="text-red-500" />
+  issues: [
+    {
+      title: "Fiscal Watchdog",
+      points: [
+        "Reform the LGA formula to ensure Eden Prairie tax dollars return home.",
+        "Direct-to-homeowner property tax credits to offset levy increases.",
+        "Zero-based budgeting to audit the $17B state surplus."
+      ],
+      icon: <Calculator size={24} />
     },
-    { 
-      title: "The Accountability Gap", 
-      value: "$9 Billion", 
-      desc: "Funds identified by prosecutors as mismanaged or lost to agency inefficiency.",
-      icon: <Database style={{ color: BRAND_COLOR }} />
+    {
+      title: "Education Stewardship",
+      points: [
+        "Lift state-mandated caps on local school referendums.",
+        "Full funding for special education mandates (Cross-subsidy).",
+        "Common-sense SRO authority to ensure classroom safety."
+      ],
+      icon: <GraduationCap size={24} />
     },
-    { 
-      title: "The Net Donor Tax", 
-      value: "$1.18 Billion", 
-      desc: "In new taxes levied on productive districts like SD49 despite a record state surplus.",
-      icon: <Scale className="text-slate-900" />
+    {
+      title: "Local Autonomy",
+      points: [
+        "Oppose state-mandated upzoning and forced high-density duplexes.",
+        "Protect municipal zoning rights for Minnetonka & Eden Prairie.",
+        "Incentivize work-from-home infrastructure for the 27% remote workforce."
+      ],
+      icon: <Home size={24} />
     }
   ]
 };
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('home');
-  const [fraudCounter, setFraudCounter] = useState(250000000);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setFraudCounter(prev => prev + (Math.random() * 8.5));
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+    window.scrollTo(0, 0);
+  }, [activeTab]);
+
+  const CampaignImage = ({ src, alt, className }) => {
+    const [error, setError] = useState(false);
+    // Normalize source: if it's not an absolute path or URL, assume it's under /images/
+    const srcPath = src && !src.startsWith('/') && !src.startsWith('http') ? `/images/${src}` : src;
+    if (error) {
+      return (
+        <div className={`${className} bg-slate-200 flex flex-col items-center justify-center text-slate-400 p-6 text-center border-2 border-dashed border-slate-300`}>
+          <Users size={40} className="mb-2 opacity-20" />
+          <p className="text-[10px] font-black uppercase tracking-widest">{alt}</p>
+          <p className="text-[8px] mt-1 opacity-60">File: {srcPath}</p>
+        </div>
+      );
+    }
+    return <img src={srcPath} alt={alt} className={className} onError={() => setError(true)} />;
+  };
 
   const Navigation = () => (
-    <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-xl z-50 border-b border-slate-100 h-20 flex items-center">
+    <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-slate-100 h-20 flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('home')}>
-          <div className="bg-slate-900 text-white p-2 rounded-lg">
+          <div className="bg-slate-900 text-white p-2 rounded-lg shadow-lg">
             <span className="font-bold text-xl tracking-tighter italic">KB</span>
           </div>
           <div>
@@ -69,21 +104,16 @@ const App = () => {
         </div>
         
         <div className="hidden lg:flex gap-8 items-center text-[11px] font-black uppercase tracking-widest text-slate-400">
-          {['Logic', 'Audit', 'Service'].map(item => (
-            <button 
-              key={item}
-              onClick={() => setActiveTab(item.toLowerCase())}
-              className="hover:text-slate-900 transition-colors"
-              style={{ color: activeTab === item.toLowerCase() ? BRAND_COLOR : undefined }}
-            >
-              {item}
-            </button>
-          ))}
+          <button onClick={() => setActiveTab('home')} className={activeTab === 'home' ? 'text-slate-900' : 'hover:text-slate-600'}>The Mission</button>
+          <button onClick={() => setActiveTab('about')} className={activeTab === 'about' ? 'text-slate-900' : 'hover:text-slate-600'}>Meet Kris</button>
+          <button onClick={() => setActiveTab('issues')} className={activeTab === 'issues' ? 'text-slate-900' : 'hover:text-slate-600'}>Issues</button>
+          <button onClick={() => setActiveTab('volunteer')} className={activeTab === 'volunteer' ? 'text-slate-900' : 'hover:text-slate-600'}>Volunteer</button>
           <button 
-            className="text-white px-6 py-2.5 rounded-full transition-all shadow-lg font-black"
+            onClick={() => setActiveTab('pcr')}
+            className="text-white px-6 py-2.5 rounded-full transition-all shadow-lg font-black hover:scale-105 active:scale-95"
             style={{ backgroundColor: BRAND_COLOR }}
           >
-            SECURE $75 REFUND
+            DONATE & REFUND
           </button>
         </div>
       </div>
@@ -91,60 +121,95 @@ const App = () => {
   );
 
   const Hero = () => (
-    <section className="pt-40 pb-24 bg-white">
+    <section className="pt-32 pb-20 lg:pt-48 lg:pb-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <div className="animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-widest mb-8 border"
-                 style={{ backgroundColor: `${BRAND_COLOR}10`, color: BRAND_COLOR, borderColor: `${BRAND_COLOR}30` }}>
-              <ShieldCheck size={14} /> The 34th Vote Strategy
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="order-2 lg:order-1 relative z-10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border bg-slate-50 text-slate-600 border-slate-200 shadow-sm">
+              <Star size={14} style={{ color: BRAND_COLOR }} /> Roots in Eden Prairie & Minnetonka
             </div>
-            <h1 className="text-6xl lg:text-[5.5rem] font-black text-slate-900 leading-[0.9] mb-8 tracking-tighter">
-              Your Vote. <br/><span style={{ color: BRAND_COLOR }}>The State's Lever.</span>
+            <h1 className="text-5xl lg:text-[4.8rem] font-black text-slate-900 leading-[0.95] mb-8 tracking-tighter">
+              Results over Rhetoric. <br/>
+              <span style={{ color: BRAND_COLOR }}>People over Party.</span>
             </h1>
-            <p className="text-xl text-slate-500 mb-10 max-w-lg leading-relaxed font-medium">
-              Voters in Eden Prairie and Minnetonka aren't looking for a "vibe"—you're looking for an ROI on your tax dollars.
+            <p className="text-lg lg:text-xl text-slate-500 mb-10 max-w-lg leading-relaxed font-medium">
+              Kris Babler is your neighbor running for State Senate to restore focus to our district. He's an Independent leader putting the needs of our families above partisan noise.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
-                onClick={() => setActiveTab('logic')}
-                className="bg-slate-900 text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-slate-800 transition-all shadow-xl shadow-slate-200"
+                onClick={() => setActiveTab('about')}
+                className="bg-slate-900 text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-slate-800 transition-all shadow-xl"
               >
-                The Audit Logic <ArrowRight size={18} />
+                Meet Kris <ArrowRight size={18} />
+              </button>
+              <button 
+                onClick={() => setActiveTab('pcr')}
+                className="bg-white text-slate-900 border-2 border-slate-100 px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-slate-50 transition-all"
+              >
+                The $75 Refund
               </button>
             </div>
           </div>
           
-          <div className="relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="bg-slate-50 p-2 rounded-[2.5rem] shadow-inner border border-slate-100 overflow-hidden">
-               <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-200 relative overflow-hidden">
-                  <div className="flex justify-between items-center mb-10 border-b border-slate-50 pb-6">
-                    <h3 className="font-black text-slate-900 text-sm tracking-widest uppercase flex items-center gap-2">
-                       <Scale size={18} style={{ color: BRAND_COLOR }} /> Senate Dynamic Audit
-                    </h3>
-                    <div className="flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100">
-                       <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                       <span className="text-[10px] text-emerald-700 font-bold uppercase tracking-widest">Active Lever</span>
-                    </div>
-                  </div>
+          <div className="order-1 lg:order-2 relative">
+             <div className="relative aspect-[4/5] bg-slate-100 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white transform lg:rotate-2 hover:rotate-0 transition-transform duration-500 z-10">
+                <CampaignImage 
+                  src={ASSETS.hero} 
+                  alt="Kris Babler Official Portrait" 
+                  className="w-full h-full object-cover"
+                />
+             </div>
+             <div className="absolute -bottom-10 -right-10 w-full h-full bg-slate-50 rounded-[3rem] -z-0 transform -rotate-6"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 
-                  <div className="space-y-8">
-                    <div className="flex gap-1 h-20 rounded-2xl overflow-hidden p-1.5 bg-slate-100 border border-slate-200">
-                       <div className="w-[49%] bg-blue-600 rounded-xl flex items-center justify-center text-white font-black text-[10px] tracking-widest">DFL (33)</div>
-                       <div className="w-[2%] mx-0.5 rounded-lg flex items-center justify-center text-white font-black text-[10px] animate-pulse" style={{ backgroundColor: BRAND_COLOR }}>1</div>
-                       <div className="w-[49%] bg-red-600 rounded-xl flex items-center justify-center text-white font-black text-[10px] tracking-widest">GOP (33)</div>
-                    </div>
-                    
-                    <div className="p-8 bg-slate-900 rounded-[2rem] relative overflow-hidden group">
-                       <div className="absolute top-0 right-0 p-6 opacity-20 text-white"><TrendingDown size={40} /></div>
-                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Live Mismanagement Counter</p>
-                       <p className="text-4xl font-mono font-bold text-white tracking-tighter">
-                          ${fraudCounter.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}
-                       </p>
-                       <p className="mt-4 text-[11px] text-slate-500 font-medium max-w-[200px]">Estimated funds lost since 2022.</p>
-                    </div>
-                  </div>
-               </div>
+  const AboutSection = () => (
+    <section className="py-24 bg-slate-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-4 pt-12">
+              <div className="rounded-3xl overflow-hidden shadow-lg aspect-square bg-white p-2">
+                 <CampaignImage src={ASSETS.family} alt="Kris with family" className="w-full h-full object-cover rounded-2xl" />
+              </div>
+              <div className="bg-slate-900 p-8 rounded-3xl text-white">
+                 <Heart className="mb-4 text-rose-500" />
+                 <p className="text-xs font-bold leading-relaxed uppercase tracking-tight">Dedicated to the future of our local families.</p>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="rounded-3xl overflow-hidden shadow-lg aspect-[3/4] bg-white p-2">
+                 <CampaignImage src={ASSETS.community} alt="In the community" className="w-full h-full object-cover rounded-2xl" />
+              </div>
+              <div className="rounded-3xl overflow-hidden shadow-lg aspect-square bg-white p-2">
+                 <CampaignImage src={ASSETS.action} alt="Taking action" className="w-full h-full object-cover rounded-2xl" />
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-8">
+            <h2 className="text-4xl lg:text-5xl font-black tracking-tighter text-slate-900 leading-tight">
+              A Life Defined by <br/>
+              <span style={{ color: BRAND_COLOR }}>Service & Stewardship.</span>
+            </h2>
+            <div className="space-y-6 text-lg text-slate-600 font-medium leading-relaxed">
+              <p>
+                Kris Babler isn't running for a title—he's running to represent his neighbors. As a professional, a father, and a long-time resident of SD49, Kris understands that our community values results over political theater.
+              </p>
+              <p>
+                From Eden Prairie to Minnetonka, he has seen the impact of St. Paul's disconnect from suburban priorities. Kris is focused on a common-sense approach that protects our schools, secures our tax dollars, and preserves local control.
+              </p>
+              <div className="flex gap-4 pt-4">
+                <button 
+                  onClick={() => setActiveTab('issues')}
+                  className="bg-slate-900 text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg"
+                >
+                  View the Playbook
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -152,25 +217,40 @@ const App = () => {
     </section>
   );
 
-  const AuditDashboard = () => (
-    <section className="py-32 bg-slate-50">
+  const IssuesSection = () => (
+    <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-24 animate-fade-in">
-          <h2 className="text-4xl font-black text-slate-900 mb-6 tracking-tight">Performance Metrics</h2>
-          <p className="text-slate-500 max-w-2xl mx-auto text-xl font-medium">
-            Accountability isn't a partisan value—it's a requirement for a $60 Billion organization.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-10">
-          {SITE_CONTENT.auditStats.map((item, idx) => (
-            <div key={idx} className="bg-white p-12 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 group animate-fade-in" style={{ animationDelay: `${idx * 0.1}s` }}>
-              <div className="bg-slate-50 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 border border-slate-100 group-hover:scale-110 transition-transform">
-                {item.icon}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl font-black text-slate-900 mb-4 tracking-tight uppercase italic">The SD49 Playbook</h2>
+            <p className="text-slate-500 font-medium italic">Practical solutions for a productive district.</p>
+          </div>
+          <div className="hidden md:block">
+            <div className="flex -space-x-3">
+              {[1,2,3].map(i => (
+                <div key={i} className="w-12 h-12 rounded-full border-4 border-white bg-slate-200" />
+              ))}
+              <div className="w-12 h-12 rounded-full border-4 border-white bg-slate-900 flex items-center justify-center text-white text-[10px] font-black italic">
+                +49
               </div>
-              <h3 className="font-black text-slate-900 text-xl mb-4 tracking-tight">{item.title}</h3>
-              <p className="text-4xl font-mono font-bold text-slate-900 mb-6 tracking-tighter">{item.value}</p>
-              <p className="text-slate-500 text-sm leading-relaxed font-medium">{item.desc}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {SITE_CONTENT.issues.map((issue, idx) => (
+            <div key={idx} className="bg-slate-50 p-10 rounded-[2.5rem] border border-slate-100 hover:border-slate-300 transition-all group">
+              <div className="w-14 h-14 rounded-2xl mb-8 flex items-center justify-center text-white transition-transform group-hover:scale-110" style={{ backgroundColor: BRAND_COLOR }}>
+                {issue.icon}
+              </div>
+              <h3 className="text-2xl font-black mb-6 text-slate-900">{issue.title}</h3>
+              <ul className="space-y-4">
+                {issue.points.map((pt, pIdx) => (
+                  <li key={pIdx} className="flex gap-3 text-sm font-medium text-slate-600 leading-relaxed">
+                    <CheckCircle2 size={18} className="text-emerald-500 shrink-0" /> {pt}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
@@ -178,63 +258,74 @@ const App = () => {
     </section>
   );
 
-  const LogicPage = () => (
-    <div className="pt-40 pb-32 px-4 max-w-5xl mx-auto animate-fade-in">
-      <h2 className="text-6xl font-black mb-12 tracking-tighter">Strategic <span style={{ color: BRAND_COLOR }}>Accountability</span></h2>
-      <div className="grid md:grid-cols-2 gap-12 mb-20">
-         <div className="bg-slate-900 text-white p-12 rounded-[3rem] shadow-2xl">
-            <h3 className="text-2xl font-black mb-6 italic" style={{ color: BRAND_COLOR }}>The Independent Veto</h3>
-            <p className="text-slate-400 text-lg leading-relaxed font-medium mb-10">
-               "A Republican vote in SD49 is a vote for the powerless minority. An Independent vote for Kris Babler creates the 34th Vote."
-            </p>
-         </div>
-         <div className="bg-white p-12 rounded-[3rem] border border-slate-200 shadow-sm relative overflow-hidden">
-            <Heart size={100} className="absolute -bottom-10 -right-10 opacity-5" style={{ color: BRAND_COLOR }} />
-            <h3 className="text-2xl font-black mb-6">Values Safeguard</h3>
-            <p className="text-slate-500 text-lg leading-relaxed font-medium mb-10">
-               Accountability is a requirement. Fraud steals from the vulnerable. Fix the machine to protect the people.
-            </p>
-         </div>
+  const VolunteerPortal = () => (
+    <div className="pt-32 pb-24 px-4 max-w-4xl mx-auto">
+      <div className="bg-white rounded-[3rem] p-8 md:p-16 border border-slate-100 shadow-2xl">
+        <div className="flex items-center gap-4 mb-8">
+          <div className="p-4 rounded-2xl bg-indigo-50 text-indigo-600"><UserPlus /></div>
+          <div>
+            <h2 className="text-3xl font-black tracking-tight uppercase">Join the Movement</h2>
+            <p className="text-slate-500 font-medium">Lend your voice to a neighbor-led campaign.</p>
+          </div>
+        </div>
+        <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+          <div className="grid md:grid-cols-2 gap-6">
+            <input type="text" className="w-full bg-slate-50 border-none p-5 rounded-2xl font-medium outline-none focus:ring-2" style={{"--tw-ring-color": BRAND_COLOR}} placeholder="Full Name" />
+            <input type="tel" className="w-full bg-slate-50 border-none p-5 rounded-2xl font-medium outline-none focus:ring-2" style={{"--tw-ring-color": BRAND_COLOR}} placeholder="Mobile Number" />
+          </div>
+          <button className="w-full py-6 rounded-2xl text-white font-black text-sm uppercase tracking-widest shadow-lg" style={{ backgroundColor: BRAND_COLOR }}>
+            GET INVOLVED
+          </button>
+        </form>
       </div>
-      <button onClick={() => setActiveTab('home')} className="flex items-center gap-3 font-black text-xs uppercase tracking-widest text-slate-400 hover:text-slate-900 transition-colors">
-         <ChevronLeft size={16} /> Back to Dashboard
-      </button>
+    </div>
+  );
+
+  const DonationPortal = () => (
+    <div className="pt-32 pb-24 px-4 max-w-4xl mx-auto">
+      <div className="bg-slate-900 rounded-[3rem] p-8 md:p-16 text-white shadow-2xl relative overflow-hidden">
+        <div className="relative z-10">
+          <h2 className="text-4xl font-black mb-6 tracking-tighter uppercase">Support SD49 Independence</h2>
+          <p className="text-slate-400 text-lg mb-10 max-w-xl leading-relaxed">
+            The <span className="text-white font-bold underline decoration-indigo-500">Political Contribution Refund</span> makes it easy. Donate $75 and the State of Minnesota will refund you 100%.
+          </p>
+          <div className="flex flex-wrap gap-4">
+             <button className="bg-white text-slate-900 px-8 py-4 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-slate-100 transition-colors">Donate $75</button>
+             <button className="bg-slate-800 text-white px-8 py-4 rounded-xl font-black uppercase text-xs tracking-widest border border-slate-700 hover:bg-slate-700">Other Amount</button>
+          </div>
+        </div>
+        <div className="absolute top-0 right-0 p-12 opacity-10">
+          <Award size={120} />
+        </div>
+      </div>
     </div>
   );
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 tracking-tight">
-      <style>{styles}</style>
       <Navigation />
       
-      <main>
+      <main className="animate-fade-in">
         {activeTab === 'home' && (
           <>
             <Hero />
-            <AuditDashboard />
+            <AboutSection />
+            <IssuesSection />
           </>
         )}
         
-        {activeTab === 'logic' && <LogicPage />}
-
-        {!['home', 'logic'].includes(activeTab) && (
-           <div className="pt-40 pb-32 text-center">
-             <div className="max-w-xl mx-auto py-24 bg-slate-50 rounded-[3rem] border border-slate-200">
-               <Target size={60} className="mx-auto text-slate-200 mb-8" />
-               <h2 className="text-2xl font-black mb-4 uppercase tracking-tighter">Syncing Data...</h2>
-               <p className="text-slate-500 px-12 mb-10">This module is currently populating with campaign intelligence.</p>
-               <button onClick={() => setActiveTab('home')} className="bg-slate-900 text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase">Return Home</button>
-             </div>
-           </div>
-        )}
+        {activeTab === 'about' && <AboutSection />}
+        {activeTab === 'issues' && <IssuesSection />}
+        {activeTab === 'volunteer' && <VolunteerPortal />}
+        {activeTab === 'pcr' && <DonationPortal />}
       </main>
 
-      <footer className="bg-white py-24 border-t border-slate-100 mt-auto">
+      <footer className="bg-slate-50 py-20 border-t border-slate-100 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[9px] text-slate-400 border border-slate-200 px-5 py-2.5 rounded-full uppercase font-black tracking-[0.3em] inline-block mb-4">
+          <p className="text-[9px] text-slate-400 border border-slate-200 px-6 py-3 rounded-full uppercase font-black tracking-[0.4em] inline-block mb-4">
             Prepared and paid for by Babler for Senate (SD49)
           </p>
-          <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest">© 2025 Babler for Senate</p>
+          <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest block">© 2025 Kris Babler for State Senate</p>
         </div>
       </footer>
     </div>
