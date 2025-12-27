@@ -63,7 +63,7 @@ const CONFIG = {
       icon: <GraduationCap className="w-6 h-6" />,
       points: [
         "Lifting state caps on local school referendums.",
-        "Full funding for special education mandates.",
+        "Ensuring high-quality educators through competitive, professional compensation.",
         "Ensuring safe, distraction-free learning environments."
       ]
     },

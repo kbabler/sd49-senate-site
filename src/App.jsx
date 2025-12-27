@@ -50,7 +50,7 @@ const SITE_CONTENT = {
       title: "Education Stewardship",
       points: [
         "Lift state-mandated caps on local school referendums.",
-        "Full funding for special education mandates (Cross-subsidy).",
+        "Ensuring high-quality educators through competitive, professional compensation.",
         "Common-sense SRO authority to ensure classroom safety."
       ],
       icon: <GraduationCap size={24} />
