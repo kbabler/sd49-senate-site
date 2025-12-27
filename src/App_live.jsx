@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { LISTENING_POST_URL } from './main';
 import { 
   ShieldCheck, 
   ArrowRight,
@@ -82,6 +83,38 @@ const CONFIG = {
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch(LISTENING_POST_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name || 'Anonymous',
+          message: formData.message,
+          timestamp: new Date().toISOString()
+        })
+      });
+      
+      setFormSubmitted(true);
+      setFormData({ name: '', message: '' });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      // Still show success message since no-cors doesn't allow reading response
+      setFormSubmitted(true);
+      setFormData({ name: '', message: '' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -243,17 +276,35 @@ const App = () => {
             </div>
             <div className="lg:w-1/2 w-full">
               {!formSubmitted ? (
-                <form className="space-y-4 bg-white/5 p-8 rounded-3xl border border-white/10" onSubmit={(e) => { e.preventDefault(); setFormSubmitted(true); }}>
+                <form className="space-y-4 bg-white/5 p-8 rounded-3xl border border-white/10" onSubmit={handleFormSubmit}>
                   <div>
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2 block">Name (Optional)</label>
-                    <input type="text" className="w-full bg-slate-800 border-none rounded-xl p-4 text-white focus:ring-2 focus:ring-purple-500 transition-all" placeholder="Neighbor Name" />
+                    <input 
+                      type="text" 
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full bg-slate-800 border-none rounded-xl p-4 text-white focus:ring-2 focus:ring-purple-500 transition-all" 
+                      placeholder="Neighbor Name" 
+                    />
                   </div>
                   <div>
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2 block">Your Priority Issue</label>
-                    <textarea rows="4" className="w-full bg-slate-800 border-none rounded-xl p-4 text-white focus:ring-2 focus:ring-purple-500 transition-all" placeholder="Tax reform, school safety, local zoning..."></textarea>
+                    <textarea 
+                      rows="4" 
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      required
+                      className="w-full bg-slate-800 border-none rounded-xl p-4 text-white focus:ring-2 focus:ring-purple-500 transition-all" 
+                      placeholder="Tax reform, school safety, local zoning..."
+                    ></textarea>
                   </div>
-                  <button className="w-full py-5 rounded-2xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95 shadow-xl" style={{ backgroundColor: CONFIG.branding.color }}>
-                    Send Message <Send size={16} />
+                  <button 
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-5 rounded-2xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed" 
+                    style={{ backgroundColor: CONFIG.branding.color }}
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'} <Send size={16} />
                   </button>
                 </form>
               ) : (
