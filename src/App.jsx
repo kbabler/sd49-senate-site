@@ -138,7 +138,7 @@ const App = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
                 onClick={() => setActiveTab('about')}
-                className="bg-brand-navy text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-slate-800 transition-all shadow-xl"
+                className="bg-brand-navy text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-opacity-90 transition-all shadow-xl"
               >
                 Meet Kris <ArrowRight size={18} />
               </button>

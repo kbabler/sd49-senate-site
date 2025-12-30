@@ -212,7 +212,7 @@ const App = () => {
               </h1>
               <p className="text-xl text-slate-500 mb-10 max-w-lg leading-relaxed font-medium">{CONFIG.copy.heroSub}</p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button onClick={() => scrollToSection('about')} className="bg-brand-navy text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-slate-800 transition-all shadow-xl shadow-slate-200">Meet Kris <ArrowRight size={18} /></button>
+                <button onClick={() => scrollToSection('about')} className="bg-brand-navy text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-opacity-90 transition-all shadow-xl shadow-slate-200">Meet Kris <ArrowRight size={18} /></button>
               </div>
             </div>
             <div className="relative">
