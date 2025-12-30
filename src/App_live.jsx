@@ -26,7 +26,7 @@ const CONFIG = {
     name: "KRIS BABLER",
     title: "Independent for State Senate",
     district: "SD49 (Eden Prairie & Minnetonka)",
-    color: "#4B384C", // Signature Purple
+    color: "#755FBE", // Signature Purple
     accent: "#10b981", // Emerald Green
   },
   
@@ -147,18 +147,18 @@ const App = () => {
     <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-100 h-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex justify-between items-center">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-          <div className="bg-slate-900 text-white w-10 h-10 flex items-center justify-center rounded-lg font-black italic text-xl shadow-lg">KB</div>
+          <div className="bg-brand-navy text-white w-10 h-10 flex items-center justify-center rounded-lg font-black italic text-xl shadow-lg">KB</div>
           <div className="hidden sm:block text-left">
-            <h1 className="font-black text-slate-900 leading-none tracking-tighter uppercase text-lg">{CONFIG.branding.name}</h1>
+            <h1 className="font-black text-brand-navy leading-none tracking-tighter uppercase text-lg">{CONFIG.branding.name}</h1>
             <p className="text-[9px] text-slate-500 font-bold tracking-widest uppercase">{CONFIG.branding.district}</p>
           </div>
         </div>
 
         <div className="hidden md:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
-          <button onClick={() => scrollToSection('issues')} className="hover:text-slate-900 transition-colors">Playbook</button>
-          <button onClick={() => scrollToSection('listening-post')} className="hover:text-slate-900 transition-colors">Listening Post</button>
-          <button onClick={() => scrollToSection('about')} className="hover:text-slate-900 transition-colors">The Man</button>
-          <button onClick={() => scrollToSection('service')} className="hover:text-slate-900 transition-colors">Service in Action</button>
+          <button onClick={() => scrollToSection('issues')} className="hover:text-brand-navy transition-colors">Playbook</button>
+          <button onClick={() => scrollToSection('listening-post')} className="hover:text-brand-navy transition-colors">Listening Post</button>
+          <button onClick={() => scrollToSection('about')} className="hover:text-brand-navy transition-colors">The Man</button>
+          <button onClick={() => scrollToSection('service')} className="hover:text-brand-navy transition-colors">Service in Action</button>
           <button 
             onClick={() => scrollToSection('pcr')}
             className="text-white px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95"
@@ -192,7 +192,7 @@ const App = () => {
   );
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900 overflow-x-hidden selection:bg-indigo-100">
+    <div className="min-h-screen bg-white font-sans text-brand-navy overflow-x-hidden selection:bg-indigo-100">
       <Navigation />
       
       {/* HERO */}
@@ -203,7 +203,7 @@ const App = () => {
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest mb-8 bg-slate-50 border border-slate-200 text-slate-500">
                 <Star size={14} style={{ color: CONFIG.branding.color }} /> Independent Voice for SD49
               </div>
-              <h1 className="text-5xl md:text-8xl font-black text-slate-900 leading-[0.85] mb-8 tracking-tighter">
+              <h1 className="text-5xl md:text-8xl font-black text-brand-navy leading-[0.85] mb-8 tracking-tighter">
                 {CONFIG.copy.heroLead.split('.').map((part, i) => (
                   <span key={i} className={i === 1 ? 'block' : ''} style={i === 1 ? { color: CONFIG.branding.color } : {}}>
                     {part}{i === 0 ? '.' : ''}
@@ -212,7 +212,7 @@ const App = () => {
               </h1>
               <p className="text-xl text-slate-500 mb-10 max-w-lg leading-relaxed font-medium">{CONFIG.copy.heroSub}</p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button onClick={() => scrollToSection('about')} className="bg-slate-900 text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-slate-800 transition-all shadow-xl shadow-slate-200">Meet Kris <ArrowRight size={18} /></button>
+                <button onClick={() => scrollToSection('about')} className="bg-brand-navy text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-slate-800 transition-all shadow-xl shadow-slate-200">Meet Kris <ArrowRight size={18} /></button>
               </div>
             </div>
             <div className="relative">
@@ -229,7 +229,7 @@ const App = () => {
       <section id="issues" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tighter uppercase italic">The SD49 Playbook</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">The SD49 Playbook</h2>
             <p className="text-slate-500 font-medium italic">Focused on the needs of Eden Prairie & Minnetonka families.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -238,7 +238,7 @@ const App = () => {
                 <div className="w-14 h-14 rounded-2xl mb-8 flex items-center justify-center text-white transition-transform group-hover:scale-110" style={{ backgroundColor: CONFIG.branding.color }}>
                   {issue.icon}
                 </div>
-                <h3 className="text-2xl font-black mb-6 text-slate-900">{issue.title}</h3>
+                <h3 className="text-2xl font-black mb-6 text-brand-navy">{issue.title}</h3>
                 <ul className="space-y-4">
                   {issue.points.map((pt, j) => (
                     <li key={j} className="flex gap-3 text-sm text-slate-600 font-medium leading-relaxed">
@@ -256,7 +256,7 @@ const App = () => {
       {/* LISTENING POST */}
       <section id="listening-post" className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="bg-slate-900 rounded-[3rem] p-8 md:p-16 text-white relative flex flex-col lg:flex-row gap-16 items-center shadow-2xl">
+          <div className="bg-brand-navy rounded-[3rem] p-8 md:p-16 text-white relative flex flex-col lg:flex-row gap-16 items-center shadow-2xl">
             <div className="lg:w-1/2">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 bg-white/10 text-white/80 border border-white/10">
                 <MessageSquare size={14} /> The Listening Post
@@ -331,7 +331,7 @@ const App = () => {
                 <div className="h-3/5 rounded-3xl overflow-hidden shadow-lg border-2 border-white">
                   <SmartImage src={CONFIG.images.family} alt="Family Portrait" className="w-full h-full object-cover" />
                 </div>
-                <div className="h-2/5 bg-slate-900 rounded-3xl p-8 text-white flex flex-col justify-center shadow-lg">
+                <div className="h-2/5 bg-brand-navy rounded-3xl p-8 text-white flex flex-col justify-center shadow-lg">
                   <Heart className="mb-4 text-rose-500" />
                   <p className="text-xs font-black uppercase tracking-widest leading-relaxed">Dedicated to the future of our district.</p>
                 </div>
@@ -346,7 +346,7 @@ const App = () => {
               </div>
             </div>
             <div className="space-y-8">
-              <h2 className="text-5xl font-black tracking-tighter text-slate-900 leading-[0.9]">
+              <h2 className="text-5xl font-black tracking-tighter text-brand-navy leading-[0.9]">
                 {CONFIG.copy.bioTitle.split(' ').slice(0, 3).join(' ')} <br/>
                 <span style={{ color: CONFIG.branding.color }}>{CONFIG.copy.bioTitle.split(' ').slice(3).join(' ')}.</span>
               </h2>
@@ -363,7 +363,7 @@ const App = () => {
       <section id="service" className="py-24 bg-slate-50 border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-black text-slate-900 mb-4 tracking-tighter uppercase italic">Service in Action</h2>
+            <h2 className="text-3xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">Service in Action</h2>
             <p className="text-slate-500 font-medium">A neighbor committed to doing the work.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -382,12 +382,12 @@ const App = () => {
 
       {/* PCR / DONATE */}
       <section id="pcr" className="py-24 px-4 max-w-5xl mx-auto">
-        <div className="bg-slate-900 rounded-[3.5rem] p-10 md:p-20 text-white shadow-2xl relative overflow-hidden">
+        <div className="bg-brand-navy rounded-[3.5rem] p-10 md:p-20 text-white shadow-2xl relative overflow-hidden">
           <div className="relative z-10">
             <h2 className="text-5xl font-black mb-8 tracking-tighter uppercase italic">Maximize Your Impact</h2>
             <p className="text-slate-400 text-xl mb-12 max-w-2xl leading-relaxed font-medium">{CONFIG.copy.pcrText}</p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-white text-slate-900 px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:scale-105 transition-all shadow-xl">Donate $75 Now</button>
+              <button className="bg-white text-brand-navy px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:scale-105 transition-all shadow-xl">Donate $75 Now</button>
               <button className="bg-slate-800 text-white px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest border border-slate-700 hover:bg-slate-700 transition-all">Custom Amount</button>
             </div>
           </div>
