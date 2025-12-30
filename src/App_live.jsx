@@ -26,7 +26,7 @@ const CONFIG = {
     name: "KRIS BABLER",
     title: "Independent for State Senate",
     district: "SD49 (Eden Prairie & Minnetonka)",
-    color: "#755FBE", // Signature Purple
+    color: "#4B384C", // Signature Purple
     accent: "#10b981", // Emerald Green
   },
   

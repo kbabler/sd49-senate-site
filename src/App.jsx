@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 
 /** * BRAND CONFIGURATION */
-const BRAND_COLOR = "#755FBE";
+const BRAND_COLOR = "#4B384C";
 
 // Your actual filenames (mapped to files in public/images)
 const ASSETS = {
