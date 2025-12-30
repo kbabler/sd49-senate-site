@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         brand: {
           purple: "#755FBE",
+          navy: "#4B384C",
         }
       }
     },

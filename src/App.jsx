@@ -94,20 +94,20 @@ const App = () => {
     <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-slate-100 h-20 flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('home')}>
-          <div className="bg-slate-900 text-white p-2 rounded-lg shadow-lg">
+          <div className="bg-brand-navy text-white p-2 rounded-lg shadow-lg">
             <span className="font-bold text-xl tracking-tighter italic">KB</span>
           </div>
           <div>
-            <h1 className="font-bold text-slate-900 leading-none tracking-tight uppercase text-lg">KRIS BABLER</h1>
+            <h1 className="font-bold text-brand-navy leading-none tracking-tight uppercase text-lg">KRIS BABLER</h1>
             <p className="text-[9px] text-slate-500 font-bold tracking-[0.2em] uppercase">Independent for SD49</p>
           </div>
         </div>
         
         <div className="hidden lg:flex gap-8 items-center text-[11px] font-black uppercase tracking-widest text-slate-400">
-          <button onClick={() => setActiveTab('home')} className={activeTab === 'home' ? 'text-slate-900' : 'hover:text-slate-600'}>The Mission</button>
-          <button onClick={() => setActiveTab('about')} className={activeTab === 'about' ? 'text-slate-900' : 'hover:text-slate-600'}>Meet Kris</button>
-          <button onClick={() => setActiveTab('issues')} className={activeTab === 'issues' ? 'text-slate-900' : 'hover:text-slate-600'}>Issues</button>
-          <button onClick={() => setActiveTab('volunteer')} className={activeTab === 'volunteer' ? 'text-slate-900' : 'hover:text-slate-600'}>Volunteer</button>
+          <button onClick={() => setActiveTab('home')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>The Mission</button>
+          <button onClick={() => setActiveTab('about')} className={activeTab === 'about' ? 'text-brand-navy' : 'hover:text-slate-600'}>Meet Kris</button>
+          <button onClick={() => setActiveTab('issues')} className={activeTab === 'issues' ? 'text-brand-navy' : 'hover:text-slate-600'}>Issues</button>
+          <button onClick={() => setActiveTab('volunteer')} className={activeTab === 'volunteer' ? 'text-brand-navy' : 'hover:text-slate-600'}>Volunteer</button>
           <button 
             onClick={() => setActiveTab('pcr')}
             className="text-white px-6 py-2.5 rounded-full transition-all shadow-lg font-black hover:scale-105 active:scale-95"
@@ -128,7 +128,7 @@ const App = () => {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border bg-slate-50 text-slate-600 border-slate-200 shadow-sm">
               <Star size={14} style={{ color: BRAND_COLOR }} /> Roots in Eden Prairie & Minnetonka
             </div>
-            <h1 className="text-5xl lg:text-[4.8rem] font-black text-slate-900 leading-[0.95] mb-8 tracking-tighter">
+            <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-8 tracking-tighter">
               Results over Rhetoric. <br/>
               <span style={{ color: BRAND_COLOR }}>People over Party.</span>
             </h1>
@@ -138,13 +138,13 @@ const App = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
                 onClick={() => setActiveTab('about')}
-                className="bg-slate-900 text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-slate-800 transition-all shadow-xl"
+                className="bg-brand-navy text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-opacity-90 transition-all shadow-xl"
               >
                 Meet Kris <ArrowRight size={18} />
               </button>
               <button 
                 onClick={() => setActiveTab('pcr')}
-                className="bg-white text-slate-900 border-2 border-slate-100 px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-slate-50 transition-all"
+                className="bg-white text-brand-navy border-2 border-slate-100 px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-slate-50 transition-all"
               >
                 The $75 Refund
               </button>
@@ -175,7 +175,7 @@ const App = () => {
               <div className="rounded-3xl overflow-hidden shadow-lg aspect-square bg-white p-2">
                  <CampaignImage src={ASSETS.family} alt="Kris with family" className="w-full h-full object-cover rounded-2xl" />
               </div>
-              <div className="bg-slate-900 p-8 rounded-3xl text-white">
+              <div className="bg-brand-navy p-8 rounded-3xl text-white">
                  <Heart className="mb-4 text-rose-500" />
                  <p className="text-xs font-bold leading-relaxed uppercase tracking-tight">Dedicated to the future of our local families.</p>
               </div>
@@ -191,7 +191,7 @@ const App = () => {
           </div>
 
           <div className="space-y-8">
-            <h2 className="text-4xl lg:text-5xl font-black tracking-tighter text-slate-900 leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-black tracking-tighter text-brand-navy leading-tight">
               A Life Defined by <br/>
               <span style={{ color: BRAND_COLOR }}>Service & Stewardship.</span>
             </h2>
@@ -205,7 +205,7 @@ const App = () => {
               <div className="flex gap-4 pt-4">
                 <button 
                   onClick={() => setActiveTab('issues')}
-                  className="bg-slate-900 text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg"
+                  className="bg-brand-navy text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg"
                 >
                   View the Playbook
                 </button>
@@ -222,7 +222,7 @@ const App = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="max-w-2xl">
-            <h2 className="text-4xl font-black text-slate-900 mb-4 tracking-tight uppercase italic">The SD49 Playbook</h2>
+            <h2 className="text-4xl font-black text-brand-navy mb-4 tracking-tight uppercase italic">The SD49 Playbook</h2>
             <p className="text-slate-500 font-medium italic">Practical solutions for a productive district.</p>
           </div>
           <div className="hidden md:block">
@@ -230,7 +230,7 @@ const App = () => {
               {[1,2,3].map(i => (
                 <div key={i} className="w-12 h-12 rounded-full border-4 border-white bg-slate-200" />
               ))}
-              <div className="w-12 h-12 rounded-full border-4 border-white bg-slate-900 flex items-center justify-center text-white text-[10px] font-black italic">
+              <div className="w-12 h-12 rounded-full border-4 border-white bg-brand-navy flex items-center justify-center text-white text-[10px] font-black italic">
                 +49
               </div>
             </div>
@@ -243,7 +243,7 @@ const App = () => {
               <div className="w-14 h-14 rounded-2xl mb-8 flex items-center justify-center text-white transition-transform group-hover:scale-110" style={{ backgroundColor: BRAND_COLOR }}>
                 {issue.icon}
               </div>
-              <h3 className="text-2xl font-black mb-6 text-slate-900">{issue.title}</h3>
+              <h3 className="text-2xl font-black mb-6 text-brand-navy">{issue.title}</h3>
               <ul className="space-y-4">
                 {issue.points.map((pt, pIdx) => (
                   <li key={pIdx} className="flex gap-3 text-sm font-medium text-slate-600 leading-relaxed">
@@ -283,14 +283,14 @@ const App = () => {
 
   const DonationPortal = () => (
     <div className="pt-32 pb-24 px-4 max-w-4xl mx-auto">
-      <div className="bg-slate-900 rounded-[3rem] p-8 md:p-16 text-white shadow-2xl relative overflow-hidden">
+      <div className="bg-brand-navy rounded-[3rem] p-8 md:p-16 text-white shadow-2xl relative overflow-hidden">
         <div className="relative z-10">
           <h2 className="text-4xl font-black mb-6 tracking-tighter uppercase">Support SD49 Independence</h2>
           <p className="text-slate-400 text-lg mb-10 max-w-xl leading-relaxed">
             The <span className="text-white font-bold underline decoration-indigo-500">Political Contribution Refund</span> makes it easy. Donate $75 and the State of Minnesota will refund you 100%.
           </p>
           <div className="flex flex-wrap gap-4">
-             <button className="bg-white text-slate-900 px-8 py-4 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-slate-100 transition-colors">Donate $75</button>
+             <button className="bg-white text-brand-navy px-8 py-4 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-slate-100 transition-colors">Donate $75</button>
              <button className="bg-slate-800 text-white px-8 py-4 rounded-xl font-black uppercase text-xs tracking-widest border border-slate-700 hover:bg-slate-700">Other Amount</button>
           </div>
         </div>
@@ -302,7 +302,7 @@ const App = () => {
   );
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900 tracking-tight">
+    <div className="min-h-screen bg-white font-sans text-brand-navy tracking-tight">
       <Navigation />
       
       <main className="animate-fade-in">
