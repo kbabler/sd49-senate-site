@@ -95,7 +95,7 @@ const App = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('home')}>
           <div className="w-10 h-10 rounded-lg shadow-lg overflow-hidden">
-            <img src="/images/kb-logo.png" alt="KB Logo" className="w-full h-full object-cover" />
+            <img src="/images/KB_Logo_Plum_512px.png" alt="KB Logo" className="w-full h-full object-cover" />
           </div>
           <div>
             <h1 className="font-bold text-brand-navy leading-none tracking-tight uppercase text-lg">KRIS BABLER</h1>
