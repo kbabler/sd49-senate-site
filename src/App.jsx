@@ -94,6 +94,7 @@ const App = () => {
     <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-slate-100 h-20 flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('home')}>
+          {/* KB Logo - Updated 2025-12-31 */}
           <div className="w-10 h-10 rounded-lg shadow-lg overflow-hidden">
             <img src="/images/KB_Logo_Plum_512px.png" alt="Kris Babler Logo" className="w-full h-full object-cover" />
           </div>
