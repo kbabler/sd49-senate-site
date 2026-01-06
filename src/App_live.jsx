@@ -44,8 +44,8 @@ const CONFIG = {
     heroLead: "Results over Rhetoric. People over Party.",
     heroSub: "Kris Babler is a dedicated neighbor and independent voice running to represent Eden Prairie and Minnetonka with common-sense leadership.",
     bioTitle: "A Neighbor Running To Make A Difference",
-    bioShort: "As a professional, a father, and a long-time resident of SD49, Kris understands that our community values results over political theater.",
-    bioLong: "He is running to ensure our voices aren't lost in partisan noise. Kris believes that effective governance happens when we listen more and lecture less.",
+    bioShort: "Kris Babler is a builder, not a partisan. A former U.S. Army Captain and CEO, Kris is running for the State Senate to bring executive-level accountability to St. Paul. In a Senate split by a single vote, the party bosses want another soldier for their political war. Kris offers something different: the strength to be independent. He isn't going to St. Paul to join a caucus; he's going there to lead the mission for Eden Prairie and Minnetonka.",
+    bioLong: "He is a fighter who knows that the hardest mission of all is forcing both parties to stop the theater and start cooperating. Kris has the backbone to stand alone against the party machine to ensure your voice is finally heard. He's not just asking for your vote—he's asking to hold the line for our community.",
     pcrText: "The Political Contribution Refund allows you to donate $75 and get a full refund from the State of Minnesota. It's a zero-cost way to fuel our campaign."
   },
 
@@ -231,8 +231,8 @@ const App = () => {
       <section id="issues" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">The SD49 Playbook</h2>
-            <p className="text-slate-500 font-medium italic">Focused on the needs of Eden Prairie & Minnetonka families.</p>
+            <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">The SD49 Playbook: Leadership for Eden Prairie & Minnetonka</h2>
+            <p className="text-slate-500 font-medium italic">The mission: Restoring professional accountability and local control.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {CONFIG.issues.map((issue, i) => (
@@ -263,7 +263,7 @@ const App = () => {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 bg-white/10 text-white/80 border border-white/10">
                 <MessageSquare size={14} /> The Listening Post
               </div>
-              <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tighter leading-none italic uppercase">Your Issues <br/><span style={{ color: CONFIG.branding.color }}>Matter.</span></h2>
+              <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tighter leading-none italic uppercase">Your Voice. <br/><span style={{ color: CONFIG.branding.color }}>My Mission.</span></h2>
               <p className="text-slate-400 text-lg font-medium leading-relaxed mb-8">Representative government only works when the representative listens. Tell Kris what issues are impacting your family in SD49.</p>
               <div className="space-y-4">
                 <div className="flex items-center gap-4 text-sm font-bold">
@@ -335,7 +335,7 @@ const App = () => {
                 </div>
                 <div className="h-2/5 bg-brand-navy rounded-3xl p-8 text-white flex flex-col justify-center shadow-lg">
                   <Heart className="mb-4 text-rose-500" />
-                  <p className="text-xs font-black uppercase tracking-widest leading-relaxed">Dedicated to the future of our district.</p>
+                  <p className="text-xs font-black uppercase tracking-widest leading-relaxed">Dedicated to the future of Minnesota.</p>
                 </div>
               </div>
               <div className="space-y-4">
@@ -366,7 +366,7 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">Service in Action</h2>
-            <p className="text-slate-500 font-medium">A neighbor committed to doing the work.</p>
+            <p className="text-slate-500 font-medium max-w-4xl mx-auto text-lg leading-relaxed">After 85 years of my family serving this country, I've learned that the hardest missions are the ones most worth winning. Today, we're told we have to choose between two parties more interested in winning the news cycle than fixing our schools or protecting our tax dollars. I'm running as an Independent because I believe Eden Prairie and Minnetonka deserve a Senator who reports to their neighbors, not a party boss. I'm not going to St. Paul to join the gridlock—I'm going there to break it.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="aspect-video rounded-3xl overflow-hidden shadow-md">
