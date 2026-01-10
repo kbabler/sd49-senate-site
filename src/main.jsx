@@ -1,5 +1,6 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
+import { Analytics } from '@vercel/analytics/react'
 import App from './App_live'
 import './index.css'
 
@@ -9,5 +10,6 @@ const root = document.getElementById('root')
 createRoot(root).render(
   <React.StrictMode>
     <App />
+    <Analytics />
   </React.StrictMode>
 )
