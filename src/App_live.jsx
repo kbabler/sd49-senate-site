@@ -44,8 +44,8 @@ const CONFIG = {
     heroLead: "Results over Rhetoric. People over Party.",
     heroSub: "Kris Babler is a dedicated neighbor and independent voice running to represent Eden Prairie and Minnetonka with common-sense leadership.",
     bioTitle: "A Neighbor Running To Make A Difference",
-    bioShort: "Kris Babler is a builder, not a partisan. A former U.S. Army Captain and CEO, Kris is running for the State Senate to bring executive-level accountability to St. Paul. In a Senate split by a single vote, the party bosses want another soldier for their political war. Kris offers something different: the strength to be independent. He isn't going to St. Paul to join a caucus; he's going there to lead the mission for Eden Prairie and Minnetonka.",
-    bioLong: "He is a fighter who knows that the hardest mission of all is forcing both parties to stop the theater and start cooperating. Kris has the backbone to stand alone against the party machine to ensure your voice is finally heard. He's not just asking for your vote—he's asking to hold the line for our community.",
+    bioShort: "As a professional, a father, and a long-time resident of SD49, Kris understands that our community values results over political theater.",
+    bioLong: "He is running to ensure our voices aren't lost in partisan noise. Kris believes that effective governance happens when we listen more and lecture less.",
     pcrText: "The Political Contribution Refund allows you to donate $75 and get a full refund from the State of Minnesota. It's a zero-cost way to fuel our campaign."
   },
 
@@ -54,27 +54,21 @@ const CONFIG = {
       title: "Fiscal Watchdog",
       icon: <Calculator className="w-6 h-6" />,
       points: [
-        "Reform the LGA formula to keep tax dollars local.",
-        "Direct property tax credits to offset rising levies.",
-        "Audit state spending to prioritize essential services."
+        "Auditing state funding to ensure our local tax dollars stay in SD49."
       ]
     },
     {
       title: "Education Excellence",
       icon: <GraduationCap className="w-6 h-6" />,
       points: [
-        "Lifting state caps on local school referendums.",
-        "Ensuring high-quality educators through competitive, professional compensation.",
-        "Ensuring safe, distraction-free learning environments."
+        "Restoring local control so our parents, not St. Paul, decide school funding."
       ]
     },
     {
       title: "Local Autonomy",
       icon: <Home className="w-6 h-6" />,
       points: [
-        "Protecting municipal zoning from state mandates.",
-        "Preserving the unique character of neighborhoods.",
-        "Empowering local leaders to make local decisions."
+        "Ensuring city planning stays local by opposing one-size-fits-all state zoning mandates."
       ]
     }
   ]
@@ -366,7 +360,7 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">Service in Action</h2>
-            <p className="text-slate-500 font-medium max-w-4xl mx-auto text-lg leading-relaxed">After 85 years of my family serving this country, I've learned that the hardest missions are the ones most worth winning. Today, we're told we have to choose between two parties more interested in winning the news cycle than fixing our schools or protecting our tax dollars. I'm running as an Independent because I believe Eden Prairie and Minnetonka deserve a Senator who reports to their neighbors, not a party boss. I'm not going to St. Paul to join the gridlock—I'm going there to break it.</p>
+            <p className="text-slate-500 font-medium">Applying professional leadership to solve local challenges for our neighbors.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="aspect-video rounded-3xl overflow-hidden shadow-md">
@@ -382,15 +376,14 @@ const App = () => {
         </div>
       </section>
 
-      {/* PCR / DONATE */}
+      {/* JOIN EXPLORATORY COMMITTEE */}
       <section id="pcr" className="py-24 px-4 max-w-5xl mx-auto">
         <div className="bg-brand-navy rounded-[3.5rem] p-10 md:p-20 text-white shadow-2xl relative overflow-hidden">
           <div className="relative z-10">
-            <h2 className="text-5xl font-black mb-8 tracking-tighter uppercase italic">Maximize Your Impact</h2>
-            <p className="text-slate-400 text-xl mb-12 max-w-2xl leading-relaxed font-medium">{CONFIG.copy.pcrText}</p>
+            <h2 className="text-5xl font-black mb-8 tracking-tighter uppercase italic">Join the Exploratory Committee</h2>
+            <p className="text-slate-400 text-xl mb-12 max-w-2xl leading-relaxed font-medium">We are currently in the exploratory phase and are not accepting financial contributions at this time. However, your support is vital. Sign up below to be the first to know when we formally launch and how you can maximize your impact through the Minnesota PCR program.</p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-white text-brand-navy px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:scale-105 transition-all shadow-xl">Donate $75 Now</button>
-              <button className="bg-slate-800 text-white px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest border border-slate-700 hover:bg-slate-700 transition-all">Custom Amount</button>
+              <a href="{LISTENING_POST_URL}" target="_blank" rel="noopener noreferrer" className="bg-white text-brand-navy px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:scale-105 transition-all shadow-xl">Sign Up Now</a>
             </div>
           </div>
           <div className="absolute top-0 right-0 p-16 opacity-10 pointer-events-none text-white">
@@ -402,6 +395,7 @@ const App = () => {
       <footer className="bg-slate-50 py-20 border-t border-slate-100 text-center">
         <div className="max-w-7xl mx-auto px-4">
           <p className="text-[10px] text-slate-400 border border-slate-200 px-6 py-3 rounded-full uppercase font-black tracking-[0.4em] inline-block mb-8">Prepared and paid for by Babler for Senate (SD49)</p>
+          <p className="text-xs text-slate-500 max-w-3xl mx-auto mb-8 leading-relaxed">Babler for Senate is an exploratory committee. Kris Babler has not yet formally declared as a candidate for SD49. All funds and activities are currently dedicated to evaluating the viability of an independent, common-sense voice for our district.</p>
           <div className="flex justify-center gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">
             <span>Eden Prairie, MN</span>
             <span>Minnetonka, MN</span>
