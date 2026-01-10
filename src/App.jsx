@@ -67,8 +67,31 @@ const SITE_CONTENT = {
   ]
 };
 
+const SplashOverlay = ({ onDismiss }) => {
+  return (
+    <div className="fixed inset-0 bg-white z-[100] flex items-center justify-center">
+      <div className="text-center px-6 max-w-2xl">
+        <div className="w-32 h-32 mx-auto mb-8 rounded-2xl shadow-2xl overflow-hidden">
+          <img src="/images/KB_Logo_Plum_512px.png" alt="Kris Babler Logo" className="w-full h-full object-cover" />
+        </div>
+        <p className="text-2xl text-slate-600 font-bold mb-8">
+          Results over rhetoric
+        </p>
+        <button
+          onClick={onDismiss}
+          className="px-8 py-4 rounded-full font-bold text-white transition-all hover:scale-105 shadow-lg"
+          style={{ backgroundColor: BRAND_COLOR }}
+        >
+          Enter Site
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const App = () => {
   const [activeTab, setActiveTab] = useState('home');
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -304,6 +327,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans text-brand-navy tracking-tight">
+      {showSplash && <SplashOverlay onDismiss={() => setShowSplash(false)} />}
       <Navigation />
       
       <main className="animate-fade-in">
