@@ -24,7 +24,7 @@ import {
 const CONFIG = {
   branding: {
     name: "KRIS BABLER",
-    title: "Independent for State Senate",
+    title: "Babler for State Senate",
     district: "SD49 (Eden Prairie & Minnetonka)",
     color: "#755FBE", // Signature Purple
     accent: "#10b981", // Emerald Green
@@ -41,11 +41,11 @@ const CONFIG = {
   },
 
   copy: {
-    heroLead: "Results over Rhetoric. People over Party.",
-    heroSub: "Kris Babler is a dedicated neighbor and independent voice running to represent Eden Prairie and Minnetonka with common-sense leadership.",
+    heroLead: "Our District. Their Mess. Your Choice.",
+    heroSub: "I'm Kris Babler. I'm running for State Senate because I think we've had enough of the noise and the drama. We don't need more professional politicians lecturing us; we need a neighbor who actually shows up, listens to what's happening on our streets, and focuses on the basic job of making things work again. I'm not interested in the partisan games—I just want to make sure Eden Prairie and Minnetonka stay the best places in the state to live and work.",
     bioTitle: "A Neighbor Running To Make A Difference",
-    bioShort: "As a professional, a father, and a long-time resident of SD49, Kris understands that our community values results over political theater.",
-    bioLong: "He is running to ensure our voices aren't lost in partisan noise. Kris believes that effective governance happens when we listen more and lecture less.",
+    bioShort: "I'm a dad, a local business owner, and a neighbor who believes that if you see a problem, you step up to help fix it. My family has been in Minnesota for over a hundred years, and I'm running to make sure the next hundred are just as bright for my kids—and yours.\nMy path to this campaign wasn't through politics; it was through service:",
+    bioLong: "In the Army: As a Captain, I learned that leadership isn't about your rank or your party—it's about the mission and the people you're responsible for. When plans failed, we didn't point fingers; we found a way to get the job done. I want to bring that mission-first accountability to St. Paul.\nIn Our Schools: Working in school administration, I saw firsthand how much red tape gets in the way of actual learning. We need to stop the top-down experiments and get back to supporting our teachers and parents so our kids can thrive in the classroom.\nOn the Court: Coaching basketball is where I've seen the real Minnesota. It's about teamwork, discipline, and showing up for each other. I'm not a career politician—I'm running to be a teammate for Eden Prairie and Minnetonka.\nIn Business: I know what it's like to balance a budget and keep a team moving forward when things get tough. I understand that every dollar St. Paul spends comes out of your pocket, and I'll treat your tax dollars with the same respect I treat my own bottom line.\nI'm not interested in the drama. I'm here to build a team, listen more than I lecture, and leave our district better than I found it.",
     pcrText: "The Political Contribution Refund allows you to donate $75 and get a full refund from the State of Minnesota. It's a zero-cost way to fuel our campaign."
   },
 
@@ -54,21 +54,21 @@ const CONFIG = {
       title: "Fiscal Watchdog",
       icon: <Calculator className="w-6 h-6" />,
       points: [
-        "Auditing state funding to ensure our local tax dollars stay in SD49."
+        "Stop the fraud. I'll demand professional audits to ensure your taxes fund results, not St. Paul's systemic waste."
       ]
     },
     {
-      title: "Education Excellence",
+      title: "Educational Excellence",
       icon: <GraduationCap className="w-6 h-6" />,
       points: [
-        "Restoring local control so our parents, not St. Paul, decide school funding."
+        "Classrooms over bureaucracy. Let local parents and teachers decide our priorities, not top-down mandates from St. Paul."
       ]
     },
     {
-      title: "Local Autonomy",
+      title: "Minnesota Advantage",
       icon: <Home className="w-6 h-6" />,
       points: [
-        "Ensuring city planning stays local by opposing one-size-fits-all state zoning mandates."
+        "Stop the math of failure. I'll fight to restore our state's competitive edge and economic growth."
       ]
     }
   ]
@@ -82,8 +82,146 @@ const SplashOverlay = () => {
           <img src="/images/KB_Logo_Plum_512px.png" alt="Kris Babler Logo" className="w-full h-full object-cover" />
         </div>
         <p className="text-2xl text-slate-600 font-bold mb-8">
-          Results over rhetoric
+          Our District. Their Deficit. Your Choice.
         </p>
+      </div>
+    </div>
+  );
+};
+
+const ExploratoryCommitteeForm = () => {
+  const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    zipCode: ''
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+
+    try {
+      const formBody = new URLSearchParams(formData);
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxjCAL4h7o2mzToxKglPX3mNjzah8b4RnsuE_MBtqBINVawlD0eMvhzALITdgMSqtJKsA/exec', {
+        method: 'POST',
+        body: formBody,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ firstName: '', lastName: '', email: '', phone: '', zipCode: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setStatus('error');
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  return (
+    <div className="bg-brand-navy rounded-[3.5rem] p-10 md:p-20 text-white shadow-2xl relative overflow-hidden">
+      <div className="relative z-10">
+        <h2 className="text-5xl font-black mb-8 tracking-tighter uppercase italic">Join the Exploratory Committee</h2>
+        <p className="text-slate-400 text-xl mb-12 max-w-2xl leading-relaxed font-medium">
+          We are currently in the exploratory phase and are not accepting financial contributions at this time. However, your support is vital. Sign up below to be the first to know when we formally launch and how you can maximize your impact through the Minnesota PCR program.
+        </p>
+
+        {status === 'success' ? (
+          <div className="bg-white/10 border-2 border-white/30 rounded-2xl p-8 max-w-2xl">
+            <div className="flex items-center gap-4 mb-4">
+              <CheckCircle2 size={32} className="text-emerald-400" />
+              <h3 className="text-2xl font-black">Thanks for joining the team!</h3>
+            </div>
+            <p className="text-slate-300">We'll keep you updated on our progress and let you know when we formally launch.</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="max-w-2xl space-y-4">
+            <div className="grid md:grid-cols-2 gap-4">
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder="First Name"
+                required
+                disabled={status === 'submitting'}
+                className="px-6 py-4 rounded-xl text-brand-navy font-medium focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50"
+              />
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder="Last Name"
+                required
+                disabled={status === 'submitting'}
+                className="px-6 py-4 rounded-xl text-brand-navy font-medium focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50"
+              />
+            </div>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email Address"
+              required
+              disabled={status === 'submitting'}
+              className="w-full px-6 py-4 rounded-xl text-brand-navy font-medium focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50"
+            />
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="Phone Number (Optional)"
+              disabled={status === 'submitting'}
+              className="w-full px-6 py-4 rounded-xl text-brand-navy font-medium focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50"
+            />
+            <input
+              type="text"
+              name="zipCode"
+              value={formData.zipCode}
+              onChange={handleChange}
+              placeholder="Zip Code"
+              required
+              pattern="[0-9]{5}"
+              title="5-digit zip code"
+              disabled={status === 'submitting'}
+              className="w-full px-6 py-4 rounded-xl text-brand-navy font-medium focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50"
+            />
+            <button
+              type="submit"
+              disabled={status === 'submitting'}
+              className="bg-white text-brand-navy px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:scale-105 transition-all shadow-xl flex items-center gap-3 disabled:opacity-50 disabled:hover:scale-100"
+            >
+              {status === 'submitting' ? 'Joining...' : 'Join the Team'} <Send size={18} />
+            </button>
+            {status === 'error' && (
+              <p className="text-red-300 text-sm">Something went wrong. Please try again.</p>
+            )}
+          </form>
+        )}
+
+        <p className="text-slate-400 text-xs mt-6 max-w-2xl">
+          By signing up, you agree to receive campaign updates from Babler for Senate. We value your privacy and will never sell your information.
+        </p>
+      </div>
+      <div className="absolute top-0 right-0 p-16 opacity-10 pointer-events-none text-white">
+        <Award size={200} />
       </div>
     </div>
   );
@@ -204,7 +342,6 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans text-brand-navy overflow-x-hidden selection:bg-indigo-100">
-      <SplashOverlay />
       <Navigation />
       
       {/* HERO */}
@@ -218,7 +355,7 @@ const App = () => {
               <h1 className="text-5xl md:text-8xl font-black text-brand-navy leading-[0.85] mb-8 tracking-tighter">
                 {CONFIG.copy.heroLead.split('.').map((part, i) => (
                   <span key={i} className={i === 1 ? 'block' : ''} style={i === 1 ? { color: CONFIG.branding.color } : {}}>
-                    {part}{i === 0 ? '.' : ''}
+                    {part}{i < 3 && part ? '.' : ''}
                   </span>
                 ))}
               </h1>
@@ -242,7 +379,6 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">The SD49 Playbook: Leadership for Eden Prairie & Minnetonka</h2>
-            <p className="text-slate-500 font-medium italic">The mission: Restoring professional accountability and local control.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {CONFIG.issues.map((issue, i) => (
@@ -364,7 +500,23 @@ const App = () => {
               </h2>
               <div className="space-y-6 text-lg text-slate-600 font-medium leading-relaxed">
                 <p>{CONFIG.copy.bioShort}</p>
-                <p>{CONFIG.copy.bioLong}</p>
+                <ul className="space-y-4">
+                  {CONFIG.copy.bioLong.split('\n').map((item, i) => (
+                    <li key={i} className="flex gap-3">
+                      {!item.startsWith("I'm not interested") && (
+                        <CheckCircle2 size={20} className="text-emerald-500 shrink-0 mt-1" />
+                      )}
+                      <span className={item.startsWith("I'm not interested") ? "mt-4" : ""}>
+                        {item.startsWith('In the Army:') || item.startsWith('In Our Schools:') || item.startsWith('On the Court:') || item.startsWith('In Business:') ? (
+                          <>
+                            <strong className="text-brand-navy">{item.split(':')[0]}:</strong>
+                            {item.substring(item.indexOf(':') + 1)}
+                          </>
+                        ) : item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -376,7 +528,8 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">Service in Action</h2>
-            <p className="text-slate-500 font-medium">Applying professional leadership to solve local challenges for our neighbors.</p>
+            <p className="text-slate-500 font-medium">Between my grandfather, my father, and my own time as a Captain, our family has a combined 85 years of military service.</p>
+            <p className="text-slate-500 font-medium mt-4">Service isn't a slogan for me; it's a family tradition of protecting the people and the values that make Eden Prairie and Minnetonka home. Whether it's on a mission abroad or on a basketball court here at home, I believe in showing up for the team.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="aspect-video rounded-3xl overflow-hidden shadow-md">
@@ -389,23 +542,15 @@ const App = () => {
               <SmartImage src={CONFIG.images.service3} alt="Neighborhood Meeting" className="w-full h-full object-cover" />
             </div>
           </div>
+          <p className="text-slate-400 text-xs mt-8 text-center max-w-3xl mx-auto">
+            Kris Babler is a former member of the U.S. Army. Use of his military rank, job titles, and photographs in uniform does not imply endorsement by the Department of the Army or the Department of Defense.
+          </p>
         </div>
       </section>
 
       {/* JOIN EXPLORATORY COMMITTEE */}
       <section id="pcr" className="py-24 px-4 max-w-5xl mx-auto">
-        <div className="bg-brand-navy rounded-[3.5rem] p-10 md:p-20 text-white shadow-2xl relative overflow-hidden">
-          <div className="relative z-10">
-            <h2 className="text-5xl font-black mb-8 tracking-tighter uppercase italic">Join the Exploratory Committee</h2>
-            <p className="text-slate-400 text-xl mb-12 max-w-2xl leading-relaxed font-medium">We are currently in the exploratory phase and are not accepting financial contributions at this time. However, your support is vital. Sign up below to be the first to know when we formally launch and how you can maximize your impact through the Minnesota PCR program.</p>
-            <div className="flex flex-wrap gap-4">
-              <a href="{LISTENING_POST_URL}" target="_blank" rel="noopener noreferrer" className="bg-white text-brand-navy px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:scale-105 transition-all shadow-xl">Sign Up Now</a>
-            </div>
-          </div>
-          <div className="absolute top-0 right-0 p-16 opacity-10 pointer-events-none text-white">
-            <Award size={200} />
-          </div>
-        </div>
+        <ExploratoryCommitteeForm />
       </section>
 
       <footer className="bg-slate-50 py-20 border-t border-slate-100 text-center">
