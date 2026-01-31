@@ -541,8 +541,8 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">Service in Action</h2>
-            <p className="text-slate-500 font-medium">Between my grandfather, my father, and my own time as a Captain, our family has a combined 85 years of military service.</p>
-            <p className="text-slate-500 font-medium mt-4">Service isn't a slogan for me; it's a family tradition of protecting the people and the values that make Eden Prairie and Minnetonka home. Whether it's on a mission abroad or on a basketball court here at home, I believe in showing up for the team.</p>
+            <p className="text-slate-500 font-medium"><strong className="text-brand-navy">85 years of combined military service.</strong> Between my grandfather, my father, and my own time as a Captain, service is more than a slogan for me—it's a family tradition.</p>
+            <p className="text-slate-500 font-medium mt-4">Whether it's on a mission abroad or a basketball court here in Eden Prairie, I believe in showing up for the team and protecting the values that make our community home.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="aspect-video rounded-3xl overflow-hidden shadow-md">
