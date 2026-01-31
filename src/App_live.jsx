@@ -42,10 +42,10 @@ const CONFIG = {
 
   copy: {
     heroLead: "Our District. Their Mess. Your Choice.",
-    heroSub: "The post-partisan era is beginning. With a record 45% of Americans now independent—including 56% of Gen Z—the old party machines have lost their mandate. In a Senate split 34–33, a partisan is just a brick in a wall. I am the Lever. I'm running as an independent to be the 34th vote that forces St. Paul to stop the shouting and start delivering. I view our fundamental liberties as settled law—I will block the distractions so we can restore the standard of excellence Eden Prairie and Minnetonka expect.",
+    heroSub: "The Independent Majority is here. In a Senate split 34–33, a partisan is just a brick in a wall. I am the Lever. I'm running to be the 34th vote that forces St. Paul to stop the shouting and start delivering.",
     bioTitle: "A Neighbor Running To Make A Difference",
-    bioShort: "I'm a dad, a local business owner, and a neighbor who believes that if you see a problem, you step up to help fix it. My family has been in Minnesota for over a hundred years, and I'm running to make sure the next hundred are just as bright for my kids—and yours.\nMy path to this campaign wasn't through politics; it was through service:",
-    bioLong: "In the Army: As a Captain, I learned that leadership isn't about your rank or your party—it's about the mission and the people you're responsible for. When plans failed, we didn't point fingers; we found a way to get the job done. I want to bring that mission-first accountability to St. Paul.\nIn Our Schools: Working in school administration, I saw firsthand how much red tape gets in the way of actual learning. We need to stop the top-down experiments and get back to supporting our teachers and parents so our kids can thrive in the classroom.\nOn the Court: Coaching basketball is where I've seen the real Minnesota. It's about teamwork, discipline, and showing up for each other. I'm not a career politician—I'm running to be a teammate for Eden Prairie and Minnetonka.\nIn Business: I know what it's like to balance a budget and keep a team moving forward when things get tough. I understand that every dollar St. Paul spends comes out of your pocket, and I'll treat your tax dollars with the same respect I treat my own bottom line.\nI'm not interested in the drama. I'm here to build a team, listen more than I lecture, and leave our district better than I found it.",
+    bioShort: "I'm a dad, a local business owner, and a neighbor who believes that if you see a problem, you step up. My path to this campaign wasn't through politics; it was through service.",
+    bioLong: "Leadership Under Pressure As a U.S. Army Captain, I learned that leadership isn't about rank—it's about the mission and the people. When a plan fails in the field, you don't point fingers; you adapt and get the job done. I'm bringing that same \"mission-first\" accountability to St. Paul.\nCutting the Red Tape Working in School Administration, I saw how top-down mandates from the state get in the way of actual learning. We need to stop the experiments and start supporting our teachers and parents so our kids can thrive.\nBuilding the Team Coaching basketball is where I've seen the real Minnesota. It's about discipline and showing up for each other. I'm not a career politician—I'm running to be a teammate for Eden Prairie and Minnetonka.\nProtecting the Bottom Line As a Business Owner, I know the weight of a budget. Every dollar St. Paul spends comes out of your pocket. I will treat your tax dollars with the same respect I treat my own bottom line—because you've earned it.",
     pcrText: "The Political Contribution Refund allows you to donate $75 and get a full refund from the State of Minnesota. It's a zero-cost way to fuel our campaign."
   },
 
@@ -68,14 +68,14 @@ const CONFIG = {
       title: "Minnesota Advantage",
       icon: <Home className="w-6 h-6" />,
       points: [
-        "Stop the math of failure. I'll fight to restore our state's competitive edge and economic growth."
+        "Restore the Minnesota Advantage. I'll fight to restore our state's competitive edge and economic growth."
       ]
     },
     {
-      title: "Protecting Liberty",
+      title: "Settled Law",
       icon: <ShieldCheck className="w-6 h-6" />,
       points: [
-        "Reproductive freedom and marriage equality are settled law. I will block distractions."
+        "I view reproductive freedom and marriage equality as settled. I'm here to block distractions, not relitigate the past."
       ]
     }
   ]
@@ -514,12 +514,18 @@ const App = () => {
                         <CheckCircle2 size={20} className="text-emerald-500 shrink-0 mt-1" />
                       )}
                       <span className={item.startsWith("I'm not interested") ? "mt-4" : ""}>
-                        {item.startsWith('In the Army:') || item.startsWith('In Our Schools:') || item.startsWith('On the Court:') || item.startsWith('In Business:') ? (
-                          <>
-                            <strong className="text-brand-navy">{item.split(':')[0]}:</strong>
-                            {item.substring(item.indexOf(':') + 1)}
-                          </>
-                        ) : item}
+                        {(() => {
+                          if (item.startsWith('Leadership Under Pressure')) {
+                            return <><strong className="text-brand-navy">Leadership Under Pressure</strong>{item.substring('Leadership Under Pressure'.length)}</>;
+                          } else if (item.startsWith('Cutting the Red Tape')) {
+                            return <><strong className="text-brand-navy">Cutting the Red Tape</strong>{item.substring('Cutting the Red Tape'.length)}</>;
+                          } else if (item.startsWith('Building the Team')) {
+                            return <><strong className="text-brand-navy">Building the Team</strong>{item.substring('Building the Team'.length)}</>;
+                          } else if (item.startsWith('Protecting the Bottom Line')) {
+                            return <><strong className="text-brand-navy">Protecting the Bottom Line</strong>{item.substring('Protecting the Bottom Line'.length)}</>;
+                          }
+                          return item;
+                        })()}
                       </span>
                     </li>
                   ))}
