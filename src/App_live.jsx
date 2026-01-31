@@ -42,7 +42,7 @@ const CONFIG = {
 
   copy: {
     heroLead: "Our District. Their Mess. Your Choice.",
-    heroSub: "I'm Kris Babler. I'm running for State Senate because I think we've had enough of the noise and the drama. We don't need more professional politicians lecturing us; we need a neighbor who actually shows up, listens to what's happening on our streets, and focuses on the basic job of making things work again. I'm not interested in the partisan games—I just want to make sure Eden Prairie and Minnetonka stay the best places in the state to live and work.",
+    heroSub: "The post-partisan era is beginning. With a record 45% of Americans now independent—including 56% of Gen Z—the old party machines have lost their mandate. In a Senate split 34–33, a partisan is just a brick in a wall. I am the Lever. I'm running as an independent to be the 34th vote that forces St. Paul to stop the shouting and start delivering. I view our fundamental liberties as settled law—I will block the distractions so we can restore the standard of excellence Eden Prairie and Minnetonka expect.",
     bioTitle: "A Neighbor Running To Make A Difference",
     bioShort: "I'm a dad, a local business owner, and a neighbor who believes that if you see a problem, you step up to help fix it. My family has been in Minnesota for over a hundred years, and I'm running to make sure the next hundred are just as bright for my kids—and yours.\nMy path to this campaign wasn't through politics; it was through service:",
     bioLong: "In the Army: As a Captain, I learned that leadership isn't about your rank or your party—it's about the mission and the people you're responsible for. When plans failed, we didn't point fingers; we found a way to get the job done. I want to bring that mission-first accountability to St. Paul.\nIn Our Schools: Working in school administration, I saw firsthand how much red tape gets in the way of actual learning. We need to stop the top-down experiments and get back to supporting our teachers and parents so our kids can thrive in the classroom.\nOn the Court: Coaching basketball is where I've seen the real Minnesota. It's about teamwork, discipline, and showing up for each other. I'm not a career politician—I'm running to be a teammate for Eden Prairie and Minnetonka.\nIn Business: I know what it's like to balance a budget and keep a team moving forward when things get tough. I understand that every dollar St. Paul spends comes out of your pocket, and I'll treat your tax dollars with the same respect I treat my own bottom line.\nI'm not interested in the drama. I'm here to build a team, listen more than I lecture, and leave our district better than I found it.",
@@ -69,6 +69,13 @@ const CONFIG = {
       icon: <Home className="w-6 h-6" />,
       points: [
         "Stop the math of failure. I'll fight to restore our state's competitive edge and economic growth."
+      ]
+    },
+    {
+      title: "Protecting Liberty",
+      icon: <ShieldCheck className="w-6 h-6" />,
+      points: [
+        "Reproductive freedom and marriage equality are settled law. I will block distractions."
       ]
     }
   ]
@@ -217,7 +224,7 @@ const ExploratoryCommitteeForm = () => {
         )}
 
         <p className="text-slate-400 text-xs mt-6 max-w-2xl">
-          By signing up, you agree to receive campaign updates from Babler for Senate. We value your privacy and will never sell your information.
+          By signing up, you agree to receive campaign updates from Babler for State Senate. We value your privacy and will never sell your information.
         </p>
       </div>
       <div className="absolute top-0 right-0 p-16 opacity-10 pointer-events-none text-white">
@@ -380,7 +387,7 @@ const App = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">The SD49 Playbook: Leadership for Eden Prairie & Minnetonka</h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {CONFIG.issues.map((issue, i) => (
               <div key={i} className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
                 <div className="w-14 h-14 rounded-2xl mb-8 flex items-center justify-center text-white transition-transform group-hover:scale-110" style={{ backgroundColor: CONFIG.branding.color }}>
@@ -555,8 +562,8 @@ const App = () => {
 
       <footer className="bg-slate-50 py-20 border-t border-slate-100 text-center">
         <div className="max-w-7xl mx-auto px-4">
-          <p className="text-[10px] text-slate-400 border border-slate-200 px-6 py-3 rounded-full uppercase font-black tracking-[0.4em] inline-block mb-8">Prepared and paid for by Babler for Senate (SD49)</p>
-          <p className="text-xs text-slate-500 max-w-3xl mx-auto mb-8 leading-relaxed">Babler for Senate is an exploratory committee. Kris Babler has not yet formally declared as a candidate for SD49. All funds and activities are currently dedicated to evaluating the viability of an independent, common-sense voice for our district.</p>
+          <p className="text-[10px] text-slate-400 border border-slate-200 px-6 py-3 rounded-full uppercase font-black tracking-[0.4em] inline-block mb-8">Prepared and paid for by Babler for State Senate (SD49)</p>
+          <p className="text-xs text-slate-500 max-w-3xl mx-auto mb-8 leading-relaxed">Babler for State Senate is an exploratory committee. Kris Babler has not yet formally declared as a candidate for SD49. All funds and activities are currently dedicated to evaluating the viability of an independent, common-sense voice for our district.</p>
           <div className="flex justify-center gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">
             <span>Eden Prairie, MN</span>
             <span>Minnetonka, MN</span>
