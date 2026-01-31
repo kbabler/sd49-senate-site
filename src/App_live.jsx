@@ -30,6 +30,10 @@ const CONFIG = {
     accent: "#10b981", // Emerald Green
   },
   
+  links: {
+    substack: "https://krisbabler.substack.com/"
+  },
+  
   images: {
     hero: "kris-babler-portrait.jpg", 
     bio: "kris-lakes.jpg",
@@ -46,6 +50,8 @@ const CONFIG = {
     bioTitle: "A Neighbor Running To Make A Difference",
     bioShort: "I'm a dad, a local business owner, and a neighbor who believes that if you see a problem, you step up. My path to this campaign wasn't through politics; it was through service.",
     bioLong: "Leadership Under Pressure As a U.S. Army Captain, I learned that leadership isn't about rank—it's about the mission and the people. When a plan fails in the field, you don't point fingers; you adapt and get the job done. I'm bringing that same \"mission-first\" accountability to St. Paul.\nCutting the Red Tape Working in School Administration, I saw how top-down mandates from the state get in the way of actual learning. We need to stop the experiments and start supporting our teachers and parents so our kids can thrive.\nBuilding the Team Coaching basketball is where I've seen the real Minnesota. It's about discipline and showing up for each other. I'm not a career politician—I'm running to be a teammate for Eden Prairie and Minnetonka.\nProtecting the Bottom Line As a Business Owner, I know the weight of a budget. Every dollar St. Paul spends comes out of your pocket. I will treat your tax dollars with the same respect I treat my own bottom line—because you've earned it.",
+    substackTitle: "Step out of the partisan echo chamber.",
+    substackText: "I'm breaking down the truth about Minnesota governance and the path to fixing our state at The BablerParty Substack. Join the conversation for a neighbor's take on the issues St. Paul ignores.",
     pcrText: "The Political Contribution Refund allows you to donate $75 and get a full refund from the State of Minnesota. It's a zero-cost way to fuel our campaign."
   },
 
@@ -541,7 +547,7 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">Service in Action</h2>
-            <p className="text-slate-500 font-medium"><strong className="text-brand-navy">85 years of combined military service.</strong> Between my grandfather, my father, and my own time as a Captain, service is more than a slogan for me—it's a family tradition.</p>
+            <p className="text-slate-500 font-medium"><strong className="text-brand-navy">85 years of combined military service.</strong> Between my grandfathers, my father, and my own time as a Captain, service is more than a slogan for me—it's a family tradition.</p>
             <p className="text-slate-500 font-medium mt-4">Whether it's on a mission abroad or a basketball court here in Eden Prairie, I believe in showing up for the team and protecting the values that make our community home.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -558,6 +564,23 @@ const App = () => {
           <p className="text-slate-400 text-xs mt-8 text-center max-w-3xl mx-auto">
             Kris Babler is a former member of the U.S. Army. Use of his military rank, job titles, and photographs in uniform does not imply endorsement by the Department of the Army or the Department of Defense.
           </p>
+        </div>
+      </section>
+
+      {/* SUBSTACK */}
+      <section className="py-24 bg-white border-t border-slate-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-6 tracking-tighter leading-tight">{CONFIG.copy.substackTitle}</h2>
+          <p className="text-lg text-slate-600 font-medium leading-relaxed mb-8 max-w-2xl mx-auto">{CONFIG.copy.substackText}</p>
+          <a 
+            href={CONFIG.links.substack} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-black uppercase tracking-widest text-sm shadow-lg transition-all hover:scale-105 active:scale-95"
+            style={{ backgroundColor: CONFIG.branding.color }}
+          >
+            Follow Me <ArrowRight size={18} />
+          </a>
         </div>
       </section>
 
