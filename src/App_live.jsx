@@ -102,139 +102,75 @@ const SplashOverlay = () => {
   );
 };
 
-const ExploratoryCommitteeForm = () => {
-  const [status, setStatus] = useState('idle'); // idle, submitting, success, error
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    zipCode: ''
-  });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus('submitting');
-
-    try {
-      const formBody = new URLSearchParams(formData);
-      const response = await fetch('https://script.google.com/macros/s/AKfycbxjCAL4h7o2mzToxKglPX3mNjzah8b4RnsuE_MBtqBINVawlD0eMvhzALITdgMSqtJKsA/exec', {
-        method: 'POST',
-        body: formBody,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      });
-
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ firstName: '', lastName: '', email: '', phone: '', zipCode: '' });
-      } else {
-        setStatus('error');
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setStatus('error');
-    }
-  };
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
+const PledgeForm = () => {
   return (
-    <div className="bg-brand-navy rounded-[3.5rem] p-10 md:p-20 text-white shadow-2xl relative overflow-hidden">
-      <div className="relative z-10">
-        <h2 className="text-5xl font-black mb-8 tracking-tighter uppercase italic">Join the Exploratory Committee</h2>
-        <p className="text-slate-400 text-xl mb-12 max-w-2xl leading-relaxed font-medium">
-          We are currently in the exploratory phase and are not accepting financial contributions at this time. However, your support is vital. Sign up below to be the first to know when we formally launch and how you can maximize your impact through the Minnesota PCR program.
+    <div className="max-w-2xl mx-auto">
+      {/* Header Context */}
+      <div className="mb-12 text-center">
+        <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border bg-emerald-50 text-emerald-700 border-emerald-200 shadow-sm">
+          <CheckCircle2 size={14} /> 100% Refundable via MN PCR
+        </div>
+        <h1 className="text-4xl lg:text-5xl font-black text-brand-navy mb-6 leading-tight">
+          Join the Founding 100
+        </h1>
+        <p className="text-lg text-slate-600 mb-8 leading-relaxed font-medium">
+          Make a $75 contribution today. On April 1st, Minnesota's Political Contribution Refund program will send you a check for 100% of your donation. You keep the money, and Kris keeps your vote.
         </p>
-
-        {status === 'success' ? (
-          <div className="bg-white/10 border-2 border-white/30 rounded-2xl p-8 max-w-2xl">
-            <div className="flex items-center gap-4 mb-4">
-              <CheckCircle2 size={32} className="text-emerald-400" />
-              <h3 className="text-2xl font-black">Thanks for joining the team!</h3>
-            </div>
-            <p className="text-slate-300">We'll keep you updated on our progress and let you know when we formally launch.</p>
+        <div className="grid md:grid-cols-3 gap-4 mb-12">
+          <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+            <p className="text-3xl font-black" style={{ color: CONFIG.branding.color }}>$75</p>
+            <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Your Contribution</p>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="max-w-2xl space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                placeholder="First Name"
-                required
-                disabled={status === 'submitting'}
-                className="px-6 py-4 rounded-xl text-brand-navy font-medium focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50"
-              />
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                placeholder="Last Name"
-                required
-                disabled={status === 'submitting'}
-                className="px-6 py-4 rounded-xl text-brand-navy font-medium focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50"
-              />
-            </div>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Email Address"
-              required
-              disabled={status === 'submitting'}
-              className="w-full px-6 py-4 rounded-xl text-brand-navy font-medium focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50"
-            />
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="Phone Number (Optional)"
-              disabled={status === 'submitting'}
-              className="w-full px-6 py-4 rounded-xl text-brand-navy font-medium focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50"
-            />
-            <input
-              type="text"
-              name="zipCode"
-              value={formData.zipCode}
-              onChange={handleChange}
-              placeholder="Zip Code"
-              required
-              pattern="[0-9]{5}"
-              title="5-digit zip code"
-              disabled={status === 'submitting'}
-              className="w-full px-6 py-4 rounded-xl text-brand-navy font-medium focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50"
-            />
-            <button
-              type="submit"
-              disabled={status === 'submitting'}
-              className="bg-white text-brand-navy px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:scale-105 transition-all shadow-xl flex items-center gap-3 disabled:opacity-50 disabled:hover:scale-100"
-            >
-              {status === 'submitting' ? 'Joining...' : 'Join the Team'} <Send size={18} />
-            </button>
-            {status === 'error' && (
-              <p className="text-red-300 text-sm">Something went wrong. Please try again.</p>
-            )}
-          </form>
-        )}
-
-        <p className="text-slate-400 text-xs mt-6 max-w-2xl">
-          By signing up, you agree to receive campaign updates from Babler for State Senate. We value your privacy and will never sell your information.
-        </p>
+          <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+            <p className="text-3xl font-black text-emerald-600">$0</p>
+            <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Your Cost</p>
+          </div>
+          <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+            <p className="text-3xl font-black text-emerald-600">April 1</p>
+            <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Refund Date</p>
+          </div>
+        </div>
       </div>
-      <div className="absolute top-0 right-0 p-16 opacity-10 pointer-events-none text-white">
-        <Award size={200} />
+
+      {/* Form Container */}
+      <div className="bg-white rounded-3xl border border-slate-100 shadow-xl p-8 md:p-12 mb-12">
+        <iframe 
+          src="https://secure.anedot.com/campaign-fund-of-kris-babler/pcrpledge?embed=true" 
+          width="100%" 
+          height="800px" 
+          frameBorder="0"
+          style={{ border: 'none', overflow: 'hidden' }}
+          scrolling="no"
+          title="Kris Babler Campaign Donation"
+        ></iframe>
+      </div>
+
+      {/* Trust Signals */}
+      <div className="space-y-6">
+        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+          <p className="text-[12px] font-black text-blue-900 uppercase tracking-wide mb-2">🔒 Secure Payment</p>
+          <p className="text-sm text-blue-800 leading-relaxed">
+            Payments are processed securely via Anedot. No funds will be withdrawn from your account until our official April 1st launch date.
+          </p>
+        </div>
+
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+          <p className="text-[12px] font-black text-slate-900 uppercase tracking-wide mb-3">Eligibility & How It Works</p>
+          <ul className="space-y-2 text-sm text-slate-700 leading-relaxed">
+            <li className="flex gap-3">
+              <span className="font-black">•</span>
+              <span>You must be a Minnesota resident to participate in the Political Contribution Refund program.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="font-black">•</span>
+              <span>After April 1st, submit your $75 contribution receipt to the Minnesota Department of Revenue to receive your refund check.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="font-black">•</span>
+              <span>Your pledge today shows that SD49 is ready for an Independent voice in St. Paul.</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
@@ -584,9 +520,9 @@ const App = () => {
         </div>
       </section>
 
-      {/* JOIN EXPLORATORY COMMITTEE */}
+      {/* JOIN THE PLEDGE */}
       <section id="pcr" className="py-24 px-4 max-w-5xl mx-auto">
-        <ExploratoryCommitteeForm />
+        <PledgeForm />
       </section>
 
       <footer className="bg-slate-50 py-20 border-t border-slate-100 text-center">

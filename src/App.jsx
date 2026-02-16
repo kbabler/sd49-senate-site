@@ -113,6 +113,18 @@ const App = () => {
     return <img src={srcPath} alt={alt} className={className} onError={() => setError(true)} />;
   };
 
+  const DonationWidget = () => {
+    return (
+      <button
+        onClick={() => setActiveTab('volunteer')}
+        className="text-white px-6 py-2.5 rounded-full transition-all shadow-lg font-black hover:scale-105 active:scale-95"
+        style={{ backgroundColor: BRAND_COLOR }}
+      >
+        $75 REFUND
+      </button>
+    );
+  };
+
   const Navigation = () => (
     <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-slate-100 h-20 flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
@@ -132,20 +144,14 @@ const App = () => {
           <button onClick={() => setActiveTab('about')} className={activeTab === 'about' ? 'text-brand-navy' : 'hover:text-slate-600'}>Meet Kris</button>
           <button onClick={() => setActiveTab('issues')} className={activeTab === 'issues' ? 'text-brand-navy' : 'hover:text-slate-600'}>Issues</button>
           <button onClick={() => setActiveTab('volunteer')} className={activeTab === 'volunteer' ? 'text-brand-navy' : 'hover:text-slate-600'}>Volunteer</button>
-          <button 
-            onClick={() => setActiveTab('pcr')}
-            className="text-white px-6 py-2.5 rounded-full transition-all shadow-lg font-black hover:scale-105 active:scale-95"
-            style={{ backgroundColor: BRAND_COLOR }}
-          >
-            DONATE & REFUND
-          </button>
+          <DonationWidget />
         </div>
       </div>
     </nav>
   );
 
   const Hero = () => (
-    <section className="pt-32 pb-20 lg:pt-48 lg:pb-32 bg-white overflow-hidden">
+    <section className="pt-24 pb-20 lg:pt-32 lg:pb-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="order-2 lg:order-1 relative z-10">
@@ -283,24 +289,75 @@ const App = () => {
   );
 
   const VolunteerPortal = () => (
-    <div className="pt-32 pb-24 px-4 max-w-4xl mx-auto">
-      <div className="bg-white rounded-[3rem] p-8 md:p-16 border border-slate-100 shadow-2xl">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="p-4 rounded-2xl bg-indigo-50 text-indigo-600"><UserPlus /></div>
-          <div>
-            <h2 className="text-3xl font-black tracking-tight uppercase">Join the Movement</h2>
-            <p className="text-slate-500 font-medium">Lend your voice to a neighbor-led campaign.</p>
+    <div className="pt-24 pb-24 px-4">
+      <div className="max-w-2xl mx-auto">
+        {/* Header Context */}
+        <div className="mb-12 text-center">
+          <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border bg-emerald-50 text-emerald-700 border-emerald-200 shadow-sm">
+            <CheckCircle2 size={14} /> 100% Refundable via MN PCR
+          </div>
+          <h1 className="text-4xl lg:text-5xl font-black text-brand-navy mb-6 leading-tight">
+            Join the Founding 100
+          </h1>
+          <p className="text-lg text-slate-600 mb-8 leading-relaxed font-medium">
+            Make a $75 contribution today. On April 1st, Minnesota's Political Contribution Refund program will send you a check for 100% of your donation. You keep the money, and Kris keeps your vote.
+          </p>
+          <div className="grid md:grid-cols-3 gap-4 mb-12">
+            <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+              <p className="text-3xl font-black" style={{ color: BRAND_COLOR }}>$75</p>
+              <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Your Contribution</p>
+            </div>
+            <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+              <p className="text-3xl font-black text-emerald-600">$0</p>
+              <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Your Cost</p>
+            </div>
+            <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+              <p className="text-3xl font-black text-emerald-600">April 1</p>
+              <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Refund Date</p>
+            </div>
           </div>
         </div>
-        <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
-          <div className="grid md:grid-cols-2 gap-6">
-            <input type="text" className="w-full bg-slate-50 border-none p-5 rounded-2xl font-medium outline-none focus:ring-2" style={{"--tw-ring-color": BRAND_COLOR}} placeholder="Full Name" />
-            <input type="tel" className="w-full bg-slate-50 border-none p-5 rounded-2xl font-medium outline-none focus:ring-2" style={{"--tw-ring-color": BRAND_COLOR}} placeholder="Mobile Number" />
+
+        {/* Form Container */}
+        <div className="bg-white rounded-3xl border border-slate-100 shadow-xl p-8 md:p-12 mb-12">
+          <iframe 
+            src="https://secure.anedot.com/campaign-fund-of-kris-babler/pcrpledge?embed=true" 
+            width="100%" 
+            height="800px" 
+            frameBorder="0"
+            style={{ border: 'none', overflow: 'hidden' }}
+            scrolling="no"
+            title="Kris Babler Campaign Donation"
+          ></iframe>
+        </div>
+
+        {/* Trust Signals */}
+        <div className="space-y-6">
+          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+            <p className="text-[12px] font-black text-blue-900 uppercase tracking-wide mb-2">🔒 Secure Payment</p>
+            <p className="text-sm text-blue-800 leading-relaxed">
+              Payments are processed securely via Anedot. No funds will be withdrawn from your account until our official April 1st launch date.
+            </p>
           </div>
-          <button className="w-full py-6 rounded-2xl text-white font-black text-sm uppercase tracking-widest shadow-lg" style={{ backgroundColor: BRAND_COLOR }}>
-            GET INVOLVED
-          </button>
-        </form>
+
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+            <p className="text-[12px] font-black text-slate-900 uppercase tracking-wide mb-3">Eligibility & How It Works</p>
+            <ul className="space-y-2 text-sm text-slate-700 leading-relaxed">
+              <li className="flex gap-3">
+                <span className="font-black">•</span>
+                <span>You must be a Minnesota resident to participate in the Political Contribution Refund program.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="font-black">•</span>
+                <span>After April 1st, submit your $75 contribution receipt to the Minnesota Department of Revenue to receive your refund check.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="font-black">•</span>
+                <span>Your pledge today shows that SD49 is ready for an Independent voice in St. Paul.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -345,7 +402,7 @@ const App = () => {
         {activeTab === 'pcr' && <DonationPortal />}
       </main>
 
-      <footer className="bg-slate-50 py-20 border-t border-slate-100 mt-20">
+      <footer className="bg-slate-50 pt-20 pb-12 border-t border-slate-100 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-[9px] text-slate-400 border border-slate-200 px-6 py-3 rounded-full uppercase font-black tracking-[0.4em] inline-block mb-4">
             Prepared and paid for by Babler for Senate (SD49)
