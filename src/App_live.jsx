@@ -114,7 +114,7 @@ const PledgeForm = () => {
           Join the Founding 100
         </h1>
         <p className="text-lg text-slate-600 mb-8 leading-relaxed font-medium">
-          Make a $75 contribution today. On April 1st, Minnesota's Political Contribution Refund program will send you a check for 100% of your donation. You keep the money, and Kris keeps your vote.
+          Donations are open as of April 2. Make a $75 contribution and the campaign handles the refund processing for you, so no additional paperwork is required from you.
         </p>
         <div className="grid md:grid-cols-3 gap-4 mb-12">
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
@@ -126,8 +126,8 @@ const PledgeForm = () => {
             <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Your Cost</p>
           </div>
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-            <p className="text-3xl font-black text-emerald-600">April 1</p>
-            <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Refund Date</p>
+            <p className="text-3xl font-black text-emerald-600">April 2</p>
+            <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Donations Open</p>
           </div>
         </div>
       </div>
@@ -150,7 +150,7 @@ const PledgeForm = () => {
         <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
           <p className="text-[12px] font-black text-blue-900 uppercase tracking-wide mb-2">🔒 Secure Payment</p>
           <p className="text-sm text-blue-800 leading-relaxed">
-            Payments are processed securely via Anedot. No funds will be withdrawn from your account until our official April 1st launch date.
+            Payments are processed securely via Anedot. Donations opened on April 2 and are processed through our secure payment partner.
           </p>
         </div>
 
@@ -163,7 +163,7 @@ const PledgeForm = () => {
             </li>
             <li className="flex gap-3">
               <span className="font-black">•</span>
-              <span>After April 1st, submit your $75 contribution receipt to the Minnesota Department of Revenue to receive your refund check.</span>
+              <span>After your contribution, our campaign submits the required refund paperwork on your behalf.</span>
             </li>
             <li className="flex gap-3">
               <span className="font-black">•</span>
