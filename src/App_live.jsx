@@ -60,7 +60,7 @@ const CONFIG = {
       title: "Fiscal Watchdog",
       icon: <Calculator className="w-6 h-6" />,
       points: [
-        "Stop the fraud. I'll demand professional audits to ensure your taxes fund results, not St. Paul's systemic waste."
+        "Balance the budget. I'll demand professional audits to ensure your taxes fund results, not St. Paul's systemic waste."
       ]
     },
     {
