@@ -116,18 +116,14 @@ const PledgeForm = () => {
         <p className="text-lg text-slate-600 mb-8 leading-relaxed font-medium">
           Donations are now live. Make your secure contribution below to support Kris Babler for State Senate.
         </p>
-        <div className="grid md:grid-cols-3 gap-4 mb-12">
+        <div className="grid md:grid-cols-2 gap-4 mb-12">
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
             <p className="text-3xl font-black" style={{ color: CONFIG.branding.color }}>$75</p>
-            <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Your Contribution</p>
+            <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">PCR-Refundable Amount</p>
           </div>
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
             <p className="text-3xl font-black text-emerald-600">$0</p>
-            <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Your Cost</p>
-          </div>
-          <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-            <p className="text-3xl font-black text-emerald-600">April 2</p>
-            <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Donations Open</p>
+            <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Your Net Cost (via MN PCR)</p>
           </div>
         </div>
       </div>
