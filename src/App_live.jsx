@@ -111,10 +111,10 @@ const PledgeForm = () => {
           <CheckCircle2 size={14} /> 100% Refundable via MN PCR
         </div>
         <h1 className="text-4xl lg:text-5xl font-black text-brand-navy mb-6 leading-tight">
-          Join the Founding 100
+          Donate to Fuel the Campaign
         </h1>
         <p className="text-lg text-slate-600 mb-8 leading-relaxed font-medium">
-          Donations are open as of April 2. Make a $75 contribution and the campaign handles the refund processing for you, so no additional paperwork is required from you.
+          Donations are now live. Make your secure contribution below to support Kris Babler for State Senate.
         </p>
         <div className="grid md:grid-cols-3 gap-4 mb-12">
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
@@ -135,7 +135,7 @@ const PledgeForm = () => {
       {/* Form Container */}
       <div className="bg-white rounded-3xl border border-slate-100 shadow-xl p-8 md:p-12 mb-12">
         <iframe 
-          src="https://secure.anedot.com/campaign-fund-of-kris-babler/pcrpledge?embed=true" 
+          src="https://secure.anedot.com/campaign-fund-of-kris-babler/donate?embed=true" 
           width="100%" 
           height="800px" 
           frameBorder="0"
@@ -167,7 +167,7 @@ const PledgeForm = () => {
             </li>
             <li className="flex gap-3">
               <span className="font-black">•</span>
-              <span>Your pledge today shows that SD49 is ready for an Independent voice in St. Paul.</span>
+              <span>Your donation today helps build an Independent voice for SD49 in St. Paul.</span>
             </li>
           </ul>
         </div>
@@ -520,7 +520,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* JOIN THE PLEDGE */}
+      {/* DONATE */}
       <section id="pcr" className="py-24 px-4 max-w-5xl mx-auto">
         <PledgeForm />
       </section>
