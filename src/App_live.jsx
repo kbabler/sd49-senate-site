@@ -311,7 +311,7 @@ const App = () => {
             </div>
             <div className="relative">
               <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl bg-slate-100 relative z-10 border-4 border-white transform lg:rotate-2">
-                <SmartImage src={CONFIG.images.hero} alt="Kris Babler Portrait" className="w-full h-full object-cover" />
+                <SmartImage src={CONFIG.images.hero} alt="Kris Babler Portrait" className="w-full h-full object-cover object-left" />
               </div>
               <div className="absolute -bottom-8 -right-8 w-full h-full bg-slate-50 rounded-[3rem] -z-0 transform -rotate-2"></div>
             </div>
