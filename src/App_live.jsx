@@ -253,6 +253,15 @@ const App = () => {
           <button onClick={() => scrollToSection('listening-post')} className="hover:text-brand-navy transition-colors">Listening Post</button>
           <button onClick={() => scrollToSection('about')} className="hover:text-brand-navy transition-colors">The Man</button>
           <button onClick={() => scrollToSection('service')} className="hover:text-brand-navy transition-colors">Service in Action</button>
+          <a 
+            href="https://docs.google.com/forms/d/e/1FAIpQLSemYpQe56U2EBXr7LbdN_-YVMF4E-BZxzw19xkbwbzkf3o-qQ/viewform?usp=dialog"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95"
+            style={{ backgroundColor: CONFIG.branding.color }}
+          >
+            Get Involved
+          </a>
           <button 
             onClick={() => scrollToSection('pcr')}
             className="text-white px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95"
@@ -273,6 +282,15 @@ const App = () => {
           <button onClick={() => scrollToSection('listening-post')}>Listening Post</button>
           <button onClick={() => scrollToSection('about')}>The Man</button>
           <button onClick={() => scrollToSection('service')}>Service in Action</button>
+          <a 
+            href="https://docs.google.com/forms/d/e/1FAIpQLSemYpQe56U2EBXr7LbdN_-YVMF4E-BZxzw19xkbwbzkf3o-qQ/viewform?usp=dialog"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-4 rounded-xl text-white text-center shadow-lg"
+            style={{ backgroundColor: CONFIG.branding.color }}
+          >
+            Get Involved
+          </a>
           <button 
             onClick={() => scrollToSection('pcr')}
             className="w-full py-4 rounded-xl text-white text-center shadow-lg"
@@ -307,6 +325,7 @@ const App = () => {
               <p className="text-xl text-slate-500 mb-10 max-w-lg leading-relaxed font-medium">{CONFIG.copy.heroSub}</p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button onClick={() => scrollToSection('about')} className="bg-brand-navy text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-opacity-90 transition-all shadow-xl shadow-slate-200">Meet Kris <ArrowRight size={18} /></button>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSemYpQe56U2EBXr7LbdN_-YVMF4E-BZxzw19xkbwbzkf3o-qQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className="bg-brand-navy text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-opacity-90 transition-all shadow-xl shadow-slate-200">Get Involved <ArrowRight size={18} /></a>
               </div>
             </div>
             <div className="relative">
