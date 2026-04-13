@@ -33,6 +33,21 @@ const CONFIG = {
   links: {
     substack: "https://krisbabler.substack.com/"
   },
+
+  substackArticles: [
+    {
+      title: "Minnesota: Is This the Best We Can Do?",
+      href: "https://krisbabler.substack.com/p/minnesota-is-this-the-best-we-can?r=1i94n6"
+    },
+    {
+      title: "You Are Not Alone",
+      href: "https://krisbabler.substack.com/p/you-are-not-alone?r=1i94n6"
+    },
+    {
+      title: "The Great Unsubscribe",
+      href: "https://krisbabler.substack.com/p/the-great-unsubscribe-why-minnesotas?r=1i94n6"
+    }
+  ],
   
   images: {
     hero: "babler-headshot.png",
@@ -520,7 +535,7 @@ const App = () => {
 
       {/* SUBSTACK */}
       <section className="py-24 bg-white border-t border-slate-100">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-6 tracking-tighter leading-tight">{CONFIG.copy.substackTitle}</h2>
           <p className="text-lg text-slate-600 font-medium leading-relaxed mb-8 max-w-2xl mx-auto">{CONFIG.copy.substackText}</p>
           <a 
@@ -532,6 +547,24 @@ const App = () => {
           >
             Follow Me <ArrowRight size={18} />
           </a>
+
+          <div className="grid md:grid-cols-3 gap-6 mt-12 text-left">
+            {CONFIG.substackArticles.map((article, idx) => (
+              <a
+                key={idx}
+                href={article.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all"
+              >
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-3">Substack Article</p>
+                <h3 className="text-xl font-black text-brand-navy leading-snug mb-4">{article.title}</h3>
+                <span className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide" style={{ color: CONFIG.branding.color }}>
+                  Read article <ArrowRight size={16} />
+                </span>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
