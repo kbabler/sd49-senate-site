@@ -40,25 +40,24 @@ const SITE_CONTENT = {
   },
   news: {
     substackUrl: "https://krisbabler.substack.com/",
-    // Drop in article or news links below.
     items: [
       {
-        title: "Read the latest on Substack",
-        description: "Visit the newsletter for direct commentary on Minnesota governance, reform, and what comes next for our state.",
+        title: "Minnesota: Is This the Best We Can Do?",
+        description: "A direct look at the current state of Minnesota governance and what voters should expect from real leadership.",
         source: "Substack",
-        href: "https://krisbabler.substack.com/"
+        href: "https://krisbabler.substack.com/p/minnesota-is-this-the-best-we-can?r=1i94n6"
       },
       {
-        title: "Paste article title here",
-        description: "Add a local news story, interview, or op-ed by replacing this text and URL.",
-        source: "News Link",
-        href: "#"
+        title: "You Are Not Alone",
+        description: "A message for neighbors who feel left out of the partisan noise and are looking for a more grounded path forward.",
+        source: "Substack",
+        href: "https://krisbabler.substack.com/p/you-are-not-alone?r=1i94n6"
       },
       {
-        title: "Paste another headline here",
-        description: "Use as many items as needed for updates, media mentions, or issue explainers.",
-        source: "Article Link",
-        href: "#"
+        title: "The Great Unsubscribe",
+        description: "A closer look at why more Minnesotans are tuning out the usual political script and searching for something better.",
+        source: "Substack",
+        href: "https://krisbabler.substack.com/p/the-great-unsubscribe-why-minnesotas?r=1i94n6"
       }
     ]
   },
