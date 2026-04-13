@@ -16,7 +16,9 @@ import {
   Target,
   Award,
   Zap,
-  Star
+  Star,
+  Newspaper,
+  ExternalLink
 } from 'lucide-react';
 
 /** * BRAND CONFIGURATION */
@@ -35,6 +37,30 @@ const SITE_CONTENT = {
     name: "KRIS BABLER",
     title: "Independent for Senate SD49",
     shortName: "KB"
+  },
+  news: {
+    substackUrl: "https://krisbabler.substack.com/",
+    // Drop in article or news links below.
+    items: [
+      {
+        title: "Read the latest on Substack",
+        description: "Visit the newsletter for direct commentary on Minnesota governance, reform, and what comes next for our state.",
+        source: "Substack",
+        href: "https://krisbabler.substack.com/"
+      },
+      {
+        title: "Paste article title here",
+        description: "Add a local news story, interview, or op-ed by replacing this text and URL.",
+        source: "News Link",
+        href: "#"
+      },
+      {
+        title: "Paste another headline here",
+        description: "Use as many items as needed for updates, media mentions, or issue explainers.",
+        source: "Article Link",
+        href: "#"
+      }
+    ]
   },
   issues: [
     {
@@ -288,6 +314,72 @@ const App = () => {
     </section>
   );
 
+  const NewsSection = () => (
+    <section className="py-24 bg-slate-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white border border-slate-100 rounded-[2rem] shadow-xl p-8 md:p-12">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest mb-5 border bg-slate-50 text-slate-600 border-slate-200 shadow-sm">
+                <Newspaper size={14} style={{ color: BRAND_COLOR }} /> Articles & News
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-black tracking-tighter text-brand-navy leading-tight mb-4">
+                Step out of the partisan echo chamber.
+              </h2>
+              <p className="text-lg text-slate-600 font-medium leading-relaxed max-w-2xl">
+                I&apos;m breaking down the truth about Minnesota governance and the path to fixing our state. Join for a neighbor&apos;s take on the issues at my Substack.
+              </p>
+            </div>
+
+            <a
+              href={SITE_CONTENT.news.substackUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl text-white font-black text-xs uppercase tracking-widest shadow-lg hover:scale-105 transition-all"
+              style={{ backgroundColor: BRAND_COLOR }}
+            >
+              Follow Me <ExternalLink size={16} />
+            </a>
+          </div>
+
+          <div className="bg-slate-50 border border-dashed border-slate-300 rounded-2xl px-5 py-4 mt-8 mb-6">
+            <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">
+              Add or edit links in the news items list at the top of this page file.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 mt-10">
+            {SITE_CONTENT.news.items.map((item, idx) => (
+              <div key={idx} className="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-6 flex flex-col justify-between gap-4">
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-3">{item.source}</p>
+                  <h3 className="text-2xl font-black text-brand-navy mb-3">{item.title}</h3>
+                  <p className="text-slate-600 font-medium leading-relaxed">{item.description}</p>
+                </div>
+
+                {item.href !== '#' ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide"
+                    style={{ color: BRAND_COLOR }}
+                  >
+                    Open link <ArrowRight size={16} />
+                  </a>
+                ) : (
+                  <span className="text-sm font-black uppercase tracking-wide text-slate-400">
+                    Paste URL here
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+
   const VolunteerPortal = () => (
     <div className="pt-24 pb-24 px-4">
       <div className="max-w-2xl mx-auto">
@@ -389,11 +481,17 @@ const App = () => {
             <Hero />
             <AboutSection />
             <IssuesSection />
+            <NewsSection />
           </>
         )}
         
         {activeTab === 'about' && <AboutSection />}
-        {activeTab === 'issues' && <IssuesSection />}
+        {activeTab === 'issues' && (
+          <>
+            <IssuesSection />
+            <NewsSection />
+          </>
+        )}
         {activeTab === 'volunteer' && <VolunteerPortal />}
         {activeTab === 'pcr' && <DonationPortal />}
       </main>
