@@ -24,7 +24,7 @@ const BRAND_COLOR = "#755FBE";
 
 // Your actual filenames (mapped to files in public/images)
 const ASSETS = {
-  hero: "Babler Headshot.png",
+  hero: "babler-headshot.png",
   family: "kris-family.jpg",
   community: "kris-lakes.jpg",
   action: "kris-coaching-basketball.jpg"
