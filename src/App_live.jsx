@@ -35,7 +35,7 @@ const CONFIG = {
   },
   
   images: {
-    hero: "kris-babler-portrait.jpg", 
+    hero: "Babler Headshot.png",
     bio: "kris-lakes.jpg",
     action: "kris-coaching-basketball.jpg",
     family: "kris-family.jpg",
