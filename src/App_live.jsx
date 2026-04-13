@@ -524,7 +524,7 @@ const App = () => {
       <footer className="bg-slate-50 py-20 border-t border-slate-100 text-center">
         <div className="max-w-7xl mx-auto px-4">
           <p className="text-[10px] text-slate-400 border border-slate-200 px-6 py-3 rounded-full uppercase font-black tracking-[0.4em] inline-block mb-8">Prepared and paid for by Babler for State Senate (SD49)</p>
-          <p className="text-xs text-slate-500 max-w-3xl mx-auto mb-8 leading-relaxed">Babler for State Senate is an exploratory committee. Kris Babler has not yet formally declared as a candidate for SD49. All funds and activities are currently dedicated to evaluating the viability of an independent, common-sense voice for our district.</p>
+          <p className="text-xs text-slate-500 max-w-3xl mx-auto mb-8 leading-relaxed">Kris Babler is a candidate for the Minnesota State Senate in District 49. Our work is focused on providing the residents of Eden Prairie and Minnetonka with a professional, results-oriented choice that prioritizes local impact over partisan interests.</p>
           <div className="flex justify-center gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">
             <span>Eden Prairie, MN</span>
             <span>Minnetonka, MN</span>
