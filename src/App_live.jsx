@@ -257,8 +257,7 @@ const App = () => {
             href="https://docs.google.com/forms/d/e/1FAIpQLSemYpQe56U2EBXr7LbdN_-YVMF4E-BZxzw19xkbwbzkf3o-qQ/viewform?usp=dialog"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95"
-            style={{ backgroundColor: CONFIG.branding.color }}
+            className="hover:text-brand-navy transition-colors"
           >
             Get Involved
           </a>
