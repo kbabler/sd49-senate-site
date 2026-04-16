@@ -42,7 +42,7 @@ const SITE_CONTENT = {
     substackUrl: "https://krisbabler.substack.com/",
     items: [
       {
-        title: "Minnesota: Is This the Best We Can Do?",
+        title: "Minnesota, Is This the Best We Can Do?",
         description: "A direct look at the current state of Minnesota governance and what voters should expect from real leadership.",
         source: "Substack",
         href: "https://krisbabler.substack.com/p/minnesota-is-this-the-best-we-can?r=1i94n6"
@@ -54,10 +54,10 @@ const SITE_CONTENT = {
         href: "https://krisbabler.substack.com/p/you-are-not-alone?r=1i94n6"
       },
       {
-        title: "The Great Unsubscribe",
-        description: "A closer look at why more Minnesotans are tuning out the usual political script and searching for something better.",
+        title: "Why I'm Stepping Into the Arena",
+        description: "Kris shares the personal story and conviction behind his decision to run for Senate — and what's at stake for SD49.",
         source: "Substack",
-        href: "https://krisbabler.substack.com/p/the-great-unsubscribe-why-minnesotas?r=1i94n6"
+        href: "https://krisbabler.substack.com/p/why-im-stepping-into-the-arena"
       }
     ]
   },
