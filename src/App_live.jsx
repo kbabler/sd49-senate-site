@@ -36,7 +36,7 @@ const CONFIG = {
 
   substackArticles: [
     {
-      title: "Minnesota: Is This the Best We Can Do?",
+      title: "Minnesota, Is This the Best We Can Do?",
       href: "https://krisbabler.substack.com/p/minnesota-is-this-the-best-we-can?r=1i94n6"
     },
     {
@@ -44,8 +44,8 @@ const CONFIG = {
       href: "https://krisbabler.substack.com/p/you-are-not-alone?r=1i94n6"
     },
     {
-      title: "The Great Unsubscribe",
-      href: "https://krisbabler.substack.com/p/the-great-unsubscribe-why-minnesotas?r=1i94n6"
+      title: "Why I'm Stepping Into the Arena",
+      href: "https://krisbabler.substack.com/p/why-im-stepping-into-the-arena"
     }
   ],
   
