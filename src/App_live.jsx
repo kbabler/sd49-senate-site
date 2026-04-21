@@ -26,8 +26,8 @@ const CONFIG = {
     name: "KRIS BABLER",
     title: "Babler for State Senate",
     district: "SD49 (Eden Prairie & Minnetonka)",
-    color: "#755FBE", // Signature Purple
-    accent: "#10b981", // Emerald Green
+    color: "#4B384C", // Dark purple (primary)
+    accent: "#00c2cc", // Poll-tested teal (accent)
   },
   
   links: {
@@ -60,8 +60,8 @@ const CONFIG = {
   },
 
   copy: {
-    heroLead: "Our District. Their Mess. Your Choice.",
-    heroSub: "Partisan drama has become a tax on our families. I'm Kris Babler—a former Army Captain, a coach, and your neighbor. I'm running for State Senate because I'm tired of watching the party machines treat our communities like an afterthought.\nIn a Senate split by a single seat, I'm not going there to wear a jersey; I'm going there to be a teammate for Eden Prairie and Minnetonka. My job isn't to win a debate—it's to make the math work for our schools, our businesses, and our future. Let's stop the finger-pointing and get back to being neighbors again.",
+    heroLead: "Our District. Your Voice.",
+    heroSub: "Eden Prairie and Minnetonka deserve more than partisan gridlock. I'm Kris Babler-a former Army Captain, a coach, and your neighbor. In a Senate split by a single seat, I'm running to be the independent vote that puts our families before party machines. I'm not going to St. Paul to join a side; I'm going to make the math work for our schools, our businesses, and our future. Let's stop the finger-pointing and get back to being neighbors.",
     bioTitle: "A Neighbor Running To Make A Difference",
     bioShort: "I'm a dad, a local business owner, and a neighbor who believes that if you see a problem, you step up. My path to this campaign wasn't through politics; it was through service.",
     bioLong: "Leadership Under Pressure As a U.S. Army Captain, I learned that leadership isn't about rank—it's about the mission and the people. When a plan fails in the field, you don't point fingers; you adapt and get the job done. I'm bringing that same \"mission-first\" accountability to St. Paul.\nCutting the Red Tape Working in School Administration, I saw how top-down mandates from the state get in the way of actual learning. We need to stop the experiments and start supporting our teachers and parents so our kids can thrive.\nBuilding the Team Coaching basketball is where I've seen the real Minnesota. It's about discipline and showing up for each other. I'm not a career politician—I'm running to be a teammate for Eden Prairie and Minnetonka.\nProtecting the Bottom Line As a Business Owner, I know the weight of a budget. Every dollar St. Paul spends comes out of your pocket. I will treat your tax dollars with the same respect I treat my own bottom line—because you've earned it.",
@@ -122,7 +122,7 @@ const PledgeForm = () => {
     <div className="max-w-2xl mx-auto">
       {/* Header Context */}
       <div className="mb-12 text-center">
-        <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border bg-emerald-50 text-emerald-700 border-emerald-200 shadow-sm">
+        <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border shadow-sm" style={{ backgroundColor: '#ecfeff', color: '#0e7490', borderColor: '#a5f3fc' }}>
           <CheckCircle2 size={14} /> 100% Refundable via MN PCR
         </div>
         <h1 className="text-4xl lg:text-5xl font-black text-brand-navy mb-6 leading-tight">
@@ -137,7 +137,7 @@ const PledgeForm = () => {
             <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">PCR-Refundable Amount</p>
           </div>
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-            <p className="text-3xl font-black text-emerald-600">$0</p>
+            <p className="text-3xl font-black" style={{ color: CONFIG.branding.accent }}>$0</p>
             <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Your Net Cost (via MN PCR)</p>
           </div>
         </div>
@@ -263,8 +263,8 @@ const App = () => {
           </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
-          <button onClick={() => scrollToSection('issues')} className="hover:text-brand-navy transition-colors">Playbook</button>
+        <div className="hidden md:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-black">
+          <button onClick={() => scrollToSection('issues')} className="transition-colors hover:text-brand-navy">Playbook</button>
           <button onClick={() => scrollToSection('listening-post')} className="hover:text-brand-navy transition-colors">Listening Post</button>
           <button onClick={() => scrollToSection('about')} className="hover:text-brand-navy transition-colors">The Man</button>
           <button onClick={() => scrollToSection('service')} className="hover:text-brand-navy transition-colors">Service in Action</button>
@@ -272,17 +272,17 @@ const App = () => {
             href="https://docs.google.com/forms/d/e/1FAIpQLSemYpQe56U2EBXr7LbdN_-YVMF4E-BZxzw19xkbwbzkf3o-qQ/viewform?usp=dialog"
             target="_blank"
             rel="noopener noreferrer"
-            className="normal-case text-white px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95"
-            style={{ backgroundColor: CONFIG.branding.color }}
+            className="normal-case text-black px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95"
+            style={{ backgroundColor: CONFIG.branding.accent }}
           >
             Get Involved
           </a>
           <button 
             onClick={() => scrollToSection('pcr')}
-            className="text-white px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95"
-            style={{ backgroundColor: CONFIG.branding.color }}
+            className="text-black px-6 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95"
+            style={{ backgroundColor: CONFIG.branding.accent }}
           >
-            $75 Refund
+            Donate
           </button>
         </div>
 
@@ -292,8 +292,8 @@ const App = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-b border-slate-100 p-8 space-y-6 flex flex-col items-center text-[12px] font-black uppercase tracking-widest">
-          <button onClick={() => scrollToSection('issues')}>Playbook</button>
+        <div className="md:hidden bg-white border-b border-slate-100 p-8 space-y-6 flex flex-col items-center text-[12px] font-black uppercase tracking-widest text-black">
+          <button onClick={() => scrollToSection('issues')} className="hover:text-brand-navy transition-colors">Playbook</button>
           <button onClick={() => scrollToSection('listening-post')}>Listening Post</button>
           <button onClick={() => scrollToSection('about')}>The Man</button>
           <button onClick={() => scrollToSection('service')}>Service in Action</button>
@@ -311,7 +311,7 @@ const App = () => {
             className="w-full py-4 rounded-xl text-white text-center shadow-lg"
             style={{ backgroundColor: CONFIG.branding.color }}
           >
-            $75 Refund / Donate
+            Donate
           </button>
         </div>
       )}
@@ -327,12 +327,22 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest mb-8 bg-slate-50 border border-slate-200 text-slate-500">
-                <Star size={14} style={{ color: CONFIG.branding.color }} /> Independent Voice for SD49
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest mb-8 bg-slate-50 border border-slate-200" style={{ color: CONFIG.branding.accent }}>
+                <Star size={14} style={{ color: CONFIG.branding.accent }} /> Independent Voice for SD49
               </div>
               <h1 className="text-5xl md:text-8xl font-black text-brand-navy leading-[0.85] mb-8 tracking-tighter">
                 {CONFIG.copy.heroLead.split('.').map((part, i) => (
-                  <span key={i} className={i === 1 ? 'block' : ''} style={i === 1 ? { color: CONFIG.branding.color } : {}}>
+                  <span
+                    key={i}
+                    className={i === 1 ? 'block' : ''}
+                    style={
+                      i === 0
+                        ? { color: '#0a0a0a' }
+                        : i === 1
+                        ? { color: CONFIG.branding.accent }
+                          : {}
+                    }
+                  >
                     {part}{i < 3 && part ? '.' : ''}
                   </span>
                 ))}
@@ -362,14 +372,14 @@ const App = () => {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {CONFIG.issues.map((issue, i) => (
               <div key={i} className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
-                <div className="w-14 h-14 rounded-2xl mb-8 flex items-center justify-center text-white transition-transform group-hover:scale-110" style={{ backgroundColor: CONFIG.branding.color }}>
+                <div className="w-14 h-14 rounded-2xl mb-8 flex items-center justify-center text-white transition-transform group-hover:scale-110" style={{ backgroundColor: '#4B384C' }}>
                   {issue.icon}
                 </div>
                 <h3 className="text-2xl font-black mb-6 text-brand-navy">{issue.title}</h3>
                 <ul className="space-y-4">
                   {issue.points.map((pt, j) => (
                     <li key={j} className="flex gap-3 text-sm text-slate-600 font-medium leading-relaxed">
-                      <CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-0.5" />
+                      <CheckCircle2 size={18} className="shrink-0 mt-0.5" style={{ color: CONFIG.branding.accent }} />
                       {pt}
                     </li>
                   ))}
@@ -388,7 +398,7 @@ const App = () => {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 bg-white/10 text-white/80 border border-white/10">
                 <MessageSquare size={14} /> The Listening Post
               </div>
-              <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tighter leading-none italic uppercase">Your Voice. <br/><span style={{ color: CONFIG.branding.color }}>My Mission.</span></h2>
+              <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tighter leading-none italic uppercase">Your Voice. <br/><span style={{ color: CONFIG.branding.accent }}>My Mission.</span></h2>
               <p className="text-slate-400 text-lg font-medium leading-relaxed mb-8">Representative government only works when the representative listens. Tell Kris what issues are impacting your family in SD49.</p>
               <div className="space-y-4">
                 <div className="flex items-center gap-4 text-sm font-bold">
@@ -410,7 +420,7 @@ const App = () => {
                       type="text" 
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-slate-800 border-none rounded-xl p-4 text-white focus:ring-2 focus:ring-purple-500 transition-all" 
+                      className="w-full bg-slate-800 border-none rounded-xl p-4 text-white focus:ring-2 focus:ring-brand-teal transition-all" 
                       placeholder="Neighbor Name" 
                     />
                   </div>
@@ -421,7 +431,7 @@ const App = () => {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       required
-                      className="w-full bg-slate-800 border-none rounded-xl p-4 text-white focus:ring-2 focus:ring-purple-500 transition-all" 
+                      className="w-full bg-slate-800 border-none rounded-xl p-4 text-white focus:ring-2 focus:ring-brand-teal transition-all" 
                       placeholder="Tax reform, school safety, local zoning..."
                     ></textarea>
                   </div>
@@ -429,19 +439,19 @@ const App = () => {
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full py-5 rounded-2xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed" 
-                    style={{ backgroundColor: CONFIG.branding.color }}
+                    style={{ backgroundColor: CONFIG.branding.accent }}
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'} <Send size={16} />
                   </button>
                 </form>
               ) : (
-                <div className="bg-emerald-500/10 border border-emerald-500/20 p-12 rounded-3xl text-center space-y-4">
-                  <div className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 text-white">
+                <div className="p-12 rounded-3xl text-center space-y-4" style={{ backgroundColor: '#ecfeff', border: '1px solid #a5f3fc' }}>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-white" style={{ backgroundColor: CONFIG.branding.accent }}>
                     <CheckCircle2 size={32} />
                   </div>
                   <h3 className="text-2xl font-black italic">Message Received</h3>
                   <p className="text-slate-400 font-medium">Thank you for sharing your priorities. Kris and the team will review this as we build our policy platform.</p>
-                  <button onClick={() => setFormSubmitted(false)} className="text-[10px] font-black uppercase tracking-widest text-emerald-500 pt-4">Send another message</button>
+                  <button onClick={() => setFormSubmitted(false)} className="text-[10px] font-black uppercase tracking-widest pt-4" style={{ color: CONFIG.branding.accent }}>Send another message</button>
                 </div>
               )}
             </div>
@@ -483,7 +493,7 @@ const App = () => {
                   {CONFIG.copy.bioLong.split('\n').map((item, i) => (
                     <li key={i} className="flex gap-3">
                       {!item.startsWith("I'm not interested") && (
-                        <CheckCircle2 size={20} className="text-emerald-500 shrink-0 mt-1" />
+                        <CheckCircle2 size={20} className="text-brand-teal shrink-0 mt-1" />
                       )}
                       <span className={item.startsWith("I'm not interested") ? "mt-4" : ""}>
                         {(() => {
