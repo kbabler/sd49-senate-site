@@ -8,16 +8,12 @@ import {
   Home,
   CheckCircle2,
   Heart,
-  Star,
   Menu,
   X,
-  Send,
   Camera,
-  MessageSquare,
-  Award,
+  Facebook,
   Mail,
-  Phone,
-  Facebook
+  Phone
 } from 'lucide-react';
 
 /** * CAMPAIGN CONTENT DASHBOARD (CONFIG)
@@ -190,9 +186,6 @@ const PledgeForm = () => {
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [signupForm, setSignupForm] = useState({
     firstName: '',
     lastName: '',
@@ -284,29 +277,6 @@ const App = () => {
     setTimeout(() => setVolunteerSubmitted(false), 3000);
   };
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      await submitToSheet({
-        formType: 'The Listening Post',
-        name: formData.name || 'Anonymous',
-        message: formData.message,
-        timestamp: new Date().toISOString()
-      });
-
-      setFormSubmitted(true);
-      setFormData({ name: '', message: '' });
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setFormSubmitted(true);
-      setFormData({ name: '', message: '' });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -349,7 +319,6 @@ const App = () => {
 
         <div className="hidden md:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-black">
           <button onClick={() => scrollToSection('issues')} className="transition-colors hover:text-brand-navy">Playbook</button>
-          <button onClick={() => scrollToSection('listening-post')} className="hover:text-brand-navy transition-colors">Listening Post</button>
           <button onClick={() => scrollToSection('about')} className="hover:text-brand-navy transition-colors">The Man</button>
           <button onClick={() => scrollToSection('service')} className="hover:text-brand-navy transition-colors">Service in Action</button>
           <button 
@@ -376,7 +345,6 @@ const App = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white border-b border-slate-100 p-8 space-y-6 flex flex-col items-center text-[12px] font-black uppercase tracking-widest text-black">
           <button onClick={() => scrollToSection('issues')} className="hover:text-brand-navy transition-colors">Playbook</button>
-          <button onClick={() => scrollToSection('listening-post')}>Listening Post</button>
           <button onClick={() => scrollToSection('about')}>The Man</button>
           <button onClick={() => scrollToSection('service')}>Service in Action</button>
           <button 
@@ -467,7 +435,7 @@ const App = () => {
                     className="w-full py-4 rounded-xl font-black text-white text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-lg"
                     style={{ backgroundColor: '#4B384C' }}
                   >
-                    JOIN THE MISSION
+                    {signupSubmitted ? 'MISSION JOINED!' : 'JOIN THE MISSION'}
                   </button>
                 </form>
               </div>
@@ -681,75 +649,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* LISTENING POST */}
-      <section id="listening-post" className="py-24 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="bg-brand-navy rounded-[3rem] p-8 md:p-16 text-white relative flex flex-col lg:flex-row gap-16 items-center shadow-2xl">
-            <div className="lg:w-1/2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 bg-white/10 text-white/80 border border-white/10">
-                <MessageSquare size={14} /> The Listening Post
-              </div>
-              <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tighter leading-none italic uppercase">Your Voice. <br/><span style={{ color: CONFIG.branding.accent }}>My Mission.</span></h2>
-              <p className="text-slate-400 text-lg font-medium leading-relaxed mb-8">Representative government only works when the representative listens. Tell Kris what issues are impacting your family in SD49.</p>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 text-sm font-bold">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white/5 border border-white/10 text-white">1</div>
-                  <span>What's the biggest challenge in your neighborhood?</span>
-                </div>
-                <div className="flex items-center gap-4 text-sm font-bold">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white/5 border border-white/10 text-white">2</div>
-                  <span>How can St. Paul better serve Eden Prairie & Minnetonka?</span>
-                </div>
-              </div>
-            </div>
-            <div className="lg:w-1/2 w-full">
-              {!formSubmitted ? (
-                <form className="space-y-4 bg-white/5 p-8 rounded-3xl border border-white/10" onSubmit={handleFormSubmit}>
-                  <div>
-                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2 block">Name (Optional)</label>
-                    <input 
-                      type="text" 
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-slate-800 border-none rounded-xl p-4 text-white focus:ring-2 focus:ring-brand-teal transition-all" 
-                      placeholder="Neighbor Name" 
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2 block">Your Priority Issue</label>
-                    <textarea 
-                      rows="4" 
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      required
-                      className="w-full bg-slate-800 border-none rounded-xl p-4 text-white focus:ring-2 focus:ring-brand-teal transition-all" 
-                      placeholder="Tax reform, school safety, local zoning..."
-                    ></textarea>
-                  </div>
-                  <button 
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full py-5 rounded-2xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed" 
-                    style={{ backgroundColor: CONFIG.branding.accent }}
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message'} <Send size={16} />
-                  </button>
-                </form>
-              ) : (
-                <div className="p-12 rounded-3xl text-center space-y-4" style={{ backgroundColor: '#ecfeff', border: '1px solid #a5f3fc' }}>
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-white" style={{ backgroundColor: CONFIG.branding.accent }}>
-                    <CheckCircle2 size={32} />
-                  </div>
-                  <h3 className="text-2xl font-black italic">Message Received</h3>
-                  <p className="text-slate-400 font-medium">Thank you for sharing your priorities. Kris and the team will review this as we build our policy platform.</p>
-                  <button onClick={() => setFormSubmitted(false)} className="text-[10px] font-black uppercase tracking-widest pt-4" style={{ color: CONFIG.branding.accent }}>Send another message</button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ABOUT */}
       <section id="about" className="py-24 bg-white border-t border-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -809,7 +708,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* SERVICE GALLERY (Placeholders) */}
+      {/* SERVICE GALLERY */}
       <section id="service" className="py-24 bg-slate-50 border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">

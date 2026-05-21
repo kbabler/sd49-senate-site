@@ -117,10 +117,120 @@ const SplashOverlay = ({ onDismiss }) => {
 const App = () => {
   const [activeTab, setActiveTab] = useState('home');
   const [showSplash, setShowSplash] = useState(true);
+  const [signupForm, setSignupForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    zipCode: '',
+    smsConsent: false
+  });
+  const [volunteerOptions, setVolunteerOptions] = useState({
+    knockDoors: false,
+    hostListening: false,
+    yardSign: false
+  });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [buildTogetherSubmitting, setBuildTogetherSubmitting] = useState(false);
+  const [buildTogetherSubmitted, setBuildTogetherSubmitted] = useState(false);
+  const [scrollTarget, setScrollTarget] = useState(null);
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyodw8KlxyNCDQLcwXy2AME9fYeZOCZ_Zno6lNC1Md7qYu3YSZz5b2TibxE0DyJClOpHA/exec";
+
+  const scrollToSection = (id) => {
+    setScrollTarget(id);
+    setActiveTab('home');
+  };
+
+  useEffect(() => {
+    if (activeTab === 'home' && scrollTarget) {
+      const element = document.getElementById(scrollTarget);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      setScrollTarget(null);
+    }
+  }, [activeTab, scrollTarget]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activeTab]);
+
+  const handleSignupSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    console.log('Signup form submitted:', signupForm);
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: new FormData(form)
+      });
+      setFormSubmitted(true);
+      form.reset();
+      setSignupForm({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        zipCode: '',
+        smsConsent: false
+      });
+      setTimeout(() => setFormSubmitted(false), 3000);
+    } catch (error) {
+      console.error('Error!', error.message);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setSignupForm(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleBuildTogetherSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    setBuildTogetherSubmitting(true);
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: new FormData(form)
+      });
+      setBuildTogetherSubmitted(true);
+      form.reset();
+      setSignupForm({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        zipCode: '',
+        smsConsent: false
+      });
+      setVolunteerOptions({
+        knockDoors: false,
+        hostListening: false,
+        yardSign: false
+      });
+    } catch (error) {
+      console.error('Error!', error.message);
+    } finally {
+      setBuildTogetherSubmitting(false);
+      setTimeout(() => setBuildTogetherSubmitted(false), 3000);
+    }
+  };
+
+  const handleVolunteerChange = (e) => {
+    const { value, checked } = e.target;
+    const key = value === 'doors' ? 'knockDoors' : value === 'signs' ? 'yardSign' : 'hostListening';
+    setVolunteerOptions(prev => ({
+      ...prev,
+      [key]: checked
+    }));
+  };
 
   const CampaignImage = ({ src, alt, className }) => {
     const [error, setError] = useState(false);
@@ -160,16 +270,16 @@ const App = () => {
           </div>
           <div>
             <h1 className="font-bold text-brand-navy leading-none tracking-tight uppercase text-lg">KRIS BABLER</h1>
-            <p className="text-[9px] text-slate-500 font-bold tracking-[0.2em] uppercase">Independent for SD49</p>
+            <p className="text-[9px] text-slate-500 font-bold tracking-[0.2em] uppercase">SD49 (Eden Prairie &amp; Minnetonka)</p>
           </div>
         </div>
         
         <div className="hidden lg:flex gap-8 items-center text-[11px] font-black uppercase tracking-widest text-slate-400">
-          <button onClick={() => setActiveTab('home')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>The Mission</button>
-          <button onClick={() => setActiveTab('about')} className={activeTab === 'about' ? 'text-brand-navy' : 'hover:text-slate-600'}>Meet Kris</button>
-          <button onClick={() => setActiveTab('issues')} className={activeTab === 'issues' ? 'text-brand-navy' : 'hover:text-slate-600'}>Issues</button>
-          <button onClick={() => setActiveTab('volunteer')} className={activeTab === 'volunteer' ? 'text-brand-navy' : 'hover:text-slate-600'}>Volunteer</button>
-          <DonationWidget />
+          <button onClick={() => scrollToSection('issues')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Playbook</button>
+          <button onClick={() => scrollToSection('about')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>The Man</button>
+          <button onClick={() => scrollToSection('service')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Service in Action</button>
+          <button onClick={() => scrollToSection('volunteer')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Get Involved</button>
+          <button onClick={() => setActiveTab('pcr')} className={activeTab === 'pcr' ? 'text-brand-navy' : 'hover:text-slate-600'}>Donate</button>
         </div>
       </div>
     </nav>
@@ -179,42 +289,154 @@ const App = () => {
     <section className="pt-24 pb-20 lg:pt-32 lg:pb-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="order-2 lg:order-1 relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border bg-slate-50 text-slate-600 border-slate-200 shadow-sm">
-              <Star size={14} style={{ color: BRAND_COLOR }} /> Roots in Eden Prairie & Minnetonka
-            </div>
+          <div className="relative z-10">
             <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-8 tracking-tighter">
-              Results over Rhetoric. <br/>
-              <span style={{ color: BRAND_COLOR }}>People over Party.</span>
+              Our District.<br/>
+              <span style={{ color: BRAND_COLOR }}>Their Mess.</span><br/>
+              Your Choice.
             </h1>
             <p className="text-lg lg:text-xl text-slate-500 mb-10 max-w-lg leading-relaxed font-medium">
-              Kris Babler is your neighbor running for State Senate to restore focus to our district. He's an Independent leader putting the needs of our families above partisan noise.
+              I'm Kris Babler—a neighbor, coach, and former Army Captain on a mission to make the math work for SD49.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button 
-                onClick={() => setActiveTab('about')}
-                className="bg-brand-navy text-white px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-opacity-90 transition-all shadow-xl"
-              >
-                Meet Kris <ArrowRight size={18} />
-              </button>
-              <button 
-                onClick={() => setActiveTab('pcr')}
-                className="bg-white text-brand-navy border-2 border-slate-100 px-10 py-5 rounded-2xl font-black text-xs tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-slate-50 transition-all"
-              >
-                The $75 Refund
-              </button>
+
+            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 shadow-lg">
+              <h3 className="text-xl font-black text-brand-navy mb-6 uppercase tracking-wide">Join the Mission</h3>
+              {formSubmitted && (
+                <div className="mb-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
+                  <p className="text-emerald-800 font-medium">Thank you for joining! We'll be in touch soon.</p>
+                </div>
+              )}
+              <form onSubmit={handleSignupSubmit} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name*"
+                    required
+                    value={signupForm.firstName}
+                    onChange={handleInputChange}
+                    className="px-4 py-3 rounded-xl border border-slate-300 focus:border-slate-400 focus:outline-none font-medium"
+                  />
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name*"
+                    required
+                    value={signupForm.lastName}
+                    onChange={handleInputChange}
+                    className="px-4 py-3 rounded-xl border border-slate-300 focus:border-slate-400 focus:outline-none font-medium"
+                  />
+                </div>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email*"
+                  required
+                  value={signupForm.email}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-slate-400 focus:outline-none font-medium"
+                />
+                <input
+                  type="text"
+                  name="zipCode"
+                  placeholder="Zip Code*"
+                  pattern="[0-9]{5}"
+                  required
+                  value={signupForm.zipCode}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-slate-400 focus:outline-none font-medium"
+                />
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="smsConsent"
+                    checked={signupForm.smsConsent}
+                    onChange={handleInputChange}
+                    required
+                    className="mt-1"
+                  />
+                  <span className="text-sm text-slate-600 leading-relaxed">
+                    I consent to receive mission updates and text alerts. Msg/data rates apply. Reply STOP to opt-out.
+                  </span>
+                </label>
+                <button
+                  type="submit"
+                  className="w-full py-4 rounded-xl font-black text-white text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-lg"
+                  style={{ backgroundColor: BRAND_COLOR }}
+                >
+                  JOIN THE MISSION
+                </button>
+              </form>
             </div>
           </div>
-          
-          <div className="order-1 lg:order-2 relative">
-             <div className="relative aspect-[4/5] bg-slate-100 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white transform lg:rotate-2 hover:rotate-0 transition-transform duration-500 z-10">
-                <CampaignImage 
-                  src={ASSETS.hero} 
-                  alt="Kris Babler Official Portrait" 
-                  className="w-full h-full object-cover"
-                />
-             </div>
-             <div className="absolute -bottom-10 -right-10 w-full h-full bg-slate-50 rounded-[3rem] -z-0 transform -rotate-6"></div>
+
+          <div className="relative">
+            <div className="rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-2xl">
+              <CampaignImage
+                src={ASSETS.hero}
+                alt="Kris Babler Official Portrait"
+                className="w-full h-[560px] object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-10 -right-10 w-full h-full bg-slate-50 rounded-[3rem] -z-0 transform -rotate-6"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+
+  const InvestmentBar = () => (
+    <section className="py-16 bg-slate-50 border-y border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl lg:text-4xl font-black text-brand-navy mb-4 tracking-tight">
+            Give $75—Get $75 Back
+          </h2>
+          <p className="text-lg text-slate-600 mb-8 leading-relaxed font-medium">
+            Minnesota's PCR program fully refunds your first $75 contribution ($150 for couples). It costs you nothing to fuel an independent voice.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="https://secure.anedot.com/campaign-fund-of-kris-babler/donate?amount=25"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest border-2 border-slate-300 text-slate-700 hover:border-slate-400 hover:bg-slate-100 transition-all"
+            >
+              $25
+            </a>
+            <a
+              href="https://secure.anedot.com/campaign-fund-of-kris-babler/donate?amount=50"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest border-2 border-slate-300 text-slate-700 hover:border-slate-400 hover:bg-slate-100 transition-all"
+            >
+              $50
+            </a>
+            <a
+              href="https://secure.anedot.com/campaign-fund-of-kris-babler/donate?amount=75"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest text-white shadow-lg hover:scale-105 transition-all"
+              style={{ backgroundColor: BRAND_COLOR }}
+            >
+              $75 (Refundable)
+            </a>
+            <a
+              href="https://secure.anedot.com/campaign-fund-of-kris-babler/donate?amount=150"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest border-2 border-slate-300 text-slate-700 hover:border-slate-400 hover:bg-slate-100 transition-all"
+            >
+              $150
+            </a>
+            <a
+              href="https://secure.anedot.com/campaign-fund-of-kris-babler/donate"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest border-2 border-slate-300 text-slate-700 hover:border-slate-400 hover:bg-slate-100 transition-all"
+            >
+              Custom
+            </a>
           </div>
         </div>
       </div>
@@ -222,7 +444,7 @@ const App = () => {
   );
 
   const AboutSection = () => (
-    <section className="py-24 bg-slate-50">
+    <section id="about" className="py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <div className="grid grid-cols-2 gap-4">
@@ -247,8 +469,8 @@ const App = () => {
 
           <div className="space-y-8">
             <h2 className="text-4xl lg:text-5xl font-black tracking-tighter text-brand-navy leading-tight">
-              A Life Defined by <br/>
-              <span style={{ color: BRAND_COLOR }}>Service & Stewardship.</span>
+              A Neighbor Running To <br/>
+              <span style={{ color: BRAND_COLOR }}>Make A Difference.</span>
             </h2>
             <div className="space-y-6 text-lg text-slate-600 font-medium leading-relaxed">
               <p>
@@ -273,7 +495,7 @@ const App = () => {
   );
 
   const IssuesSection = () => (
-    <section className="py-24 bg-white">
+    <section id="issues" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="max-w-2xl">
@@ -309,6 +531,164 @@ const App = () => {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+
+  const BuildTogetherSection = () => (
+    <section id="volunteer" className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-brand-navy rounded-[2.5rem] p-8 md:p-16 text-white shadow-2xl overflow-hidden">
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <h2 className="text-4xl font-black text-white mb-4">Build Together</h2>
+            <p className="text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">Tell us how you want to help protect our district.</p>
+          </div>
+
+          <form id="kris-form" onSubmit={handleBuildTogetherSubmit} className="space-y-6">
+            <div className="grid gap-4 md:grid-cols-2">
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name*"
+                required
+                value={signupForm.firstName}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/10 text-white placeholder:text-slate-200 focus:border-white/50 focus:outline-none"
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name*"
+                required
+                value={signupForm.lastName}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/10 text-white placeholder:text-slate-200 focus:border-white/50 focus:outline-none"
+              />
+            </div>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address*"
+              required
+              value={signupForm.email}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/10 text-white placeholder:text-slate-200 focus:border-white/50 focus:outline-none"
+            />
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone (Optional)"
+                value={signupForm.phone}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/10 text-white placeholder:text-slate-200 focus:border-white/50 focus:outline-none"
+              />
+              <input
+                type="text"
+                name="zipCode"
+                placeholder="Zip Code*"
+                required
+                value={signupForm.zipCode}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/10 text-white placeholder:text-slate-200 focus:border-white/50 focus:outline-none"
+              />
+            </div>
+
+            <div className="text-left space-y-4">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-200">I want to help with:</p>
+              <div className="grid gap-3">
+                <label className="flex items-center gap-3 text-sm text-slate-200">
+                  <input
+                    type="checkbox"
+                    name="interest"
+                    value="doors"
+                    checked={volunteerOptions.knockDoors}
+                    onChange={handleVolunteerChange}
+                    className="h-4 w-4 rounded border-white/20 bg-white/10"
+                  />
+                  Knocking on Doors
+                </label>
+                <label className="flex items-center gap-3 text-sm text-slate-200">
+                  <input
+                    type="checkbox"
+                    name="interest"
+                    value="signs"
+                    checked={volunteerOptions.yardSign}
+                    onChange={handleVolunteerChange}
+                    className="h-4 w-4 rounded border-white/20 bg-white/10"
+                  />
+                  Yard Sign Request
+                </label>
+                <label className="flex items-center gap-3 text-sm text-slate-200">
+                  <input
+                    type="checkbox"
+                    name="interest"
+                    value="events"
+                    checked={volunteerOptions.hostListening}
+                    onChange={handleVolunteerChange}
+                    className="h-4 w-4 rounded border-white/20 bg-white/10"
+                  />
+                  Hosting a Listening Post
+                </label>
+              </div>
+            </div>
+
+            <div className="border-t border-white/20 pt-4">
+              <label className="flex items-start gap-3 cursor-pointer text-sm text-slate-200 leading-relaxed">
+                <input
+                  type="checkbox"
+                  name="smsConsent"
+                  required
+                  checked={signupForm.smsConsent}
+                  onChange={handleInputChange}
+                  className="mt-1 h-4 w-4 rounded border-white/20 bg-white/10"
+                />
+                <span className="text-sm text-slate-200 leading-relaxed">
+                  By providing my number, I consent to receive updates via text. Msg/data rates apply. Reply STOP to opt-out. <a href="/privacy" className="underline text-slate-300">Privacy Policy</a>
+                </span>
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              id="submit-btn"
+              className="w-full py-4 rounded-xl font-black text-brand-navy uppercase tracking-widest text-sm transition-all hover:scale-105 shadow-lg bg-white"
+            >
+              {buildTogetherSubmitting ? 'Sending...' : 'SIGN ME UP'}
+            </button>
+
+            {buildTogetherSubmitted && (
+              <div className="rounded-2xl bg-emerald-50 border border-emerald-200 p-4 text-center text-emerald-800 font-semibold">
+                Mission Received. Thanks for joining the team!
+              </div>
+            )}
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+
+  const ServiceSection = () => (
+    <section id="service" className="py-24 bg-slate-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">Service in Action</h2>
+          <p className="text-slate-600 max-w-3xl mx-auto leading-relaxed">85 years of combined military service. Between my grandfathers, my father, and my own time as a Captain, service is more than a slogan for me—it&apos;s a family tradition.</p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          <div className="rounded-3xl overflow-hidden shadow-lg bg-white">
+            <CampaignImage src={ASSETS.action} alt="Community Service Event 1" className="w-full h-full object-cover" />
+          </div>
+          <div className="rounded-3xl overflow-hidden shadow-lg bg-white">
+            <CampaignImage src={ASSETS.community} alt="Local Volunteering" className="w-full h-full object-cover" />
+          </div>
+          <div className="rounded-3xl overflow-hidden shadow-lg bg-white">
+            <CampaignImage src={ASSETS.family} alt="Neighborhood Meeting" className="w-full h-full object-cover" />
+          </div>
+        </div>
+        <p className="text-slate-500 text-sm mt-8 text-center">Kris Babler is a former member of the U.S. Army. Use of his military rank, job titles, and photographs in uniform does not imply endorsement by the Department of the Army or the Department of Defense.</p>
       </div>
     </section>
   );
@@ -380,13 +760,10 @@ const App = () => {
   );
 
   const VolunteerPortal = () => (
-    <div className="pt-24 pb-24 px-4">
+    <div className="pt-20 pb-20 px-4">
       <div className="max-w-2xl mx-auto">
         {/* Header Context */}
-        <div className="mb-12 text-center">
-          <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border bg-emerald-50 text-emerald-700 border-emerald-200 shadow-sm">
-            <CheckCircle2 size={14} /> 100% Refundable via MN PCR
-          </div>
+        <div className="mb-8 text-center">
           <h1 className="text-4xl lg:text-5xl font-black text-brand-navy mb-6 leading-tight">
             Donate to Fuel the Campaign
           </h1>
@@ -454,6 +831,9 @@ const App = () => {
       <div className="bg-brand-navy rounded-[3rem] p-8 md:p-16 text-white shadow-2xl relative overflow-hidden">
         <div className="relative z-10">
           <h2 className="text-4xl font-black mb-6 tracking-tighter uppercase">Support SD49 Independence</h2>
+          <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm font-black uppercase tracking-[0.2em] text-slate-100">
+            <CheckCircle2 size={16} /> 100% Refundable via MN PCR
+          </div>
           <p className="text-slate-400 text-lg mb-10 max-w-xl leading-relaxed">
             The <span className="text-white font-bold underline decoration-indigo-500">Political Contribution Refund</span> makes it easy. Donate $75 and the State of Minnesota will refund you 100%.
           </p>
@@ -478,8 +858,11 @@ const App = () => {
         {activeTab === 'home' && (
           <>
             <Hero />
+            <InvestmentBar />
             <AboutSection />
             <IssuesSection />
+            <BuildTogetherSection />
+            <ServiceSection />
             <NewsSection />
           </>
         )}
@@ -496,11 +879,13 @@ const App = () => {
       </main>
 
       <footer className="bg-slate-50 pt-20 pb-12 border-t border-slate-100 mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[9px] text-slate-400 border border-slate-200 px-6 py-3 rounded-full uppercase font-black tracking-[0.4em] inline-block mb-4">
-            Prepared and paid for by Babler for Senate (SD49)
-          </p>
-          <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest block">© 2025 Kris Babler for State Senate</p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-[9px] text-slate-400 border border-slate-200 px-6 py-3 rounded-full uppercase font-black tracking-[0.4em] inline-block mb-4">
+              Prepared and paid for by Babler for Senate (SD49)
+            </p>
+            <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest block">© 2025 Kris Babler for State Senate</p>
+          </div>
         </div>
       </footer>
     </div>
