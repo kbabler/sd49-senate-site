@@ -34,7 +34,7 @@ const BRAND_COLOR = "#00c2cc";
 const GOOGLE_FORM_ACTION_URL = "";
 const USE_GOOGLE_FORM = Boolean(GOOGLE_FORM_ACTION_URL);
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyodw8KlxyNCDQLcwXy2AME9fYeZOCZ_Zno6lNC1Md7qYu3YSZz5b2TibxE0DyJClOpHA/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfSB4cXyKBQQdLl2C5pw4lL0Q4t2KBdF8VwcOLZ_0gijH6KbRQAKTP1N-XgQZOnww8rw/exec";
 
 // Your actual filenames (mapped to files in public/images)
 const ASSETS = {
