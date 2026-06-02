@@ -6,6 +6,7 @@ import {
   GraduationCap,
   Home,
   CheckCircle2,
+  MessageSquare,
   UserPlus,
   Heart,
   ChevronLeft,
@@ -18,18 +19,31 @@ import {
   Zap,
   Star,
   Newspaper,
-  ExternalLink
+  ExternalLink,
+  Phone,
+  Mail,
+  Facebook
 } from 'lucide-react';
 
 /** * BRAND CONFIGURATION */
-const BRAND_COLOR = "#755FBE";
+const BRAND_COLOR = "#00c2cc";
+
+// Optional: set this to your Google Form post endpoint if you want native form submission
+// Example: https://docs.google.com/forms/d/e/<FORM_ID>/formResponse
+// Note: if you use this path, you also need to update the input names to Google Form entry IDs like entry.123456.
+const GOOGLE_FORM_ACTION_URL = "";
+
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyodw8KlxyNCDQLcwXy2AME9fYeZOCZ_Zno6lNC1Md7qYu3YSZz5b2TibxE0DyJClOpHA/exec";
 
 // Your actual filenames (mapped to files in public/images)
 const ASSETS = {
   hero: "babler-headshot.png",
   family: "kris-family.jpg",
   community: "kris-lakes.jpg",
-  action: "kris-coaching-basketball.jpg"
+  action: "kris-coaching-basketball.jpg",
+  promotion: "promotion-cpt.jpg",
+  serviceFamily: "family-service.jpg",
+  capital: "st-paul-state-capital.jpg"
 };
 
 const SITE_CONTENT = {
@@ -42,10 +56,10 @@ const SITE_CONTENT = {
     substackUrl: "https://krisbabler.substack.com/",
     items: [
       {
-        title: "Minnesota, Is This the Best We Can Do?",
+        title: "On Policy: The Tax the Rich Deceit",
         description: "A direct look at the current state of Minnesota governance and what voters should expect from real leadership.",
         source: "Substack",
-        href: "https://krisbabler.substack.com/p/minnesota-is-this-the-best-we-can?r=1i94n6"
+        href: "https://krisbabler.substack.com/p/on-policy-the-tax-the-rich-deceit?r=1i94n6"
       },
       {
         title: "You Are Not Alone",
@@ -65,29 +79,30 @@ const SITE_CONTENT = {
     {
       title: "Fiscal Watchdog",
       points: [
-        "Reform the LGA formula to ensure Eden Prairie tax dollars return home.",
-        "Direct-to-homeowner property tax credits to offset levy increases.",
-        "Zero-based budgeting to audit the $17B state surplus."
+        "Balance the budget. I'll demand professional audits to ensure your taxes fund results, not St. Paul's systemic waste."
       ],
       icon: <Calculator size={24} />
     },
     {
-      title: "Education Stewardship",
+      title: "Educational Excellence",
       points: [
-        "Lift state-mandated caps on local school referendums.",
-        "Ensuring high-quality educators through competitive, professional compensation.",
-        "Common-sense SRO authority to ensure classroom safety."
+        "Classrooms over bureaucracy. Let local parents and teachers decide our priorities, not top-down mandates from St. Paul."
       ],
       icon: <GraduationCap size={24} />
     },
     {
-      title: "Local Autonomy",
+      title: "Minnesota Advantage",
       points: [
-        "Oppose state-mandated upzoning and forced high-density duplexes.",
-        "Protect municipal zoning rights for Minnetonka & Eden Prairie.",
-        "Incentivize work-from-home infrastructure for the 27% remote workforce."
+        "Restore the Minnesota Advantage. I'll fight to restore our state's competitive edge and economic growth."
       ],
       icon: <Home size={24} />
+    },
+    {
+      title: "Settled Law",
+      points: [
+        "I view reproductive freedom and marriage equality as settled. I'm here to block distractions, not relitigate the past."
+      ],
+      icon: <ShieldCheck size={24} />
     }
   ]
 };
@@ -116,7 +131,7 @@ const SplashOverlay = ({ onDismiss }) => {
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('home');
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(false);
   const [signupForm, setSignupForm] = useState({
     firstName: '',
     lastName: '',
@@ -134,7 +149,6 @@ const App = () => {
   const [buildTogetherSubmitting, setBuildTogetherSubmitting] = useState(false);
   const [buildTogetherSubmitted, setBuildTogetherSubmitted] = useState(false);
   const [scrollTarget, setScrollTarget] = useState(null);
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyodw8KlxyNCDQLcwXy2AME9fYeZOCZ_Zno6lNC1Md7qYu3YSZz5b2TibxE0DyJClOpHA/exec";
 
   const scrollToSection = (id) => {
     setScrollTarget(id);
@@ -156,6 +170,7 @@ const App = () => {
   }, [activeTab]);
 
   const handleSignupSubmit = async (e) => {
+    if (GOOGLE_FORM_ACTION_URL) return;
     e.preventDefault();
     const form = e.target;
     console.log('Signup form submitted:', signupForm);
@@ -195,10 +210,25 @@ const App = () => {
     setBuildTogetherSubmitting(true);
 
     try {
+      const formData = new FormData(form);
+      const involvement = [
+        volunteerOptions.knockDoors && 'Knocking on Doors',
+        volunteerOptions.yardSign && 'Yard Sign Request',
+        volunteerOptions.hostListening && 'Hosting a Listening Post'
+      ]
+        .filter(Boolean)
+        .join('; ');
+
+      formData.set('knockDoors', volunteerOptions.knockDoors ? 'Yes' : 'No');
+      formData.set('yardSign', volunteerOptions.yardSign ? 'Yes' : 'No');
+      formData.set('hostListening', volunteerOptions.hostListening ? 'Yes' : 'No');
+      formData.set('smsConsent', signupForm.smsConsent ? 'Yes' : 'No');
+      formData.set('involvement', involvement);
+
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        body: new FormData(form)
+        body: formData
       });
       setBuildTogetherSubmitted(true);
       form.reset();
@@ -224,11 +254,10 @@ const App = () => {
   };
 
   const handleVolunteerChange = (e) => {
-    const { value, checked } = e.target;
-    const key = value === 'doors' ? 'knockDoors' : value === 'signs' ? 'yardSign' : 'hostListening';
+    const { name, checked } = e.target;
     setVolunteerOptions(prev => ({
       ...prev,
-      [key]: checked
+      [name]: checked
     }));
   };
 
@@ -269,7 +298,7 @@ const App = () => {
             <img src="/images/KB_Logo_Plum_512px.png" alt="Kris Babler Logo" className="w-full h-full object-cover" />
           </div>
           <div>
-            <h1 className="font-bold text-brand-navy leading-none tracking-tight uppercase text-lg">KRIS BABLER</h1>
+            <h1 className="font-black text-brand-navy leading-none tracking-tight uppercase text-xl lg:text-2xl">KRIS BABLER</h1>
             <p className="text-[9px] text-slate-500 font-bold tracking-[0.2em] uppercase">SD49 (Eden Prairie &amp; Minnetonka)</p>
           </div>
         </div>
@@ -279,7 +308,7 @@ const App = () => {
           <button onClick={() => scrollToSection('about')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>The Man</button>
           <button onClick={() => scrollToSection('service')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Service in Action</button>
           <button onClick={() => scrollToSection('volunteer')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Get Involved</button>
-          <button onClick={() => setActiveTab('pcr')} className={activeTab === 'pcr' ? 'text-brand-navy' : 'hover:text-slate-600'}>Donate</button>
+          <button onClick={() => scrollToSection('pcr')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Donate</button>
         </div>
       </div>
     </nav>
@@ -306,7 +335,13 @@ const App = () => {
                   <p className="text-emerald-800 font-medium">Thank you for joining! We'll be in touch soon.</p>
                 </div>
               )}
-              <form onSubmit={handleSignupSubmit} className="space-y-4">
+              <form
+                action={GOOGLE_FORM_ACTION_URL || undefined}
+                method="POST"
+                target={GOOGLE_FORM_ACTION_URL ? "_blank" : undefined}
+                onSubmit={handleSignupSubmit}
+                className="space-y-4"
+              >
                 <div className="grid grid-cols-2 gap-4">
                   <input
                     type="text"
@@ -371,14 +406,14 @@ const App = () => {
           </div>
 
           <div className="relative">
-            <div className="rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-2xl">
+            <div className="absolute -bottom-10 -right-10 w-full h-full bg-slate-50 rounded-[3rem] -z-10 transform -rotate-6"></div>
+            <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-2xl">
               <CampaignImage
                 src={ASSETS.hero}
                 alt="Kris Babler Official Portrait"
-                className="w-full h-[560px] object-cover"
+                className="w-full h-[680px] lg:h-[780px] object-cover"
               />
             </div>
-            <div className="absolute -bottom-10 -right-10 w-full h-full bg-slate-50 rounded-[3rem] -z-0 transform -rotate-6"></div>
           </div>
         </div>
       </div>
@@ -474,11 +509,22 @@ const App = () => {
             </h2>
             <div className="space-y-6 text-lg text-slate-600 font-medium leading-relaxed">
               <p>
-                Kris Babler isn't running for a title—he's running to represent his neighbors. As a professional, a father, and a long-time resident of SD49, Kris understands that our community values results over political theater.
+                I'm a dad, a local business owner, and a neighbor who believes that if you see a problem, you step up. My path to this campaign wasn't through politics; it was through service.
               </p>
-              <p>
-                From Eden Prairie to Minnetonka, he has seen the impact of St. Paul's disconnect from suburban priorities. Kris is focused on a common-sense approach that protects our schools, secures our tax dollars, and preserves local control.
-              </p>
+              <div className="space-y-6">
+                <p>
+                  <span className="font-black">Leadership Under Pressure</span> As a U.S. Army Captain, I learned that leadership isn't about rank—it's about the mission and the people. When a plan fails in the field, you don't point fingers; you adapt and get the job done. I'm bringing that same "mission-first" accountability to St. Paul.
+                </p>
+                <p>
+                  <span className="font-black">Cutting the Red Tape</span> Working in School Administration, I saw how top-down mandates from the state get in the way of actual learning. We need to stop the experiments and start supporting our teachers and parents so our kids can thrive.
+                </p>
+                <p>
+                  <span className="font-black">Building the Team</span> Coaching basketball is where I've seen the real Minnesota. It's about discipline and showing up for each other. I'm not a career politician—I'm running to be a teammate for Eden Prairie and Minnetonka.
+                </p>
+                <p>
+                  <span className="font-black">Protecting the Bottom Line</span> As a Business Owner, I know the weight of a budget. Every dollar St. Paul spends comes out of your pocket. I will treat your tax dollars with the same respect I treat my own bottom line—because you've earned it.
+                </p>
+              </div>
               <div className="flex gap-4 pt-4">
                 <button 
                   onClick={() => setActiveTab('issues')}
@@ -602,8 +648,8 @@ const App = () => {
                 <label className="flex items-center gap-3 text-sm text-slate-200">
                   <input
                     type="checkbox"
-                    name="interest"
-                    value="doors"
+                    name="knockDoors"
+                    value="Yes"
                     checked={volunteerOptions.knockDoors}
                     onChange={handleVolunteerChange}
                     className="h-4 w-4 rounded border-white/20 bg-white/10"
@@ -613,8 +659,8 @@ const App = () => {
                 <label className="flex items-center gap-3 text-sm text-slate-200">
                   <input
                     type="checkbox"
-                    name="interest"
-                    value="signs"
+                    name="yardSign"
+                    value="Yes"
                     checked={volunteerOptions.yardSign}
                     onChange={handleVolunteerChange}
                     className="h-4 w-4 rounded border-white/20 bg-white/10"
@@ -624,8 +670,8 @@ const App = () => {
                 <label className="flex items-center gap-3 text-sm text-slate-200">
                   <input
                     type="checkbox"
-                    name="interest"
-                    value="events"
+                    name="hostListening"
+                    value="Yes"
                     checked={volunteerOptions.hostListening}
                     onChange={handleVolunteerChange}
                     className="h-4 w-4 rounded border-white/20 bg-white/10"
@@ -675,17 +721,17 @@ const App = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-black text-brand-navy mb-4 tracking-tighter uppercase italic">Service in Action</h2>
-          <p className="text-slate-600 max-w-3xl mx-auto leading-relaxed">85 years of combined military service. Between my grandfathers, my father, and my own time as a Captain, service is more than a slogan for me—it&apos;s a family tradition.</p>
+          <p className="text-slate-600 max-w-3xl mx-auto leading-relaxed">85 years of combined military service. Between my grandfathers, my father, and my own time in the Army, service is more than a slogan for me—it's a family tradition.</p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           <div className="rounded-3xl overflow-hidden shadow-lg bg-white">
-            <CampaignImage src={ASSETS.action} alt="Community Service Event 1" className="w-full h-full object-cover" />
+            <CampaignImage src={ASSETS.promotion} alt="Promotion Captain" className="w-full h-full object-cover" />
           </div>
           <div className="rounded-3xl overflow-hidden shadow-lg bg-white">
-            <CampaignImage src={ASSETS.community} alt="Local Volunteering" className="w-full h-full object-cover" />
+            <CampaignImage src={ASSETS.capital} alt="St. Paul State Capital" className="w-full h-full object-cover" />
           </div>
           <div className="rounded-3xl overflow-hidden shadow-lg bg-white">
-            <CampaignImage src={ASSETS.family} alt="Neighborhood Meeting" className="w-full h-full object-cover" />
+            <CampaignImage src={ASSETS.serviceFamily} alt="Family Service" className="w-full h-full object-cover" />
           </div>
         </div>
         <p className="text-slate-500 text-sm mt-8 text-center">Kris Babler is a former member of the U.S. Army. Use of his military rank, job titles, and photographs in uniform does not imply endorsement by the Department of the Army or the Department of Defense.</p>
@@ -721,13 +767,7 @@ const App = () => {
             </a>
           </div>
 
-          <div className="bg-slate-50 border border-dashed border-slate-300 rounded-2xl px-5 py-4 mt-8 mb-6">
-            <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">
-              Add or edit links in the news items list at the top of this page file.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 mt-10">
+          <div className="grid md:grid-cols-2 gap-6 mt-8">
             {SITE_CONTENT.news.items.map((item, idx) => (
               <div key={idx} className="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-6 flex flex-col justify-between gap-4">
                 <div>
@@ -753,6 +793,72 @@ const App = () => {
                 )}
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+
+  const DonateSection = () => (
+    <section id="pcr" className="py-24 bg-slate-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-[2rem] shadow-xl p-8 md:p-12">
+          <div className="grid gap-8 lg:grid-cols-2 items-start mb-12">
+            <div>
+              <h2 className="text-4xl font-black text-brand-navy mb-4 tracking-tight uppercase">Donate to Fuel the Campaign</h2>
+              <p className="text-lg text-slate-600 leading-relaxed max-w-2xl">
+                Donations are now live. Make your secure contribution below to support Kris Babler for State Senate.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200">
+                <p className="text-3xl font-black" style={{ color: BRAND_COLOR }}>$75</p>
+                <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">PCR-Refundable Amount</p>
+              </div>
+              <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200">
+                <p className="text-3xl font-black text-emerald-600">$0</p>
+                <p className="text-[12px] font-bold text-slate-600 uppercase tracking-wide mt-2">Your Net Cost (via MN PCR)</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl border border-slate-100 shadow-xl p-8 md:p-12 mb-10">
+            <iframe
+              src="https://secure.anedot.com/campaign-fund-of-kris-babler/donate?embed=true"
+              width="100%"
+              height="800px"
+              frameBorder="0"
+              style={{ border: 'none', overflow: 'hidden' }}
+              scrolling="no"
+              title="Kris Babler Campaign Donation"
+            ></iframe>
+          </div>
+
+          <div className="space-y-6">
+            <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+              <p className="text-[12px] font-black text-blue-900 uppercase tracking-wide mb-2">🔒 Secure Payment</p>
+              <p className="text-sm text-blue-800 leading-relaxed">
+                Payments are processed securely via Anedot. Donations opened on April 2 and are processed through our secure payment partner.
+              </p>
+            </div>
+
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+              <p className="text-[12px] font-black text-slate-900 uppercase tracking-wide mb-3">Eligibility & How It Works</p>
+              <ul className="space-y-2 text-sm text-slate-700 leading-relaxed">
+                <li className="flex gap-3">
+                  <span className="font-black">•</span>
+                  <span>You must be a Minnesota resident to participate in the Political Contribution Refund program.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-black">•</span>
+                  <span>After your contribution, our campaign submits the required refund paperwork on your behalf.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-black">•</span>
+                  <span>Your donation today helps build an Independent voice for SD49 in St. Paul.</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -851,7 +957,6 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans text-brand-navy tracking-tight">
-      {showSplash && <SplashOverlay onDismiss={() => setShowSplash(false)} />}
       <Navigation />
       
       <main className="animate-fade-in">
@@ -864,6 +969,7 @@ const App = () => {
             <BuildTogetherSection />
             <ServiceSection />
             <NewsSection />
+            <DonateSection />
           </>
         )}
         
@@ -878,13 +984,36 @@ const App = () => {
         {activeTab === 'pcr' && <DonationPortal />}
       </main>
 
-      <footer className="bg-slate-50 pt-20 pb-12 border-t border-slate-100 mt-20">
+      <footer className="bg-brand-navy text-white pt-20 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <p className="text-[9px] text-slate-400 border border-slate-200 px-6 py-3 rounded-full uppercase font-black tracking-[0.4em] inline-block mb-4">
+          <div className="grid md:grid-cols-3 gap-12 mb-12">
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-wider mb-4 text-slate-400">Contact</p>
+              <div className="space-y-3 text-sm">
+                <a href="tel:218-206-2664" className="flex items-center gap-2 hover:text-slate-300 transition-colors">
+                  <Phone size={16} /> Call Kris
+                </a>
+                <a href="mailto:KB@krisbabler.com" className="flex items-center gap-2 hover:text-slate-300 transition-colors">
+                  <Mail size={16} /> Email Kris
+                </a>
+              </div>
+            </div>
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-wider mb-4 text-slate-400">Follow</p>
+              <a href="https://www.facebook.com/profile.php?id=61572137380455" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-slate-300 transition-colors text-sm">
+                <Facebook size={16} /> Facebook
+              </a>
+            </div>
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-wider mb-4 text-slate-400">About</p>
+              <p className="text-sm text-slate-300 leading-relaxed">Kris Babler is a candidate for the Minnesota State Senate in District 49. Our work is focused on providing the residents of Eden Prairie and Minnetonka with a professional, results-oriented choice that prioritizes local impact over partisan interests.</p>
+            </div>
+          </div>
+          <div className="border-t border-slate-700 pt-8 text-center">
+            <p className="text-[9px] text-slate-400 uppercase font-black tracking-[0.4em] mb-4">
               Prepared and paid for by Babler for Senate (SD49)
             </p>
-            <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest block">© 2025 Kris Babler for State Senate</p>
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">© 2025 Kris Babler for State Senate</p>
           </div>
         </div>
       </footer>
