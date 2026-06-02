@@ -32,6 +32,7 @@ const BRAND_COLOR = "#00c2cc";
 // Example: https://docs.google.com/forms/d/e/<FORM_ID>/formResponse
 // Note: if you use this path, you also need to update the input names to Google Form entry IDs like entry.123456.
 const GOOGLE_FORM_ACTION_URL = "";
+const USE_GOOGLE_FORM = Boolean(GOOGLE_FORM_ACTION_URL);
 
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyodw8KlxyNCDQLcwXy2AME9fYeZOCZ_Zno6lNC1Md7qYu3YSZz5b2TibxE0DyJClOpHA/exec";
 
@@ -170,15 +171,18 @@ const App = () => {
   }, [activeTab]);
 
   const handleSignupSubmit = async (e) => {
-    if (GOOGLE_FORM_ACTION_URL) return;
+    if (USE_GOOGLE_FORM) return;
     e.preventDefault();
     const form = e.target;
     console.log('Signup form submitted:', signupForm);
     try {
+      const formData = new FormData(form);
+      formData.set('smsConsent', signupForm.smsConsent ? 'Yes' : 'No');
+      formData.set('involvement', 'Join the Mission');
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        body: new FormData(form)
+        body: formData
       });
       setFormSubmitted(true);
       form.reset();
@@ -205,6 +209,7 @@ const App = () => {
   };
 
   const handleBuildTogetherSubmit = async (e) => {
+    if (USE_GOOGLE_FORM) return;
     e.preventDefault();
     const form = e.target;
     setBuildTogetherSubmitting(true);
@@ -223,7 +228,7 @@ const App = () => {
       formData.set('yardSign', volunteerOptions.yardSign ? 'Yes' : 'No');
       formData.set('hostListening', volunteerOptions.hostListening ? 'Yes' : 'No');
       formData.set('smsConsent', signupForm.smsConsent ? 'Yes' : 'No');
-      formData.set('involvement', involvement);
+      formData.set('involvement', involvement || 'Build Together');
 
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
@@ -363,6 +368,14 @@ const App = () => {
                   />
                 </div>
                 <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone (Optional)"
+                  value={signupForm.phone}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-slate-400 focus:outline-none font-medium"
+                />
+                <input
                   type="email"
                   name="email"
                   placeholder="Email*"
@@ -381,10 +394,12 @@ const App = () => {
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-slate-400 focus:outline-none font-medium"
                 />
+                <input type="hidden" name="involvement" value="Join the Mission" />
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
                     type="checkbox"
                     name="smsConsent"
+                    value="Yes"
                     checked={signupForm.smsConsent}
                     onChange={handleInputChange}
                     required
@@ -590,7 +605,23 @@ const App = () => {
             <p className="text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">Tell us how you want to help protect our district.</p>
           </div>
 
-          <form id="kris-form" onSubmit={handleBuildTogetherSubmit} className="space-y-6">
+          <form
+            id="kris-form"
+            action={GOOGLE_FORM_ACTION_URL || undefined}
+            method="POST"
+            target={GOOGLE_FORM_ACTION_URL ? "_blank" : undefined}
+            onSubmit={handleBuildTogetherSubmit}
+            className="space-y-6"
+          >
+            <input type="hidden" name="involvement" value={
+              [
+                volunteerOptions.knockDoors && 'Knocking on Doors',
+                volunteerOptions.yardSign && 'Yard Sign Request',
+                volunteerOptions.hostListening && 'Hosting a Listening Post'
+              ]
+              .filter(Boolean)
+              .join('; ') || 'Build Together'
+            } />
             <div className="grid gap-4 md:grid-cols-2">
               <input
                 type="text"
