@@ -1044,7 +1044,8 @@ const App = () => {
             <p className="text-[9px] text-slate-400 uppercase font-black tracking-[0.4em] mb-4">
               Prepared and paid for by Babler for Senate (SD49)
             </p>
-            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">© 2025 Kris Babler for State Senate</p>
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-2">© 2025 Kris Babler for State Senate</p>
+            <p className="text-[9px] text-slate-400">6647 Canterbury Lane, Eden Prairie, MN 55346</p>
           </div>
         </div>
       </footer>
