@@ -63,6 +63,12 @@ const SITE_CONTENT = {
         href: "https://krisbabler.substack.com/p/on-policy-the-tax-the-rich-deceit?r=1i94n6"
       },
       {
+        title: "On Policy #2: The $168 Billion Healthcare Question",
+        description: "A closer look at the growing healthcare cost crisis and the reforms Minnesota needs to protect families and taxpayers.",
+        source: "Substack",
+        href: "https://krisbabler.substack.com/p/on-policy-2-the-168-billion-healthcare?r=1i94n6"
+      },
+      {
         title: "You Are Not Alone",
         description: "A message for neighbors who feel left out of the partisan noise and are looking for a more grounded path forward.",
         source: "Substack",
