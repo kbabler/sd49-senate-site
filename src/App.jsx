@@ -29,6 +29,7 @@ import {
 const BRAND_COLOR = "#00c2cc";
 const CALENDLY_URL = "https://calendly.com/kb-krisbabler/30min?hide_event_type_details=1&primary_color=00c2cc";
 const CALENDLY_SCRIPT_SRC = "https://assets.calendly.com/assets/external/widget.js";
+const CALENDLY_CSS_SRC = "https://assets.calendly.com/assets/external/widget.css";
 
 // Optional: set this to your Google Form post endpoint if you want native form submission
 // Example: https://docs.google.com/forms/d/e/<FORM_ID>/formResponse
@@ -181,6 +182,13 @@ const App = () => {
   const [calendlyScriptLoaded, setCalendlyScriptLoaded] = useState(false);
 
   useEffect(() => {
+    if (!document.querySelector(`link[href="${CALENDLY_CSS_SRC}"]`)) {
+      const link = document.createElement('link');
+      link.href = CALENDLY_CSS_SRC;
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    }
+
     if (document.querySelector(`script[src="${CALENDLY_SCRIPT_SRC}"]`)) {
       setCalendlyScriptLoaded(true);
       return;
@@ -189,29 +197,22 @@ const App = () => {
     script.src = CALENDLY_SCRIPT_SRC;
     script.async = true;
     script.onload = () => setCalendlyScriptLoaded(true);
-    script.onerror = () => setCalendlyScriptLoaded(false);
+    script.onerror = () => {
+      console.error('Failed to load Calendly script');
+      setCalendlyScriptLoaded(false);
+    };
     document.body.appendChild(script);
   }, []);
 
-  const openCalendlyPopup = () => {
+  const openCalendlyPopup = (e) => {
+    if (e) e.preventDefault();
+
     if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
       window.Calendly.initPopupWidget({ url: CALENDLY_URL });
       return;
     }
 
-    const newWindow = window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
-    if (!newWindow) {
-      window.location.href = CALENDLY_URL;
-    }
-
-    if (!document.querySelector(`script[src="${CALENDLY_SCRIPT_SRC}"]`)) {
-      const script = document.createElement('script');
-      script.src = CALENDLY_SCRIPT_SRC;
-      script.async = true;
-      script.onload = () => setCalendlyScriptLoaded(true);
-      script.onerror = () => setCalendlyScriptLoaded(false);
-      document.body.appendChild(script);
-    }
+    window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
   };
 
   const handleSignupSubmit = async (e) => {
@@ -388,10 +389,11 @@ const App = () => {
               <button
                 type="button"
                 onClick={openCalendlyPopup}
-                className="w-full py-4 rounded-full font-black text-white text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-lg mb-6"
+                disabled={!calendlyScriptLoaded}
+                className="w-full py-4 rounded-full font-black text-white text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-lg mb-6 disabled:cursor-not-allowed disabled:opacity-60"
                 style={{ backgroundColor: BRAND_COLOR }}
               >
-                Book 20 Minutes with Kris
+                {calendlyScriptLoaded ? 'Book 20 Minutes with Kris' : 'Loading...' }
               </button>
             </div>
           </div>
