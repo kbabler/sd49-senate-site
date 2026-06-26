@@ -176,6 +176,25 @@ const App = () => {
     window.scrollTo(0, 0);
   }, [activeTab]);
 
+  useEffect(() => {
+    if (document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]')) {
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
+  const openCalendlyPopup = () => {
+    const calendlyUrl = 'https://calendly.com/kb-krisbabler/30min?hide_event_type_details=1&primary_color=00c2cc';
+    if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+      window.Calendly.initPopupWidget({ url: calendlyUrl });
+    } else {
+      window.open(calendlyUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   const handleSignupSubmit = async (e) => {
     if (USE_GOOGLE_FORM) return;
     e.preventDefault();
@@ -326,113 +345,45 @@ const App = () => {
   );
 
   const Hero = () => (
-    <section className="pt-24 pb-20 lg:pt-32 lg:pb-32 bg-white overflow-hidden">
+    <section className="pt-24 pb-24 lg:pt-32 lg:pb-36 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           <div className="relative z-10">
-            <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-8 tracking-tighter">
+            <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-6 tracking-tighter">
               Our District.<br/>
               <span style={{ color: BRAND_COLOR }}>Their Mess.</span><br/>
               Your Choice.
             </h1>
+            <h2 className="text-xl lg:text-2xl font-black text-brand-navy mb-6 max-w-lg">
+              Tired of the partisan wreckage both parties sell us? You are not alone.
+            </h2>
             <p className="text-lg lg:text-xl text-slate-500 mb-10 max-w-lg leading-relaxed font-medium">
-              I'm Kris Babler—a neighbor, coach, and former Army Captain on a mission to make the math work for SD49.
+              I'm Kris Babler—a neighbor, coach, and former Army Captain out to prove we don't need them. We can build together.
             </p>
 
-            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 shadow-lg">
-              <h3 className="text-xl font-black text-brand-navy mb-6 uppercase tracking-wide">Join the Mission</h3>
-              {formSubmitted && (
-                <div className="mb-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
-                  <p className="text-emerald-800 font-medium">Thank you for joining! We'll be in touch soon.</p>
-                </div>
-              )}
-              <form
-                action={GOOGLE_FORM_ACTION_URL || undefined}
-                method="POST"
-                target={GOOGLE_FORM_ACTION_URL ? "_blank" : undefined}
-                onSubmit={handleSignupSubmit}
-                className="space-y-4"
+            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 shadow-lg max-w-xl">
+              <h3 className="text-xl font-black text-brand-navy mb-4 uppercase tracking-wide">Meet Kris</h3>
+              <p className="text-slate-600 mb-6 leading-relaxed font-medium">
+                Book 20 minutes with Kris to discuss district priorities, service, or local campaign concerns.
+              </p>
+              <button
+                type="button"
+                onClick={openCalendlyPopup}
+                className="w-full py-4 rounded-full font-black text-white text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-lg mb-6"
+                style={{ backgroundColor: BRAND_COLOR }}
               >
-                <div className="grid grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name*"
-                    required
-                    value={signupForm.firstName}
-                    onChange={handleInputChange}
-                    className="px-4 py-3 rounded-xl border border-slate-300 focus:border-slate-400 focus:outline-none font-medium"
-                  />
-                  <input
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name*"
-                    required
-                    value={signupForm.lastName}
-                    onChange={handleInputChange}
-                    className="px-4 py-3 rounded-xl border border-slate-300 focus:border-slate-400 focus:outline-none font-medium"
-                  />
-                </div>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone (Optional)"
-                  value={signupForm.phone}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-slate-400 focus:outline-none font-medium"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email*"
-                  required
-                  value={signupForm.email}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-slate-400 focus:outline-none font-medium"
-                />
-                <input
-                  type="text"
-                  name="zipCode"
-                  placeholder="Zip Code*"
-                  pattern="[0-9]{5}"
-                  required
-                  value={signupForm.zipCode}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-slate-400 focus:outline-none font-medium"
-                />
-                <input type="hidden" name="involvement" value="Join the Mission" />
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    name="smsConsent"
-                    value="Yes"
-                    checked={signupForm.smsConsent}
-                    onChange={handleInputChange}
-                    required
-                    className="mt-1"
-                  />
-                  <span className="text-sm text-slate-600 leading-relaxed">
-                    I consent to receive mission updates and text alerts. Msg/data rates apply. Reply STOP to opt-out.
-                  </span>
-                </label>
-                <button
-                  type="submit"
-                  className="w-full py-4 rounded-xl font-black text-white text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-lg"
-                  style={{ backgroundColor: BRAND_COLOR }}
-                >
-                  JOIN THE MISSION
-                </button>
-              </form>
+                Book 20 Minutes with Kris
+              </button>
             </div>
           </div>
 
           <div className="relative">
             <div className="absolute -bottom-10 -right-10 w-full h-full bg-slate-50 rounded-[3rem] -z-10 transform -rotate-6"></div>
-            <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-2xl">
+            <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-2xl bg-white">
               <CampaignImage
                 src={ASSETS.hero}
                 alt="Kris Babler Official Portrait"
-                className="w-full h-[680px] lg:h-[780px] object-cover"
+                className="w-full h-[700px] lg:h-[760px] object-cover"
               />
             </div>
           </div>
