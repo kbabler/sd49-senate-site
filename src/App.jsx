@@ -27,6 +27,7 @@ import {
 
 /** * BRAND CONFIGURATION */
 const BRAND_COLOR = "#00c2cc";
+const CALENDLY_URL = "https://calendly.com/kb-krisbabler/30min?hide_event_type_details=1&primary_color=00c2cc";
 
 // Optional: set this to your Google Form post endpoint if you want native form submission
 // Example: https://docs.google.com/forms/d/e/<FORM_ID>/formResponse
@@ -187,11 +188,16 @@ const App = () => {
   }, []);
 
   const openCalendlyPopup = () => {
-    const calendlyUrl = 'https://calendly.com/kb-krisbabler/30min?hide_event_type_details=1&primary_color=00c2cc';
+    const calendlyUrl = CALENDLY_URL;
     if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
       window.Calendly.initPopupWidget({ url: calendlyUrl });
-    } else {
-      window.open(calendlyUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    // Fallback for cases where the script hasn't loaded or blocked popups
+    const newWindow = window.open(calendlyUrl, '_blank', 'noopener,noreferrer');
+    if (!newWindow) {
+      window.location.href = calendlyUrl;
     }
   };
 
