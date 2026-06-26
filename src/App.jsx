@@ -28,6 +28,7 @@ import {
 /** * BRAND CONFIGURATION */
 const BRAND_COLOR = "#00c2cc";
 const CALENDLY_URL = "https://calendly.com/kb-krisbabler/30min?hide_event_type_details=1&primary_color=00c2cc";
+const CALENDLY_SCRIPT_SRC = "https://assets.calendly.com/assets/external/widget.js";
 
 // Optional: set this to your Google Form post endpoint if you want native form submission
 // Example: https://docs.google.com/forms/d/e/<FORM_ID>/formResponse
@@ -177,27 +178,39 @@ const App = () => {
     window.scrollTo(0, 0);
   }, [activeTab]);
 
+  const [calendlyScriptLoaded, setCalendlyScriptLoaded] = useState(false);
+
   useEffect(() => {
-    if (document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]')) {
+    if (document.querySelector(`script[src="${CALENDLY_SCRIPT_SRC}"]`)) {
+      setCalendlyScriptLoaded(true);
       return;
     }
     const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.src = CALENDLY_SCRIPT_SRC;
     script.async = true;
+    script.onload = () => setCalendlyScriptLoaded(true);
+    script.onerror = () => setCalendlyScriptLoaded(false);
     document.body.appendChild(script);
   }, []);
 
   const openCalendlyPopup = () => {
-    const calendlyUrl = CALENDLY_URL;
     if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
-      window.Calendly.initPopupWidget({ url: calendlyUrl });
+      window.Calendly.initPopupWidget({ url: CALENDLY_URL });
       return;
     }
 
-    // Fallback for cases where the script hasn't loaded or blocked popups
-    const newWindow = window.open(calendlyUrl, '_blank', 'noopener,noreferrer');
+    const newWindow = window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
     if (!newWindow) {
-      window.location.href = calendlyUrl;
+      window.location.href = CALENDLY_URL;
+    }
+
+    if (!document.querySelector(`script[src="${CALENDLY_SCRIPT_SRC}"]`)) {
+      const script = document.createElement('script');
+      script.src = CALENDLY_SCRIPT_SRC;
+      script.async = true;
+      script.onload = () => setCalendlyScriptLoaded(true);
+      script.onerror = () => setCalendlyScriptLoaded(false);
+      document.body.appendChild(script);
     }
   };
 
