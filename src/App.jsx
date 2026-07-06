@@ -78,6 +78,12 @@ const SITE_CONTENT = {
         href: "https://krisbabler.substack.com/p/you-are-not-alone?r=1i94n6"
       },
       {
+        title: "On Policy: People Need Jobs",
+        description: "A clear look at how workforce and economic policy shape opportunity for families and communities across Minnesota.",
+        source: "Substack",
+        href: "https://open.substack.com/pub/krisbabler/p/people-need-jobs?r=1i94n6&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true"
+      },
+      {
         title: "Why I'm Stepping Into the Arena",
         description: "Kris shares the personal story and conviction behind his decision to run for Senate — and what's at stake for SD49.",
         source: "Substack",
@@ -101,9 +107,9 @@ const SITE_CONTENT = {
       icon: <GraduationCap size={24} />
     },
     {
-      title: "Minnesota Advantage",
+      title: "People Need Jobs",
       points: [
-        "Restore the Minnesota Advantage. I'll fight to restore our state's competitive edge and economic growth."
+        "Human-centric growth. Pro-economic growth policies that protect our future, cut housing costs, and create jobs."
       ],
       icon: <Home size={24} />
     },
