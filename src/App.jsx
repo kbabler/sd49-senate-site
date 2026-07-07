@@ -41,7 +41,7 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfSB4cXyKBQQ
 
 // Your actual filenames (mapped to files in public/images)
 const ASSETS = {
-  hero: "babler-headshot.png",
+  heroVideo: "mediumzoom.mp4",
   family: "kris-family.jpg",
   community: "kris-lakes.jpg",
   action: "kris-coaching-basketball.jpg",
@@ -371,48 +371,55 @@ const App = () => {
   );
 
   const Hero = () => (
-    <section className="pt-24 pb-24 lg:pt-32 lg:pb-36 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          <div className="relative z-10">
-            <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-6 tracking-tighter">
-              Our District.<br/>
-              <span style={{ color: BRAND_COLOR }}>Their Mess.</span><br/>
-              Your Choice.
-            </h1>
-            <h2 className="text-xl lg:text-2xl font-black text-brand-navy mb-6 max-w-lg">
-              Tired of the partisan wreckage both parties sell us? You are not alone.
-            </h2>
-            <p className="text-lg lg:text-xl text-slate-500 mb-10 max-w-lg leading-relaxed font-medium">
-              I'm Kris Babler—a neighbor, coach, and former Army Captain out to prove we don't need them. We can build together.
+    <section className="relative overflow-hidden bg-white pt-20 pb-24 lg:pt-20 lg:pb-20">
+      <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+        <div className="pointer-events-none absolute inset-0" style={{
+          zIndex: 15,
+          background: 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 20%, rgba(255,255,255,0.85) 35%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 75%)'
+        }} />
+        <div className="relative z-20 w-full max-w-[500px] lg:w-[45%] lg:pr-10">
+          <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-6 tracking-tighter">
+            Our District.<br/>
+            <span style={{ color: BRAND_COLOR }}>Their Mess.</span><br/>
+            Your Choice.
+          </h1>
+          <h2 className="text-xl lg:text-2xl font-black text-brand-navy mb-6 max-w-lg">
+            Tired of the partisan wreckage both parties sell us? You are not alone.
+          </h2>
+          <p className="text-lg lg:text-xl text-slate-500 mb-10 max-w-lg leading-relaxed font-medium">
+            I'm Kris Babler—a neighbor, coach, and former Army Captain out to prove we don't need them. We can build together.
+          </p>
+
+          <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 shadow-lg max-w-xl">
+            <h3 className="text-xl font-black text-brand-navy mb-4 uppercase tracking-wide">Meet Kris</h3>
+            <p className="text-slate-600 mb-6 leading-relaxed font-medium">
+              Book 20 minutes with Kris to discuss district priorities, service, or local campaign concerns.
             </p>
-
-            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 shadow-lg max-w-xl">
-              <h3 className="text-xl font-black text-brand-navy mb-4 uppercase tracking-wide">Meet Kris</h3>
-              <p className="text-slate-600 mb-6 leading-relaxed font-medium">
-                Book 20 minutes with Kris to discuss district priorities, service, or local campaign concerns.
-              </p>
-              <button
-                type="button"
-                onClick={openCalendlyPopup}
-                disabled={!calendlyScriptLoaded}
-                className="w-full py-4 rounded-full font-black text-white text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-lg mb-6 disabled:cursor-not-allowed disabled:opacity-60"
-                style={{ backgroundColor: BRAND_COLOR }}
-              >
-                {calendlyScriptLoaded ? 'Book 20 Minutes with Kris' : 'Loading...' }
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={openCalendlyPopup}
+              disabled={!calendlyScriptLoaded}
+              className="w-full py-4 rounded-full font-black text-white text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-lg mb-6 disabled:cursor-not-allowed disabled:opacity-60"
+              style={{ backgroundColor: BRAND_COLOR }}
+            >
+              {calendlyScriptLoaded ? 'Book 20 Minutes with Kris' : 'Loading...' }
+            </button>
           </div>
+        </div>
 
-          <div className="relative">
-            <div className="absolute -bottom-10 -right-10 w-full h-full bg-slate-50 rounded-[3rem] -z-10 transform -rotate-6"></div>
-            <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-2xl bg-white">
-              <CampaignImage
-                src={ASSETS.hero}
-                alt="Kris Babler Official Portrait"
-                className="w-full h-[700px] lg:h-[760px] object-cover"
-              />
-            </div>
+        <div className="relative z-10 mt-10 h-[360px] w-full lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:h-auto lg:w-[55vw]">
+          <div className="absolute inset-0">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster="/images/babler-headshot.png"
+              className="h-full w-full object-cover object-center"
+            >
+              <source src={`/images/${ASSETS.heroVideo}`} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </div>
