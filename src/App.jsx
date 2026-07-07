@@ -41,7 +41,7 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfSB4cXyKBQQ
 
 // Your actual filenames (mapped to files in public/images)
 const ASSETS = {
-  heroVideo: "mediumzoom.mp4",
+  heroVideo: "mix2.mp4",
   family: "kris-family.jpg",
   community: "kris-lakes.jpg",
   action: "kris-coaching-basketball.jpg",
@@ -387,28 +387,57 @@ const App = () => {
   );
 
   const Hero = () => (
-    <section className="relative overflow-hidden bg-white pt-20 pb-24 lg:pt-20 lg:pb-20">
-      <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
-        <div className="pointer-events-none absolute top-0 bottom-0 right-0 hidden lg:block" style={{
-          zIndex: 15,
-          left: '58%',
-          background: 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.85) 30%, rgba(255,255,255,0.6) 55%, rgba(255,255,255,0.35) 75%, rgba(255,255,255,0) 100%)'
-        }} />
-        <div className="relative z-20 w-full max-w-[500px] lg:w-[45%] lg:pr-10">
+    <section className="relative w-full bg-white flex flex-col lg:flex-row lg:items-center pt-20 lg:min-h-[85vh] overflow-hidden">
+      
+      {/* 1. THE VIDEO: Anchored to the right, scaled by height to prevent cropping */}
+      <div className="relative w-full h-[55vh] lg:absolute lg:top-0 lg:right-0 lg:w-[65%] lg:h-full z-0 flex justify-end">
+        
+        {/* 2. THE GRADIENT SHIELD: Bridges the white gap and fades into the video */}
+        <div 
+          className="hidden lg:block absolute inset-y-0 left-0 w-full z-10 pointer-events-none"
+          style={{ 
+            background: 'linear-gradient(to right, #ffffff 0%, #ffffff 20%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%)' 
+          }}
+        ></div>
+
+        <video
+          ref={heroVideoRef}
+          preload="auto"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="h-full w-auto max-w-none lg:w-full object-cover object-[center_top] lg:object-[center_center] z-0"
+        >
+          <source src={`/images/${ASSETS.heroVideo}`} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      {/* 3. THE TEXT CONTENT: Anchored safely to the left */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:min-h-[85vh] lg:flex lg:items-center pointer-events-none">
+        <div className="w-full lg:w-[50%] py-10 lg:py-12 bg-white lg:bg-transparent pointer-events-auto">
+          
           <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-6 tracking-tighter">
             Our District.<br/>
             <span style={{ color: BRAND_COLOR }}>Their Mess.</span><br/>
             Your Choice.
           </h1>
+          
           <h2 className="text-xl lg:text-2xl font-black text-brand-navy mb-6 max-w-lg">
-            Tired of the partisan wreckage both parties sell us? You are not alone.
+            Tired of party gridlock? You are not alone.
           </h2>
-          <p className="text-lg lg:text-xl text-slate-500 mb-10 max-w-lg leading-relaxed font-medium">
-            I'm Kris Babler—a neighbor, coach, and former Army Captain out to prove we don't need them. We can build together.
+          
+          <p className="text-lg lg:text-xl text-slate-950 mb-8 max-w-lg leading-relaxed font-medium">
+            I’m <strong>Kris Babler</strong>—former Army Captain, coach, and Independent. The party machines are corrupted by special interests and self-service. I owe them nothing.
+          </p>
+          
+          <p className="text-lg lg:text-xl text-slate-950 mb-10 max-w-lg leading-relaxed font-medium">
+            With a deciding swing vote, I will force both sides to govern. I don’t answer to party bosses. <strong>I answer to you.</strong>
           </p>
 
-          <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 shadow-lg max-w-xl">
-            <h3 className="text-xl font-black text-brand-navy mb-4 uppercase tracking-wide">Meet Kris</h3>
+          <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 lg:p-8 shadow-lg max-w-xl">
+            <h3 className="text-xl font-black text-brand-navy mb-3 uppercase tracking-wide">Meet Kris</h3>
             <p className="text-slate-600 mb-6 leading-relaxed font-medium">
               Book 20 minutes with Kris to discuss district priorities, service, or local campaign concerns.
             </p>
@@ -416,29 +445,13 @@ const App = () => {
               type="button"
               onClick={openCalendlyPopup}
               disabled={!calendlyScriptLoaded}
-              className="w-full py-4 rounded-full font-black text-white text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-lg mb-6 disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full py-4 rounded-full font-black text-white text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
               style={{ backgroundColor: BRAND_COLOR }}
             >
-              {calendlyScriptLoaded ? 'Book 20 Minutes with Kris' : 'Loading...' }
+              {calendlyScriptLoaded ? 'Book 20 Minutes with Kris' : 'Loading...'}
             </button>
           </div>
-        </div>
-
-        <div className="relative z-10 mt-10 h-[360px] w-full lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:h-auto lg:w-[55vw]">
-          <div className="absolute inset-0">
-            <video
-              ref={heroVideoRef}
-              preload="auto"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="h-full w-full object-cover object-center"
-            >
-              <source src={`/images/${ASSETS.heroVideo}`} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
+          
         </div>
       </div>
     </section>
