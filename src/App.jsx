@@ -390,7 +390,7 @@ const App = () => {
     <section className="relative w-full bg-white flex flex-col lg:flex-row lg:items-center pt-20 lg:min-h-[85vh] overflow-hidden">
       
       {/* 1. THE VIDEO: Anchored to the right, scaled by height to prevent cropping */}
-      <div className="relative w-full h-[55vh] lg:absolute lg:top-0 lg:right-0 lg:w-[65%] lg:h-full z-0 lg:flex lg:justify-end">
+      <div className="relative w-full aspect-video lg:absolute lg:top-0 lg:right-0 lg:w-[65%] lg:h-full z-0 flex justify-end">
         
         {/* 2. THE GRADIENT SHIELD: Bridges the white gap and fades into the video */}
         <div 
@@ -407,7 +407,7 @@ const App = () => {
           loop
           muted
           playsInline
-          className="h-full w-full lg:w-auto lg:max-w-none object-cover object-[center_top] lg:object-[center_center] z-0"
+          className="h-full w-auto max-w-none lg:w-full object-cover object-[center_top] lg:object-[center_center] z-0"
         >
           <source src={`/images/${ASSETS.heroVideo}`} type="video/mp4" />
           Your browser does not support the video tag.
