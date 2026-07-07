@@ -389,9 +389,10 @@ const App = () => {
   const Hero = () => (
     <section className="relative overflow-hidden bg-white pt-20 pb-24 lg:pt-20 lg:pb-20">
       <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
-        <div className="pointer-events-none absolute inset-0" style={{
-          zIndex: 5,
-          background: 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 20%, rgba(255,255,255,0.85) 35%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 75%)'
+        <div className="pointer-events-none absolute top-0 bottom-0 right-0 hidden lg:block" style={{
+          zIndex: 15,
+          left: '45%',
+          background: 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 10%, rgba(255,255,255,0.85) 25%, rgba(255,255,255,0.6) 45%, rgba(255,255,255,0) 75%)'
         }} />
         <div className="relative z-20 w-full max-w-[500px] lg:w-[45%] lg:pr-10">
           <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-6 tracking-tighter">
