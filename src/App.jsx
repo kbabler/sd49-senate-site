@@ -392,7 +392,7 @@ const App = () => {
         <div className="pointer-events-none absolute top-0 bottom-0 right-0 hidden lg:block" style={{
           zIndex: 15,
           left: '58%',
-          background: 'linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 18%, rgba(255,255,255,0.6) 35%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%)'
+          background: 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.85) 30%, rgba(255,255,255,0.6) 55%, rgba(255,255,255,0.35) 75%, rgba(255,255,255,0) 100%)'
         }} />
         <div className="relative z-20 w-full max-w-[500px] lg:w-[45%] lg:pr-10">
           <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-6 tracking-tighter">
