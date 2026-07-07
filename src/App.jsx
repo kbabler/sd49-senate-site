@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   ShieldCheck, 
   ArrowRight,
@@ -165,6 +165,7 @@ const App = () => {
   const [buildTogetherSubmitting, setBuildTogetherSubmitting] = useState(false);
   const [buildTogetherSubmitted, setBuildTogetherSubmitted] = useState(false);
   const [scrollTarget, setScrollTarget] = useState(null);
+  const heroVideoRef = useRef(null);
 
   const scrollToSection = (id) => {
     setScrollTarget(id);
@@ -184,6 +185,21 @@ const App = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activeTab]);
+
+  useEffect(() => {
+    const v = heroVideoRef.current;
+    if (!v) return;
+    try {
+      v.preload = 'auto';
+      const p = v.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {
+        // autoplay may be blocked; muted autoplay typically allowed—fail silently
+        console.debug('Hero video play was prevented by browser autoplay policy');
+      });
+    } catch (err) {
+      console.debug('Error attempting to play hero video', err);
+    }
+  }, []);
 
   const [calendlyScriptLoaded, setCalendlyScriptLoaded] = useState(false);
 
@@ -410,11 +426,12 @@ const App = () => {
         <div className="relative z-10 mt-10 h-[360px] w-full lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:h-auto lg:w-[55vw]">
           <div className="absolute inset-0">
             <video
+              ref={heroVideoRef}
+              preload="auto"
               autoPlay
               loop
               muted
               playsInline
-              poster="/images/babler-headshot.png"
               className="h-full w-full object-cover object-center"
             >
               <source src={`/images/${ASSETS.heroVideo}`} type="video/mp4" />
