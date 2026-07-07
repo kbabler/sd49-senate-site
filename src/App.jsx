@@ -390,7 +390,7 @@ const App = () => {
     <section className="relative w-full bg-white flex flex-col lg:flex-row lg:items-center pt-20 lg:min-h-[85vh] overflow-hidden">
       
       {/* 1. THE VIDEO: Anchored to the right, scaled by height to prevent cropping */}
-      <div className="relative w-full h-[18vh] sm:h-[22vh] md:h-[26vh] lg:absolute lg:top-0 lg:right-0 lg:w-[65%] lg:h-full z-0 flex justify-end">
+      <div className="relative w-full h-[120px] sm:h-[160px] md:h-[200px] lg:absolute lg:top-0 lg:right-0 lg:w-[65%] lg:h-full z-0 flex justify-end">
         
         {/* 2. THE GRADIENT SHIELD: Bridges the white gap and fades into the video */}
         <div 
