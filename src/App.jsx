@@ -407,7 +407,7 @@ const App = () => {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover object-center lg:w-auto lg:max-w-none lg:object-[center_right] z-0"
+          className="w-full h-full object-cover object-center lg:object-[center_right] z-0"
         >
           <source src={`/images/${ASSETS.heroVideo}`} type="video/mp4" />
           Your browser does not support the video tag.
