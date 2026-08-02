@@ -362,22 +362,24 @@ const CampaignImage = ({ src, alt, className }) => {
   };
 
   const Navigation = () => (
-    <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-slate-100 h-20 flex items-center">
+    <nav className="main-header fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-slate-100 h-24 flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
         
         {/* LOGO BLOCK */}
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('home')}>
-          <div className="w-10 h-10 rounded-lg shadow-lg overflow-hidden">
-            <img src="/images/KB_Logo_Plum_512px.png" alt="Kris Babler Logo" className="w-full h-full object-cover" />
-          </div>
-          <div>
-            <h1 className="font-black text-brand-navy leading-none tracking-tight uppercase text-xl lg:text-2xl">KRIS BABLER</h1>
-            <p className="text-[9px] text-slate-500 font-bold tracking-[0.2em] uppercase">SD49 (Eden Prairie & Minnetonka)</p>
-          </div>
-        </div>
+        <a
+          href="#"
+          className="logo"
+          onClick={(e) => {
+            e.preventDefault();
+            setActiveTab('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        >
+          <img src="/images/neutrallogo.png" alt="Campaign logo" />
+        </a>
         
         {/* NAVIGATION LINKS & SOCIALS */}
-        <div className="hidden lg:flex gap-8 items-center text-[11px] font-black uppercase tracking-widest text-slate-400">
+        <div className="nav-links hidden lg:flex gap-8 items-center text-[11px] font-black uppercase tracking-widest text-slate-400">
           <button onClick={() => scrollToSection('issues')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Playbook</button>
           <button onClick={() => scrollToSection('about')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>The Man</button>
           <button onClick={() => scrollToSection('service')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Service in Action</button>
@@ -385,7 +387,7 @@ const CampaignImage = ({ src, alt, className }) => {
           <button onClick={() => scrollToSection('pcr')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Donate</button>
           
           {/* SOCIAL MEDIA ICONS (With vertical divider line) */}
-          <div className="flex items-center gap-4 border-l border-slate-300 pl-6 ml-2">
+          <div className="social-icons flex items-center gap-4 border-l border-slate-300 pl-6 ml-2">
             
             {/* Facebook */}
             <a 
