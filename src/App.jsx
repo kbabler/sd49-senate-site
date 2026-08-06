@@ -779,7 +779,19 @@ const CampaignImage = ({ src, alt, className }) => {
                   className="mt-1 h-4 w-4 rounded border-white/20 bg-white/10"
                 />
                 <span className="text-sm text-slate-200 leading-relaxed">
-                  By providing my number, I consent to receive updates via text. Msg/data rates apply. Reply STOP to opt-out. <a href="/privacy" className="underline text-slate-300">Privacy Policy</a>
+                  By providing my number, I consent to receive updates via text. Msg/data rates apply. Reply STOP to opt-out. See our{' '}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveTab('privacy');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="underline text-slate-300 hover:text-white"
+                  >
+                    Privacy Policy
+                  </button>
+                  .
                 </span>
               </label>
             </div>
@@ -1042,6 +1054,123 @@ const CampaignImage = ({ src, alt, className }) => {
     </div>
   );
 
+  const PrivacyPolicySection = () => (
+    <section className="py-24 bg-slate-50">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="rounded-[2rem] border border-slate-200 bg-white shadow-xl p-8 md:p-12">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-500 mb-3">Privacy Policy</p>
+              <h1 className="text-3xl md:text-4xl font-black text-brand-navy tracking-tight">Kris Babler for State Senate (SD49)</h1>
+              <p className="text-sm text-slate-500 mt-2">Effective Date: August 6, 2026</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab('home');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-black uppercase tracking-widest text-slate-600 hover:border-slate-300 hover:text-slate-800"
+            >
+              Back to Home
+            </button>
+          </div>
+
+          <div className="space-y-8 text-slate-700 leading-relaxed">
+            <p>We value your privacy and are committed to maintaining the trust of our supporters.</p>
+
+            <div>
+              <h2 className="text-xl font-black text-brand-navy mb-3">1. Mobile & Text Messaging (SMS/MMS) Privacy (10DLC Compliance)</h2>
+              <div className="space-y-3">
+                <h3 className="text-lg font-black text-slate-800">A. Mobile Information Non-Sharing Disclosure</h3>
+                <p>Mobile information will not be shared with third parties/affiliates for marketing/promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>
+                <h3 className="text-lg font-black text-slate-800">B. SMS Consent & Opt-In</h3>
+                <p>We collect mobile phone numbers only when you explicitly provide them to us through our web forms, volunteer sign-ups, event registrations, paper petitions, door-to-door canvassing, or when you initiate an inbound text message (for example, texting a keyword such as START to our campaign number).</p>
+                <p>By providing your mobile phone number and submitting a form with text consent, you agree to receive recurring automated and peer-to-peer text messages from Kris Babler for State Senate (SD49) regarding campaign updates, event reminders, voting information, and volunteer opportunities.</p>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li><span className="font-semibold">Message Frequency:</span> Message frequency varies.</li>
+                  <li><span className="font-semibold">Cost:</span> Message and data rates may apply.</li>
+                  <li><span className="font-semibold">Opt-Out Instructions:</span> You may unsubscribe from mobile text messages at any time by replying STOP to any text message you receive from us. You will receive a single confirmation message verifying that you have been unsubscribed.</li>
+                  <li><span className="font-semibold">Support Instructions:</span> For support or help regarding our text messaging program, reply HELP to any message, or contact us directly at KB@krisbabler.com or 218-206-2664.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-black text-brand-navy mb-3">2. Information We Collect</h2>
+              <div className="space-y-3">
+                <h3 className="text-lg font-black text-slate-800">A. Information You Provide Voluntarily</h3>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li><span className="font-semibold">Contact Information:</span> Name, email address, physical address, ZIP code, and phone number when you sign up for updates, fill out a contact form, or register for an event.</li>
+                  <li><span className="font-semibold">Field & Survey Data:</span> Voting preferences, key policy issues, and survey responses provided during door-to-door canvassing, phone banks, or online forms.</li>
+                  <li><span className="font-semibold">Donor Information:</span> Name, billing address, occupation, employer, and contribution amount when you make a campaign donation.</li>
+                </ul>
+                <h3 className="text-lg font-black text-slate-800">B. Automated Information & Web Telemetry</h3>
+                <p>When you browse our website or click links inside campaign emails or text messages, our servers automatically record telemetry data, including:</p>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li><span className="font-semibold">Device & Usage Data:</span> IP address, browser type, operating system, referring URL, pages viewed, and timestamps.</li>
+                  <li><span className="font-semibold">Tracking Technologies & Cookies:</span> We use first-party cookies and tokenized link parameters to measure engagement, understand which policy pages resonate with voters, and streamline user experience.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-black text-brand-navy mb-3">3. How We Use Your Information</h2>
+              <p>We use the information we collect to advance our political campaign and engage with voters, including to:</p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>Send campaign news, policy updates, election reminders, and event invitations.</li>
+                <li>Organize grassroots field activities, volunteer opportunities, and door-to-door canvassing.</li>
+                <li>Process campaign donations and fulfill legal reporting requirements under federal and state campaign finance laws.</li>
+                <li>Analyze web traffic and communication effectiveness to optimize our outreach strategy.</li>
+                <li>Respond to inquiries, support requests, and user feedback.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-black text-brand-navy mb-3">4. Information Sharing & Disclosures</h2>
+              <p>We respect your personal data and do not sell, rent, or trade voter lists or personal information to commercial marketers. We share personal information only under the following strictly defined circumstances:</p>
+              <ol className="list-decimal pl-6 space-y-2">
+                <li><span className="font-semibold">Campaign Partners & Affiliates:</span> We may share non-SMS voter data with affiliated political committees, state party organizations, or allied caucus committees solely for election efforts, voter mobilization, and political coordination. Mobile opt-in data and SMS consent are strictly excluded from sharing.</li>
+                <li><span className="font-semibold">Campaign Vendors & Service Providers:</span> We may share necessary information with trusted third-party service providers who assist in running our campaign. These providers are bound by strict confidentiality obligations and are prohibited from using your data for any independent purpose.</li>
+                <li><span className="font-semibold">Public Campaign Finance Reporting:</span> Under state and federal election laws, campaign contributions over regulatory thresholds require us to collect and report the donor’s full name, mailing address, occupation, and employer to the relevant Election Board or Campaign Finance Board. These reports are a matter of public record.</li>
+                <li><span className="font-semibold">Legal Compliance & Safety:</span> We may disclose information if required to do so by law, court order, or governmental regulation, or if we believe disclosure is necessary to protect the safety, rights, or property of our campaign, voters, or the public.</li>
+              </ol>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-black text-brand-navy mb-3">5. Third-Party Websites & Payment Processors</h2>
+              <p>Our website may contain links to external websites, social media platforms, or third-party donation processors. We are not responsible for the privacy practices or content of these third-party platforms. Financial transactions conducted through third-party payment processors are governed directly by their respective privacy policies and security standards.</p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-black text-brand-navy mb-3">6. Children’s Privacy (COPPA)</h2>
+              <p>Our website and political outreach programs are intended for registered voters, adults, and young adults eligible to participate in civic activities. We do not knowingly collect personal information from children under the age of 13. If we become aware that we have collected personal data from a child under 13 without verified parental consent, we will take immediate steps to delete that information from our database.</p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-black text-brand-navy mb-3">7. Data Security & Retention</h2>
+              <p>We implement industry-standard physical, technical, and administrative security measures to safeguard your personal information against unauthorized access, alteration, disclosure, or destruction. We retain your personal information for as long as necessary to fulfill campaign objectives, maintain legal records, and comply with state and federal campaign finance regulations.</p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-black text-brand-navy mb-3">8. Your Choices & Rights</h2>
+              <ul className="list-disc pl-6 space-y-2">
+                <li><span className="font-semibold">Email Opt-Out:</span> You may unsubscribe from marketing or campaign email updates at any time by clicking the “Unsubscribe” link located at the bottom of any email we send.</li>
+                <li><span className="font-semibold">SMS Opt-Out:</span> You may stop receiving text messages by replying STOP to any text message sent by our campaign.</li>
+                <li><span className="font-semibold">Cookie Controls:</span> You can adjust your web browser settings to reject cookies or alert you when cookies are being set. Note that disabling cookies may affect the functionality of certain website features.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-black text-brand-navy mb-3">9. Changes to This Privacy Policy</h2>
+              <p>We reserve the right to update or modify this Privacy Policy at any time to reflect changes in our campaign operations, legal requirements, or mobile carrier regulations. Any updates will be posted on this page with a revised Effective Date at the top. We encourage you to review this policy periodically.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+
   return (
     <div className="min-h-screen bg-white font-sans text-brand-navy tracking-tight">
       <Navigation />
@@ -1061,6 +1190,7 @@ const CampaignImage = ({ src, alt, className }) => {
         )}
         
         {activeTab === 'about' && <AboutSection />}
+        {activeTab === 'privacy' && <PrivacyPolicySection />}
         {activeTab === 'issues' && (
           <>
             <IssuesSection />
@@ -1100,7 +1230,17 @@ const CampaignImage = ({ src, alt, className }) => {
             <p className="text-[9px] text-slate-400 uppercase font-black tracking-[0.4em] mb-4">
               Prepared and paid for by Babler for Senate (SD49)
             </p>
-            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">© 2025 Kris Babler for State Senate</p>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab('privacy');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="text-[10px] text-slate-400 font-bold uppercase tracking-widest hover:text-slate-300 transition-colors"
+            >
+              Privacy Policy
+            </button>
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-4">© 2025 Kris Babler for State Senate</p>
           </div>
         </div>
       </footer>
