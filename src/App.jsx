@@ -24,6 +24,7 @@ import {
   Mail,
   Facebook
 } from 'lucide-react';
+import LogoRotator from './components/LogoRotator';
 
 /** * BRAND CONFIGURATION */
 const BRAND_COLOR = "#00c2cc";
@@ -382,6 +383,7 @@ const CampaignImage = ({ src, alt, className }) => {
         <div className="nav-links hidden lg:flex gap-8 items-center text-[11px] font-black uppercase tracking-widest text-slate-400">
           <button onClick={() => scrollToSection('issues')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Playbook</button>
           <button onClick={() => scrollToSection('about')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>The Man</button>
+          <button onClick={() => scrollToSection('endorsements')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Endorsements</button>
           <button onClick={() => scrollToSection('service')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Service in Action</button>
           <button onClick={() => scrollToSection('volunteer')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Get Involved</button>
           <button onClick={() => scrollToSection('pcr')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Donate</button>
@@ -1182,6 +1184,7 @@ const CampaignImage = ({ src, alt, className }) => {
             <InvestmentBar />
             <AboutSection />
             <IssuesSection />
+            <LogoRotator />
             <BuildTogetherSection />
             <ServiceSection />
             <NewsSection />
