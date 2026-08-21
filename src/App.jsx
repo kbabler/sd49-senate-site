@@ -781,9 +781,9 @@ const CampaignImage = ({ src, alt, className }) => {
                   className="mt-1 h-4 w-4 rounded border-white/20 bg-white/10"
                 />
                 <span className="text-sm text-slate-200 leading-relaxed">
-                  By providing my number, I consent to receive updates via text. Msg/data rates apply. Reply STOP to opt-out. See our{' '}
-                  <button
-                    type="button"
+                  By checking this box and providing my number, I consent to receive recurring automated and peer-to-peer campaign text messages from Kris Babler for State Senate (SD49). Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out or HELP for help. See our{' '}
+                  <a
+                    href="#privacy"
                     onClick={(e) => {
                       e.preventDefault();
                       setActiveTab('privacy');
@@ -792,7 +792,7 @@ const CampaignImage = ({ src, alt, className }) => {
                     className="underline text-slate-300 hover:text-white"
                   >
                     Privacy Policy
-                  </button>
+                  </a>
                   .
                 </span>
               </label>
