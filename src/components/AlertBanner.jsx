@@ -97,7 +97,7 @@ const AlertBanner = () => {
   ) : alert.message;
 
   return (
-    <div className="relative z-[60] flex items-center justify-center gap-4 bg-amber-500 px-12 py-2 text-center text-sm font-semibold text-white">
+    <div className="relative z-[60] flex items-center justify-center gap-4 bg-[#00C2CC] px-12 py-2 text-center text-sm font-bold text-[#2B1736]">
       <div>{announcement}</div>
       <button
         type="button"
