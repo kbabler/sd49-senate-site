@@ -54,6 +54,12 @@ const DEFAULT_LOGOS: LogoItem[] = [
     logoUrl: '/images/filogo.jpg',
     altText: 'District Leaders Network Logo',
   },
+  {
+    id: 'mn-forward-together',
+    name: 'Minnesota Forward Together',
+    logoUrl: '/images/mnfwdtogether.jpg',
+    altText: 'Minnesota Forward Together Logo',
+  },
 ];
 
 export default function LogoRotator({
