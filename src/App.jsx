@@ -25,6 +25,7 @@ import {
   Facebook
 } from 'lucide-react';
 import LogoRotator from './components/LogoRotator';
+import AlertBanner from './components/AlertBanner';
 
 /** * BRAND CONFIGURATION */
 const BRAND_COLOR = "#00c2cc";
@@ -363,7 +364,7 @@ const CampaignImage = ({ src, alt, className }) => {
   };
 
   const Navigation = () => (
-    <nav className="main-header fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-slate-100 h-24 flex items-center">
+    <nav className="main-header sticky top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-slate-100 h-24 flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
         
         {/* LOGO BLOCK */}
@@ -1188,6 +1189,7 @@ const CampaignImage = ({ src, alt, className }) => {
 
   return (
     <div className="min-h-screen bg-white font-sans text-brand-navy tracking-tight">
+      <AlertBanner />
       <Navigation />
       
       <main className="animate-fade-in">
