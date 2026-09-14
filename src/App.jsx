@@ -96,30 +96,26 @@ const SITE_CONTENT = {
   issues: [
     {
       title: "Fiscal Watchdog",
-      points: [
-        "Balance the budget. I'll demand professional audits to ensure your taxes fund results, not St. Paul's systemic waste."
-      ],
+      tagline: "Accountability for every tax dollar.",
+      description: "Demand independent audits and measurable outcomes to ensure your tax dollars fund clear results, not St. Paul's systemic waste.",
       icon: <Calculator size={24} />
     },
     {
       title: "Educational Excellence",
-      points: [
-        "Classrooms over bureaucracy. Let local parents and teachers decide our priorities, not top-down mandates from St. Paul."
-      ],
+      tagline: "Classrooms over bureaucracy.",
+      description: "Empower local parents and teachers to direct our schools, keeping the focus on student achievement rather than top-down state mandates.",
       icon: <GraduationCap size={24} />
     },
     {
-      title: "People Need Jobs",
-      points: [
-        "Human-centric growth. Pro-economic growth policies that protect our future, cut housing costs, and create jobs."
-      ],
+      title: "Economic Opportunity & Housing",
+      tagline: "Lowering costs, building prosperity.",
+      description: "Cut red tape, spur job creation, and address housing affordability so West Metro families and small businesses can thrive.",
       icon: <Home size={24} />
     },
     {
-      title: "Settled Law",
-      points: [
-        "I view reproductive freedom and marriage equality as settled. I'm here to block distractions, not relitigate the past."
-      ],
+      title: "Reproductive Freedom & Privacy",
+      tagline: "Protecting personal decisions.",
+      description: "Keep healthcare decisions—including reproductive care, IVF, and contraception—between women and their doctors. I'll block partisan overreach and defend constitutional rights.",
       icon: <ShieldCheck size={24} />
     }
   ]
@@ -437,7 +433,7 @@ const CampaignImage = ({ src, alt, className }) => {
   );
 
   const Hero = () => (
-    <section className="relative w-full bg-white flex flex-col lg:flex-row lg:items-center pt-20 lg:min-h-[85vh] overflow-hidden">
+    <section className="relative w-full bg-white flex flex-col lg:flex-row lg:items-center pt-0 lg:min-h-[85vh] overflow-hidden">
       
       {/* 1. THE VIDEO: Anchored to the right, scaled by height to prevent cropping */}
       <div className="relative w-full h-[56.25vw] sm:h-[48vw] md:h-[40vw] lg:absolute lg:top-0 lg:right-0 lg:w-[65%] lg:h-full z-0 lg:flex lg:justify-end">
@@ -468,22 +464,22 @@ const CampaignImage = ({ src, alt, className }) => {
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:min-h-[85vh] lg:flex lg:items-center pointer-events-none">
         <div className="w-full lg:w-[50%] py-10 lg:py-12 bg-white lg:bg-transparent pointer-events-auto">
           
-          <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-6 tracking-tighter">
-            Our District.<br/>
-            <span style={{ color: BRAND_COLOR }}>Their Mess.</span><br/>
-            Your Choice.
+          <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-8 tracking-tighter">
+            <span style={{ color: BRAND_COLOR }}>Independence</span><br />
+            Driven by Our<br />
+            <span style={{ color: BRAND_COLOR }}>Community.</span>
           </h1>
           
           <h2 className="text-xl lg:text-2xl font-black text-brand-navy mb-6 max-w-lg">
-            Tired of party gridlock? You are not alone.
+            Built on Front Porches, Not Party Machines.
           </h2>
           
-          <p className="text-lg lg:text-xl text-slate-950 mb-8 max-w-lg leading-relaxed font-medium">
-            I’m <strong>Kris Babler</strong>—former Army Captain, coach, and Independent. The party machines are corrupted by special interests and self-service. I owe them nothing.
+          <p className="text-lg lg:text-xl text-slate-950 mb-8 max-w-lg leading-relaxed font-medium italic">
+            I’ve personally knocked on over 5,000 doors across Eden Prairie and Minnetonka listening to what actually matters to local families.
           </p>
           
           <p className="text-lg lg:text-xl text-slate-950 mb-10 max-w-lg leading-relaxed font-medium">
-            With a deciding swing vote, I will force both sides to govern. I don’t answer to party bosses. <strong>I answer to you.</strong>
+            I'm <strong>Kris Babler</strong>. I owe zero favors to party bosses or out-of-state donors. That means on Day 1 in St. Paul, I have the total freedom to put our community first—voting for good ideas regardless of who wrote them and stopping bad spending dead in its tracks.
           </p>
 
           <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 lg:p-8 shadow-lg max-w-xl">
@@ -647,20 +643,15 @@ const CampaignImage = ({ src, alt, className }) => {
           </div>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {SITE_CONTENT.issues.map((issue, idx) => (
             <div key={idx} className="bg-slate-50 p-10 rounded-[2.5rem] border border-slate-100 hover:border-slate-300 transition-all group">
               <div className="w-14 h-14 rounded-2xl mb-8 flex items-center justify-center text-white transition-transform group-hover:scale-110" style={{ backgroundColor: BRAND_COLOR }}>
                 {issue.icon}
               </div>
               <h3 className="text-2xl font-black mb-6 text-brand-navy">{issue.title}</h3>
-              <ul className="space-y-4">
-                {issue.points.map((pt, pIdx) => (
-                  <li key={pIdx} className="flex gap-3 text-sm font-medium text-slate-600 leading-relaxed">
-                    <CheckCircle2 size={18} className="text-emerald-500 shrink-0" /> {pt}
-                  </li>
-                ))}
-              </ul>
+              <p className="text-sm font-bold italic text-brand-navy mb-3">{issue.tagline}</p>
+              <p className="text-sm font-medium text-slate-600 leading-relaxed">{issue.description}</p>
             </div>
           ))}
         </div>
