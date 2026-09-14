@@ -45,7 +45,7 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfSB4cXyKBQQ
 const ASSETS = {
   heroVideo: "mix2.mp4",
   family: "kris-family.jpg",
-  community: "kris-lakes.jpg",
+  community: "krisheadshot.png",
   action: "kris-coaching-basketball.jpg",
   promotion: "promotion-cpt.jpg",
   serviceFamily: "family-service.jpg",
