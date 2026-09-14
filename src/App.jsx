@@ -467,20 +467,16 @@ const CampaignImage = ({ src, alt, className }) => {
           <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-8 tracking-tighter">
             <span style={{ color: BRAND_COLOR }}>Independence</span><br />
             Driven by Our<br />
-            <span style={{ color: BRAND_COLOR }}>Community.</span>
+            <span style={{ color: BRAND_COLOR }}>Community</span>
           </h1>
           
-          <h2 className="text-xl lg:text-2xl font-black text-brand-navy mb-6 max-w-lg">
-            Built on Front Porches, Not Party Machines.
-          </h2>
-          
-          <p className="text-lg lg:text-xl text-slate-950 mb-8 max-w-lg leading-relaxed font-medium italic">
-            I’ve personally knocked on over 5,000 doors across Eden Prairie and Minnetonka listening to what actually matters to local families.
-          </p>
-          
           <p className="text-lg lg:text-xl text-slate-950 mb-10 max-w-lg leading-relaxed font-medium">
-            I’m <strong>Kris Babler</strong>. I owe zero favors to party bosses or out-of-state special interests. That means on Day 1 in St. Paul, I have the total freedom to put District 49 first—supporting common-sense solutions that lower costs, strengthen our schools, and hold state government accountable to you.
+            There are over 58,000 voters across Eden Prairie and Minnetonka—and I’m working to earn every single vote the hard way: face-to-face, front porch by front porch, listening to what actually matters to local families.
           </p>
+
+          <h2 className="text-xl lg:text-2xl font-black text-brand-navy mb-6 max-w-lg">
+            Built on Front Porches, Not by Party Machines
+          </h2>
 
           <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 lg:p-8 shadow-lg max-w-xl">
             <h3 className="text-xl font-black text-brand-navy mb-3 uppercase tracking-wide">Meet Kris</h3>
