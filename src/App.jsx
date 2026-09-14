@@ -453,7 +453,7 @@ const CampaignImage = ({ src, alt, className }) => {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover object-center lg:object-[center_right] z-0"
+          className="w-full h-full object-cover object-left z-0"
         >
           <source src={`/images/${ASSETS.heroVideo}`} type="video/mp4" />
           Your browser does not support the video tag.
