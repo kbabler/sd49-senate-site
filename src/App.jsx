@@ -74,6 +74,12 @@ const SITE_CONTENT = {
         href: "https://krisbabler.substack.com/p/on-policy-2-the-168-billion-healthcare?r=1i94n6"
       },
       {
+        title: "On Policy #4: Demand Local Accountability",
+        description: "A practical look at why meaningful accountability starts with the people closest to the decisions and the neighborhoods they affect.",
+        source: "Substack",
+        href: "https://krisbabler.substack.com/p/on-policy-4-demand-local-accountability?r=1i94n6"
+      },
+      {
         title: "You Are Not Alone",
         description: "A message for neighbors who feel left out of the partisan noise and are looking for a more grounded path forward.",
         source: "Substack",
@@ -113,8 +119,8 @@ const SITE_CONTENT = {
       icon: <Home size={24} />
     },
     {
-      title: "Reproductive Freedom & Privacy",
-      tagline: "Protecting personal decisions.",
+      title: "Medical Freedom & Privacy",
+      tagline: "Protecting personal medical decisions.",
       description: "Keep healthcare decisions—including reproductive care, IVF, and contraception—between women and their doctors. I'll block partisan overreach and defend constitutional rights.",
       icon: <ShieldCheck size={24} />
     }
@@ -570,9 +576,8 @@ const CampaignImage = ({ src, alt, className }) => {
               <div className="rounded-3xl overflow-hidden shadow-lg aspect-square bg-white p-2">
                  <CampaignImage src={ASSETS.family} alt="Kris with family" className="w-full h-full object-cover rounded-2xl" />
               </div>
-              <div className="bg-brand-navy p-8 rounded-3xl text-white">
-                 <Heart className="mb-4 text-rose-500" />
-                 <p className="text-xs font-bold leading-relaxed uppercase tracking-tight">Dedicated to the future of our local families.</p>
+              <div className="rounded-3xl overflow-hidden shadow-lg aspect-square bg-white p-2">
+                 <CampaignImage src="speaking.png" alt="Kris speaking with community" className="w-full h-full object-cover rounded-2xl" />
               </div>
             </div>
             <div className="space-y-4">
@@ -1249,6 +1254,9 @@ const CampaignImage = ({ src, alt, className }) => {
             >
               Privacy Policy
             </button>
+            <p className="text-[9px] text-slate-400 font-medium uppercase tracking-[0.22em] mt-4">
+              Disclaimer: Some campaign B-roll footage was produced with AI tools for storytelling.
+            </p>
             <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-4">© 2025 Kris Babler for State Senate</p>
           </div>
         </div>
