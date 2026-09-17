@@ -4,6 +4,8 @@
     { "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
   ],
   "rewrites": [
+    { "source": "/receipts", "destination": "/receipts/index.html" },
+    { "source": "/receipts/(.*)", "destination": "/receipts/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
