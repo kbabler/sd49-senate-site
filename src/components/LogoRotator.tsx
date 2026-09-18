@@ -33,32 +33,38 @@ const DEFAULT_LOGOS: LogoItem[] = [
   {
     id: 'logo-3',
     name: 'Local Action',
-    logoUrl: '/images/housing_first.png',
+    logoUrl: '/images/neutrallogo.png',
     altText: 'Local Action Network Logo',
   },
   {
     id: 'logo-4',
     name: 'Community Alliance',
-    logoUrl: '/images/filogo.jpg',
+    logoUrl: '/images/KB_Logo_Plum_512px.png',
     altText: 'Community Alliance Logo',
   },
   {
     id: 'logo-5',
     name: 'Progressive Voice',
-    logoUrl: '/images/housing_first.png',
+    logoUrl: '/images/mnfwdtogether.jpg',
     altText: 'Progressive Voice Coalition Logo',
   },
   {
     id: 'logo-6',
     name: 'District Leaders',
-    logoUrl: '/images/filogo.jpg',
+    logoUrl: '/images/signature.jpg',
     altText: 'District Leaders Network Logo',
   },
   {
     id: 'mn-forward-together',
     name: 'Minnesota Forward Together',
-    logoUrl: '/images/mnfwdtogether.jpg',
+    logoUrl: '/images/da-portrait.jpg',
     altText: 'Minnesota Forward Together Logo',
+  },
+  {
+    id: 'rcv',
+    name: 'Ranked Choice Voting',
+    logoUrl: '/images/rcv.png',
+    altText: 'Ranked Choice Voting Logo',
   },
 ];
 
