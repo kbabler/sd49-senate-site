@@ -19,45 +19,21 @@ interface LogoRotatorProps {
 
 const DEFAULT_LOGOS: LogoItem[] = [
   {
-    id: 'logo-1',
+    id: 'filogo',
     name: 'Community Partners',
     logoUrl: '/images/filogo.jpg',
     altText: 'Community Partners Logo',
   },
   {
-    id: 'logo-2',
+    id: 'housing-first',
     name: 'Housing First',
     logoUrl: '/images/housing_first.png',
     altText: 'Housing First Coalition Logo',
   },
   {
-    id: 'logo-3',
-    name: 'Local Action',
-    logoUrl: '/images/neutrallogo.png',
-    altText: 'Local Action Network Logo',
-  },
-  {
-    id: 'logo-4',
-    name: 'Community Alliance',
-    logoUrl: '/images/KB_Logo_Plum_512px.png',
-    altText: 'Community Alliance Logo',
-  },
-  {
-    id: 'logo-5',
-    name: 'Progressive Voice',
-    logoUrl: '/images/mnfwdtogether.jpg',
-    altText: 'Progressive Voice Coalition Logo',
-  },
-  {
-    id: 'logo-6',
-    name: 'District Leaders',
-    logoUrl: '/images/signature.jpg',
-    altText: 'District Leaders Network Logo',
-  },
-  {
     id: 'mn-forward-together',
     name: 'Minnesota Forward Together',
-    logoUrl: '/images/da-portrait.jpg',
+    logoUrl: '/images/mnfwdtogether.jpg',
     altText: 'Minnesota Forward Together Logo',
   },
   {

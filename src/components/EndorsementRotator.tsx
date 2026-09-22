@@ -37,13 +37,22 @@ const defaultEndorsements: Endorsement[] = [
     photoUrl: '/images/housing_first.png',
   },
   {
-    id: 'community',
+    id: 'mn-forward-together',
     quote:
-      'He brings real-world problem solving and a steady hand to the tough choices ahead. That is exactly the kind of leadership people in SD49 deserve.',
-    name: 'Local Neighbor',
-    title: 'Small Business Owner',
+      'Minnesota Forward Together is building a stronger future through practical progress and community-powered leadership.',
+    name: 'Minnesota Forward Together',
+    title: 'Community Organization',
     organization: 'Minnesota',
-    photoUrl: '/images/kris-family.jpg',
+    photoUrl: '/images/mnfwdtogether.jpg',
+  },
+  {
+    id: 'rcv',
+    quote:
+      'Ranked choice voting gives voters more voice and helps communities choose leaders who can bring people together.',
+    name: 'Ranked Choice Voting',
+    title: 'Community Organization',
+    organization: 'Minnesota',
+    photoUrl: '/images/rcv.png',
   },
 ];
 
