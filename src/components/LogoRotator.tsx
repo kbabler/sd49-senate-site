@@ -21,25 +21,25 @@ const DEFAULT_LOGOS: LogoItem[] = [
   {
     id: 'filogo',
     name: 'Community Partners',
-    logoUrl: '/images/filogo.jpg',
+    logoUrl: '/images/endorsements/filogo.jpg',
     altText: 'Community Partners Logo',
   },
   {
     id: 'housing-first',
     name: 'Housing First',
-    logoUrl: '/images/housing_first.png',
+    logoUrl: '/images/endorsements/housing_first.png',
     altText: 'Housing First Coalition Logo',
   },
   {
     id: 'mn-forward-together',
     name: 'Minnesota Forward Together',
-    logoUrl: '/images/mnfwdtogether.jpg',
+    logoUrl: '/images/endorsements/mnfwdtogether.jpg',
     altText: 'Minnesota Forward Together Logo',
   },
   {
     id: 'rcv',
     name: 'Ranked Choice Voting',
-    logoUrl: '/images/rcv.png',
+    logoUrl: '/images/endorsements/rcv.png',
     altText: 'Ranked Choice Voting Logo',
   },
 ];

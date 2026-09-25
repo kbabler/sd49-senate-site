@@ -22,7 +22,8 @@ import {
   ExternalLink,
   Phone,
   Mail,
-  Facebook
+  Facebook,
+  SlidersHorizontal
 } from 'lucide-react';
 import LogoRotator from './components/LogoRotator';
 import AlertBanner from './components/AlertBanner';
@@ -50,6 +51,100 @@ const ASSETS = {
   promotion: "promotion-cpt.jpg",
   serviceFamily: "family-service.jpg",
   capital: "st-paul-state-capital.jpg"
+};
+
+const HERO_TUNING_STORAGE_KEY = 'kris-babler-hero-tuning';
+const DEFAULT_HERO_TUNING = {
+  videoWidth: 60,
+  videoPosition: 0,
+  videoOpacity: 100,
+  textOffset: 48
+};
+
+const HeroTuningPanel = ({ values, onChange, onReset }) => {
+  const updateValue = (key, value) => {
+    onChange({ ...values, [key]: Number(value) });
+  };
+
+  return (
+    <aside className="fixed bottom-4 right-4 z-[90] w-72 rounded-2xl border border-slate-200 bg-white/95 p-4 text-slate-900 shadow-2xl backdrop-blur">
+      <div className="mb-4 flex items-center justify-between">
+        <div className="flex items-center gap-2 font-black text-brand-navy">
+          <SlidersHorizontal size={17} aria-hidden="true" />
+          <span>Hero tuning</span>
+        </div>
+        <button
+          type="button"
+          onClick={onReset}
+          className="text-xs font-bold uppercase tracking-wide text-slate-500 hover:text-brand-navy"
+        >
+          Reset
+        </button>
+      </div>
+
+      <div className="space-y-4 text-sm">
+        <label className="block">
+          <div className="mb-1 flex justify-between font-bold">
+            <span>Video width</span>
+            <output>{values.videoWidth}%</output>
+          </div>
+          <input
+            type="range"
+            min="35"
+            max="85"
+            value={values.videoWidth}
+            onChange={(event) => updateValue('videoWidth', event.target.value)}
+            className="w-full accent-cyan-600"
+          />
+        </label>
+
+        <label className="block">
+          <div className="mb-1 flex justify-between font-bold">
+            <span>Video crop</span>
+            <output>{values.videoPosition}%</output>
+          </div>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={values.videoPosition}
+            onChange={(event) => updateValue('videoPosition', event.target.value)}
+            className="w-full accent-cyan-600"
+          />
+        </label>
+
+        <label className="block">
+          <div className="mb-1 flex justify-between font-bold">
+            <span>Video opacity</span>
+            <output>{values.videoOpacity}%</output>
+          </div>
+          <input
+            type="range"
+            min="40"
+            max="100"
+            value={values.videoOpacity}
+            onChange={(event) => updateValue('videoOpacity', event.target.value)}
+            className="w-full accent-cyan-600"
+          />
+        </label>
+
+        <label className="block">
+          <div className="mb-1 flex justify-between font-bold">
+            <span>Text offset</span>
+            <output>{values.textOffset}px</output>
+          </div>
+          <input
+            type="range"
+            min="-32"
+            max="160"
+            value={values.textOffset}
+            onChange={(event) => updateValue('textOffset', event.target.value)}
+            className="w-full accent-cyan-600"
+          />
+        </label>
+      </div>
+    </aside>
+  );
 };
 
 const SITE_CONTENT = {
@@ -170,6 +265,28 @@ const App = () => {
   const [buildTogetherSubmitted, setBuildTogetherSubmitted] = useState(false);
   const [scrollTarget, setScrollTarget] = useState(null);
   const heroVideoRef = useRef(null);
+  const [heroTuning, setHeroTuning] = useState(DEFAULT_HERO_TUNING);
+
+  useEffect(() => {
+    try {
+      const savedTuning = window.localStorage.getItem(HERO_TUNING_STORAGE_KEY);
+      if (savedTuning) {
+        setHeroTuning({ ...DEFAULT_HERO_TUNING, ...JSON.parse(savedTuning) });
+      }
+    } catch (error) {
+      console.debug('Unable to load saved hero tuning', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(HERO_TUNING_STORAGE_KEY, JSON.stringify(heroTuning));
+    } catch (error) {
+      console.debug('Unable to save hero tuning', error);
+    }
+  }, [heroTuning]);
+
+  const resetHeroTuning = () => setHeroTuning(DEFAULT_HERO_TUNING);
 
   const scrollToSection = (id) => {
     setScrollTarget(id);
@@ -442,7 +559,10 @@ const CampaignImage = ({ src, alt, className }) => {
     <section className="relative w-full bg-white flex flex-col lg:flex-row lg:items-center pt-0 lg:min-h-[85vh] overflow-hidden">
       
       {/* 1. THE VIDEO: Anchored to the right, scaled by height to prevent cropping */}
-      <div className="relative w-full h-[56.25vw] sm:h-[48vw] md:h-[40vw] lg:absolute lg:top-0 lg:right-0 lg:w-[65%] lg:h-full z-0 lg:flex lg:justify-end">
+      <div
+        className="relative w-full h-[56.25vw] sm:h-[48vw] md:h-[40vw] lg:absolute lg:top-0 lg:right-0 lg:w-[var(--hero-video-width)] lg:h-full z-0 lg:flex lg:justify-end"
+        style={{ '--hero-video-width': `${heroTuning.videoWidth}%` }}
+      >
         
         {/* 2. THE GRADIENT SHIELD: Bridges the white gap and fades into the video */}
         <div 
@@ -459,7 +579,11 @@ const CampaignImage = ({ src, alt, className }) => {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover object-left z-0"
+          className="w-full h-full object-cover z-0"
+          style={{
+            objectPosition: `${heroTuning.videoPosition}% center`,
+            opacity: heroTuning.videoOpacity / 100
+          }}
         >
           <source src={`/images/${ASSETS.heroVideo}`} type="video/mp4" />
           Your browser does not support the video tag.
@@ -468,7 +592,10 @@ const CampaignImage = ({ src, alt, className }) => {
 
       {/* 3. THE TEXT CONTENT: Anchored safely to the left */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:min-h-[85vh] lg:flex lg:items-center pointer-events-none">
-        <div className="w-full lg:w-[50%] py-10 lg:py-12 bg-white lg:bg-transparent pointer-events-auto">
+        <div
+          className="w-full lg:w-[50%] py-10 lg:py-12 lg:translate-x-[var(--hero-text-offset)] bg-white lg:bg-transparent pointer-events-auto"
+          style={{ '--hero-text-offset': `${heroTuning.textOffset}px` }}
+        >
           
           <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-8 tracking-tighter">
             <span style={{ color: BRAND_COLOR }}>Independence</span><br />
@@ -1261,6 +1388,14 @@ const CampaignImage = ({ src, alt, className }) => {
           </div>
         </div>
       </footer>
+
+      {import.meta.env.DEV && (
+        <HeroTuningPanel
+          values={heroTuning}
+          onChange={setHeroTuning}
+          onReset={resetHeroTuning}
+        />
+      )}
     </div>
   );
 };
