@@ -55,10 +55,10 @@ const ASSETS = {
 
 const HERO_TUNING_STORAGE_KEY = 'kris-babler-hero-tuning';
 const DEFAULT_HERO_TUNING = {
-  videoWidth: 60,
-  videoPosition: 0,
+  videoWidth: 85,
+  videoPosition: 41,
   videoOpacity: 100,
-  textOffset: 48
+  textOffset: 160
 };
 
 const HeroTuningPanel = ({ values, onChange, onReset }) => {
@@ -265,18 +265,17 @@ const App = () => {
   const [buildTogetherSubmitted, setBuildTogetherSubmitted] = useState(false);
   const [scrollTarget, setScrollTarget] = useState(null);
   const heroVideoRef = useRef(null);
-  const [heroTuning, setHeroTuning] = useState(DEFAULT_HERO_TUNING);
-
-  useEffect(() => {
+  const [heroTuning, setHeroTuning] = useState(() => {
     try {
       const savedTuning = window.localStorage.getItem(HERO_TUNING_STORAGE_KEY);
-      if (savedTuning) {
-        setHeroTuning({ ...DEFAULT_HERO_TUNING, ...JSON.parse(savedTuning) });
-      }
+      return savedTuning
+        ? { ...DEFAULT_HERO_TUNING, ...JSON.parse(savedTuning) }
+        : DEFAULT_HERO_TUNING;
     } catch (error) {
       console.debug('Unable to load saved hero tuning', error);
+      return DEFAULT_HERO_TUNING;
     }
-  }, []);
+  });
 
   useEffect(() => {
     try {
