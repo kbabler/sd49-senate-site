@@ -42,6 +42,12 @@ const DEFAULT_LOGOS: LogoItem[] = [
     logoUrl: '/images/endorsements/rcv.png',
     altText: 'Ranked Choice Voting Logo',
   },
+  {
+    id: 'iva',
+    name: 'Independent Veterans of America',
+    logoUrl: '/images/endorsements/iva.jpg',
+    altText: 'Independent Veterans of America Logo',
+  },
 ];
 
 export default function LogoRotator({
