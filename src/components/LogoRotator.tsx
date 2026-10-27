@@ -31,6 +31,12 @@ const DEFAULT_LOGOS: LogoItem[] = [
     altText: 'Housing First Coalition Logo',
   },
   {
+    id: 'iva',
+    name: 'Independent Veterans of America',
+    logoUrl: '/images/endorsements/iva.jpg',
+    altText: 'Independent Veterans of America Logo',
+  },
+  {
     id: 'mn-forward-together',
     name: 'Minnesota Forward Together',
     logoUrl: '/images/endorsements/mnfwdtogether.jpg',
@@ -41,12 +47,6 @@ const DEFAULT_LOGOS: LogoItem[] = [
     name: 'Ranked Choice Voting',
     logoUrl: '/images/endorsements/rcv.png',
     altText: 'Ranked Choice Voting Logo',
-  },
-  {
-    id: 'iva',
-    name: 'Independent Veterans of America',
-    logoUrl: '/images/endorsements/iva.jpg',
-    altText: 'Independent Veterans of America Logo',
   },
 ];
 

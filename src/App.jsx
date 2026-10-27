@@ -187,10 +187,10 @@ const SITE_CONTENT = {
         href: "https://open.substack.com/pub/krisbabler/p/people-need-jobs?r=1i94n6&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true"
       },
       {
-        title: "Why I'm Stepping Into the Arena",
-        description: "Kris shares the personal story and conviction behind his decision to run for Senate — and what's at stake for SD49.",
+        title: "On Policy #6: Stop Shorting Our Schools",
+        description: "A closer look at the consequences of shortchanging Minnesota schools and the need to put students first.",
         source: "Substack",
-        href: "https://krisbabler.substack.com/p/why-im-stepping-into-the-arena"
+        href: "https://krisbabler.substack.com/p/on-policy-6-stop-shorting-our-schools?r=1i94n6&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true"
       }
     ]
   },

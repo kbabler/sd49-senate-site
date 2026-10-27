@@ -48,8 +48,8 @@ const CONFIG = {
       href: "https://krisbabler.substack.com/p/you-are-not-alone?r=1i94n6"
     },
     {
-      title: "Why I'm Stepping Into the Arena",
-      href: "https://krisbabler.substack.com/p/why-im-stepping-into-the-arena"
+      title: "On Policy #6: Stop Shorting Our Schools",
+      href: "https://krisbabler.substack.com/p/on-policy-6-stop-shorting-our-schools?r=1i94n6&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true"
     }
   ],
   
