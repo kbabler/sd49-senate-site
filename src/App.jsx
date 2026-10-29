@@ -611,7 +611,7 @@ const CampaignImage = ({ src, alt, className }) => {
           </p>
           
           <p className="text-lg lg:text-xl text-slate-950 mb-10 max-w-lg leading-relaxed font-medium">
-            I’m <strong>Kris Babler</strong>. I owe zero favors to party bosses or out-of-state special interests. That means on Day 1 in St. Paul, I have the total freedom to put District 49 first—supporting common-sense solutions that lower costs, strengthen our schools, and hold state government accountable to you.
+            I’m <strong>Kris Babler</strong>. I owe zero favors to party bosses or out-of-state special interests. In an evenly split 34-33 Senate, I have the total freedom to put District 49 first—supporting common-sense solutions that lower costs, strengthen our schools, and hold state government accountable to you.
           </p>
 
           <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 lg:p-8 shadow-lg max-w-xl">
