@@ -425,7 +425,7 @@ const CampaignImage = ({ src, alt, className }) => {
             Eden Prairie &amp; Minnetonka <span className="px-2 text-brand-teal" aria-hidden="true">·</span> Independent Civic Voice
           </p>
           <h1 className="mb-6 text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-            <span style={{ color: BRAND_COLOR }}>Front-Porch Priorities Over Party Politics.</span>
+            <span style={{ color: BRAND_COLOR, fontFamily: '"Poller One", cursive' }}>MOVING FORWARD</span>
           </h1>
           <div className="space-y-5 text-lg font-medium leading-relaxed text-white sm:text-xl">
             <p className="max-w-2xl">
