@@ -351,7 +351,7 @@ const CampaignImage = ({ src, alt, className }) => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
-          <img src="/images/neutrallogo.png" alt="Campaign logo" />
+          <img src="/images/logo.png" alt="Kris Babler campaign logo" />
         </a>
         
         {/* NAVIGATION LINKS & SOCIALS */}
