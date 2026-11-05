@@ -337,18 +337,6 @@ const CampaignImage = ({ src, alt, className }) => {
     return <img src={srcPath} alt={alt} className={className} onError={() => setError(true)} />;
   };
 
-  const DonationWidget = () => {
-    return (
-      <button
-        onClick={() => setActiveTab('volunteer')}
-        className="text-white px-6 py-2.5 rounded-full transition-all shadow-lg font-black hover:scale-105 active:scale-95"
-        style={{ backgroundColor: BRAND_COLOR }}
-      >
-        $75 REFUND
-      </button>
-    );
-  };
-
   const Navigation = () => (
     <nav className="main-header sticky top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-slate-100 h-24 flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
@@ -372,8 +360,6 @@ const CampaignImage = ({ src, alt, className }) => {
           <button onClick={() => scrollToSection('about')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>The Man</button>
           <button onClick={() => scrollToSection('endorsements')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Endorsements</button>
           <button onClick={() => scrollToSection('service')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Service in Action</button>
-          <button onClick={() => scrollToSection('volunteer')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Get Involved</button>
-          <button onClick={() => scrollToSection('pcr')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Donate</button>
           
           {/* SOCIAL MEDIA ICONS (With vertical divider line) */}
           <div className="social-icons flex items-center gap-4 border-l border-slate-300 pl-6 ml-2">
@@ -1099,14 +1085,11 @@ const CampaignImage = ({ src, alt, className }) => {
         {activeTab === 'home' && (
           <>
             <Hero />
-            <InvestmentBar />
             <AboutSection />
             <IssuesSection />
             <LogoRotator />
-            <BuildTogetherSection />
             <ServiceSection />
             <NewsSection />
-            <DonateSection />
           </>
         )}
         
@@ -1169,13 +1152,6 @@ const CampaignImage = ({ src, alt, className }) => {
         </div>
       </footer>
 
-      {import.meta.env.DEV && (
-        <HeroTuningPanel
-          values={heroTuning}
-          onChange={setHeroTuning}
-          onReset={resetHeroTuning}
-        />
-      )}
     </div>
   );
 };
