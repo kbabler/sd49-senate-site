@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ShieldCheck, 
   ArrowRight,
@@ -22,8 +22,7 @@ import {
   ExternalLink,
   Phone,
   Mail,
-  Facebook,
-  SlidersHorizontal
+  Facebook
 } from 'lucide-react';
 import LogoRotator from './components/LogoRotator';
 import AlertBanner from './components/AlertBanner';
@@ -44,107 +43,13 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfSB4cXyKBQQ
 
 // Your actual filenames (mapped to files in public/images)
 const ASSETS = {
-  heroVideo: "mix2.mp4",
+  heroImage: "headshot (2).jpg",
   family: "kris-family.jpg",
   community: "krisheadshot.png",
   action: "kris-coaching-basketball.jpg",
   promotion: "promotion-cpt.jpg",
   serviceFamily: "family-service.jpg",
   capital: "st-paul-state-capital.jpg"
-};
-
-const HERO_TUNING_STORAGE_KEY = 'kris-babler-hero-tuning';
-const DEFAULT_HERO_TUNING = {
-  videoWidth: 85,
-  videoPosition: 41,
-  videoOpacity: 100,
-  textOffset: 160
-};
-
-const HeroTuningPanel = ({ values, onChange, onReset }) => {
-  const updateValue = (key, value) => {
-    onChange({ ...values, [key]: Number(value) });
-  };
-
-  return (
-    <aside className="fixed bottom-4 right-4 z-[90] w-72 rounded-2xl border border-slate-200 bg-white/95 p-4 text-slate-900 shadow-2xl backdrop-blur">
-      <div className="mb-4 flex items-center justify-between">
-        <div className="flex items-center gap-2 font-black text-brand-navy">
-          <SlidersHorizontal size={17} aria-hidden="true" />
-          <span>Hero tuning</span>
-        </div>
-        <button
-          type="button"
-          onClick={onReset}
-          className="text-xs font-bold uppercase tracking-wide text-slate-500 hover:text-brand-navy"
-        >
-          Reset
-        </button>
-      </div>
-
-      <div className="space-y-4 text-sm">
-        <label className="block">
-          <div className="mb-1 flex justify-between font-bold">
-            <span>Video width</span>
-            <output>{values.videoWidth}%</output>
-          </div>
-          <input
-            type="range"
-            min="35"
-            max="85"
-            value={values.videoWidth}
-            onChange={(event) => updateValue('videoWidth', event.target.value)}
-            className="w-full accent-cyan-600"
-          />
-        </label>
-
-        <label className="block">
-          <div className="mb-1 flex justify-between font-bold">
-            <span>Video crop</span>
-            <output>{values.videoPosition}%</output>
-          </div>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={values.videoPosition}
-            onChange={(event) => updateValue('videoPosition', event.target.value)}
-            className="w-full accent-cyan-600"
-          />
-        </label>
-
-        <label className="block">
-          <div className="mb-1 flex justify-between font-bold">
-            <span>Video opacity</span>
-            <output>{values.videoOpacity}%</output>
-          </div>
-          <input
-            type="range"
-            min="40"
-            max="100"
-            value={values.videoOpacity}
-            onChange={(event) => updateValue('videoOpacity', event.target.value)}
-            className="w-full accent-cyan-600"
-          />
-        </label>
-
-        <label className="block">
-          <div className="mb-1 flex justify-between font-bold">
-            <span>Text offset</span>
-            <output>{values.textOffset}px</output>
-          </div>
-          <input
-            type="range"
-            min="-32"
-            max="160"
-            value={values.textOffset}
-            onChange={(event) => updateValue('textOffset', event.target.value)}
-            className="w-full accent-cyan-600"
-          />
-        </label>
-      </div>
-    </aside>
-  );
 };
 
 const SITE_CONTENT = {
@@ -264,28 +169,6 @@ const App = () => {
   const [buildTogetherSubmitting, setBuildTogetherSubmitting] = useState(false);
   const [buildTogetherSubmitted, setBuildTogetherSubmitted] = useState(false);
   const [scrollTarget, setScrollTarget] = useState(null);
-  const heroVideoRef = useRef(null);
-  const [heroTuning, setHeroTuning] = useState(() => {
-    try {
-      const savedTuning = window.localStorage.getItem(HERO_TUNING_STORAGE_KEY);
-      return savedTuning
-        ? { ...DEFAULT_HERO_TUNING, ...JSON.parse(savedTuning) }
-        : DEFAULT_HERO_TUNING;
-    } catch (error) {
-      console.debug('Unable to load saved hero tuning', error);
-      return DEFAULT_HERO_TUNING;
-    }
-  });
-
-  useEffect(() => {
-    try {
-      window.localStorage.setItem(HERO_TUNING_STORAGE_KEY, JSON.stringify(heroTuning));
-    } catch (error) {
-      console.debug('Unable to save hero tuning', error);
-    }
-  }, [heroTuning]);
-
-  const resetHeroTuning = () => setHeroTuning(DEFAULT_HERO_TUNING);
 
   const scrollToSection = (id) => {
     setScrollTarget(id);
@@ -305,21 +188,6 @@ const App = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activeTab]);
-
-  useEffect(() => {
-    const v = heroVideoRef.current;
-    if (!v) return;
-    try {
-      v.preload = 'auto';
-      const p = v.play();
-      if (p && typeof p.catch === 'function') p.catch(() => {
-        // autoplay may be blocked; muted autoplay typically allowed—fail silently
-        console.debug('Hero video play was prevented by browser autoplay policy');
-      });
-    } catch (err) {
-      console.debug('Error attempting to play hero video', err);
-    }
-  }, []);
 
   const [calendlyScriptLoaded, setCalendlyScriptLoaded] = useState(false);
 
@@ -555,138 +423,51 @@ const CampaignImage = ({ src, alt, className }) => {
   );
 
   const Hero = () => (
-    <section className="relative w-full bg-white flex flex-col lg:flex-row lg:items-center pt-0 lg:min-h-[85vh] overflow-hidden">
-      
-      {/* 1. THE VIDEO: Anchored to the right, scaled by height to prevent cropping */}
-      <div
-        className="relative w-full h-[56.25vw] sm:h-[48vw] md:h-[40vw] lg:absolute lg:top-0 lg:right-0 lg:w-[var(--hero-video-width)] lg:h-full z-0 lg:flex lg:justify-end"
-        style={{ '--hero-video-width': `${heroTuning.videoWidth}%` }}
-      >
-        
-        {/* 2. THE GRADIENT SHIELD: Bridges the white gap and fades into the video */}
-        <div 
-          className="hidden lg:block absolute inset-y-0 left-0 w-full z-10 pointer-events-none"
-          style={{ 
-            background: 'linear-gradient(to right, #ffffff 0%, #ffffff 20%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%)' 
-          }}
-        ></div>
-
-        <video
-          ref={heroVideoRef}
-          preload="auto"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover z-0"
-          style={{
-            objectPosition: `${heroTuning.videoPosition}% center`,
-            opacity: heroTuning.videoOpacity / 100
-          }}
-        >
-          <source src={`/images/${ASSETS.heroVideo}`} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+    <section className="relative isolate overflow-hidden bg-brand-navy text-white">
+      <div className="absolute inset-y-0 right-[4%] w-full lg:right-[12%] lg:w-[42%]">
+        <img
+          src={`/images/${ASSETS.heroImage}`}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-y-[4%] right-0 h-[92%] w-[88%] object-cover object-[center_35%]"
+        />
+        <div className="absolute inset-y-[4%] left-[12%] w-[22.4%] bg-gradient-to-r from-brand-navy via-brand-navy/70 to-transparent" />
       </div>
-
-      {/* 3. THE TEXT CONTENT: Anchored safely to the left */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:min-h-[85vh] lg:flex lg:items-center pointer-events-none">
-        <div
-          className="w-full lg:w-[50%] py-10 lg:py-12 lg:translate-x-[var(--hero-text-offset)] bg-white lg:bg-transparent pointer-events-auto"
-          style={{ '--hero-text-offset': `${heroTuning.textOffset}px` }}
-        >
-          
-          <h1 className="text-5xl lg:text-[4.8rem] font-black text-brand-navy leading-[0.95] mb-8 tracking-tighter">
-            <span style={{ color: BRAND_COLOR }}>Independence</span><br />
-            Driven by Our<br />
-            <span style={{ color: BRAND_COLOR }}>Community</span>
+      <div className="relative mx-auto flex min-h-[600px] w-full max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="max-w-3xl lg:w-[60%]">
+          <p className="mb-4 text-xs font-black uppercase tracking-[0.24em] text-white/80">
+            Eden Prairie &amp; Minnetonka <span className="px-2 text-brand-teal" aria-hidden="true">·</span> Independent Civic Voice
+          </p>
+          <h1 className="mb-6 text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            <span style={{ color: BRAND_COLOR }}>Front-Porch Priorities Over Party Politics.</span>
           </h1>
-          
-          <h2 className="text-xl lg:text-2xl font-black text-brand-navy mb-6 max-w-lg">
-            Built on Front Porches, Not by Party Machines.
-          </h2>
-          
-          <p className="text-lg lg:text-xl text-slate-950 mb-8 max-w-lg leading-relaxed font-medium">
-            There are over 58,000 voters across Eden Prairie and Minnetonka—and I’m working to earn every single vote the hard way: face-to-face, front porch by front porch, listening to what actually matters to local families.
-          </p>
-          
-          <p className="text-lg lg:text-xl text-slate-950 mb-10 max-w-lg leading-relaxed font-medium">
-            I’m <strong>Kris Babler</strong>. I owe zero favors to party bosses or out-of-state special interests. In an evenly split 34-33 Senate, I have the total freedom to put District 49 first—supporting common-sense solutions that lower costs, strengthen our schools, and hold state government accountable to you.
-          </p>
-
-          <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 lg:p-8 shadow-lg max-w-xl">
-            <h3 className="text-xl font-black text-brand-navy mb-3 uppercase tracking-wide">Meet Kris</h3>
-            <p className="text-slate-600 mb-6 leading-relaxed font-medium">
-              Book 20 minutes with Kris to discuss district priorities, service, or local campaign concerns.
+          <div className="space-y-5 text-lg font-medium leading-relaxed text-white sm:text-xl">
+            <p className="max-w-2xl">
+              The 2026 election is in the books. Over 2,000 neighbors across Eden Prairie and Minnetonka cast their votes for a pragmatic, independent alternative. The campaign has concluded, but the work of tracking state spending, standing up for local classrooms, and demanding common sense at the Capitol continues.
             </p>
+            <ul className="space-y-3 text-base font-semibold sm:text-lg">
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-brand-teal" aria-hidden="true" />
+                <span>Independent oversight of state budgets and tax dollars</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-brand-teal" aria-hidden="true" />
+                <span>Education funding focused directly inside the classroom</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-brand-teal" aria-hidden="true" />
+                <span>Practical, non-partisan solutions for suburban families</span>
+              </li>
+            </ul>
             <button
               type="button"
-              onClick={openCalendlyPopup}
-              disabled={!calendlyScriptLoaded}
-              className="w-full py-4 rounded-full font-black text-white text-sm uppercase tracking-widest transition-all hover:scale-105 shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
+              onClick={() => setActiveTab('issues')}
+              className="inline-flex items-center rounded-xl px-7 py-4 text-sm font-black uppercase tracking-widest text-brand-navy shadow-lg transition-transform hover:scale-105"
               style={{ backgroundColor: BRAND_COLOR }}
             >
-              {calendlyScriptLoaded ? 'Book 20 Minutes with Kris' : 'Loading...'}
+              Explore the Playbook
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
             </button>
-          </div>
-          
-        </div>
-      </div>
-    </section>
-  );
-
-  const InvestmentBar = () => (
-    <section className="py-16 bg-slate-50 border-y border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl lg:text-4xl font-black text-brand-navy mb-4 tracking-tight">
-            Give $75—Get $75 Back
-          </h2>
-          <p className="text-lg text-slate-600 mb-8 leading-relaxed font-medium">
-            Minnesota's PCR program fully refunds your first $75 contribution ($150 for couples). It costs you nothing to fuel an independent voice.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="https://secure.anedot.com/campaign-fund-of-kris-babler/donate?amount=25"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest border-2 border-slate-300 text-slate-700 hover:border-slate-400 hover:bg-slate-100 transition-all"
-            >
-              $25
-            </a>
-            <a
-              href="https://secure.anedot.com/campaign-fund-of-kris-babler/donate?amount=50"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest border-2 border-slate-300 text-slate-700 hover:border-slate-400 hover:bg-slate-100 transition-all"
-            >
-              $50
-            </a>
-            <a
-              href="https://secure.anedot.com/campaign-fund-of-kris-babler/donate?amount=75"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest text-white shadow-lg hover:scale-105 transition-all"
-              style={{ backgroundColor: BRAND_COLOR }}
-            >
-              $75 (Refundable)
-            </a>
-            <a
-              href="https://secure.anedot.com/campaign-fund-of-kris-babler/donate?amount=150"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest border-2 border-slate-300 text-slate-700 hover:border-slate-400 hover:bg-slate-100 transition-all"
-            >
-              $150
-            </a>
-            <a
-              href="https://secure.anedot.com/campaign-fund-of-kris-babler/donate"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest border-2 border-slate-300 text-slate-700 hover:border-slate-400 hover:bg-slate-100 transition-all"
-            >
-              Custom
-            </a>
           </div>
         </div>
       </div>
