@@ -313,8 +313,9 @@ const CampaignImage = ({ src, alt, className }) => {
         
         {/* NAVIGATION LINKS & SOCIALS */}
         <div className="nav-links hidden lg:flex gap-8 items-center text-[11px] font-black uppercase tracking-widest text-slate-400">
-          <button onClick={() => scrollToSection('about')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>The Man</button>
           <button onClick={() => scrollToSection('newsletter')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Newsletter</button>
+          <button onClick={() => scrollToSection('about')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>The Man</button>
+          <button onClick={() => scrollToSection('ventures')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Ventures</button>
           <button onClick={() => scrollToSection('service')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Service in Action</button>
           
           {/* SOCIAL MEDIA ICONS (With vertical divider line) */}
@@ -456,14 +457,88 @@ const CampaignImage = ({ src, alt, className }) => {
                   <span className="font-black">Cutting Red Tape</span> Directing school athletic programs showed me firsthand how bureaucracies get in the way of actual results. Good governance isn't about passing more rules; it's about clearing obstacles so teachers, coaches, and local administrators can succeed.
                 </p>
                 <p>
-                  <span className="font-black">Building the Team</span> Whether building athletic ventures from scratch or coaching college athletes, real progress comes from accountability and showing up for each other. I build alliances to win in mission-first environments. Different people have different strengths.
+                  <span className="font-black">Building the Team</span> Good programs aren't built on slogans; they are built on infrastructure. Through <a href="https://www.polarathleticgroup.com" target="_blank" rel="noopener noreferrer" className="font-bold text-cyan-700 underline decoration-cyan-700/40 underline-offset-2 hover:text-cyan-800">Polar Athletic Group</a> and years coaching youth sports, I build systems that take administrative weight off coaches and teachers so they can focus on their kids. Real progress comes from showing up, doing the grunt work, and staying accountable to the community.
                 </p>
                 <p>
-                  <span className="font-black">Protecting the Bottom Line</span> As a business owner, I know the weight of a balance sheet. Every single dollar the state or school district spends comes out of a taxpayer’s pocket. I evaluate public spending with the exact same fiscal discipline I bring to my own operations.
+                  <span className="font-black">Protecting the Bottom Line</span> As an entrepreneur operating <a href="https://www.tripointapp.com" target="_blank" rel="noopener noreferrer" className="font-bold text-cyan-700 underline decoration-cyan-700/40 underline-offset-2 hover:text-cyan-800">Tripoint</a> and managing athletic budgets, I know the friction of broken software and bloated overhead. Every dollar the state or school district spends comes out of a taxpayer’s pocket. I evaluate public spending with the exact same fiscal discipline and demand for operational simplicity I bring to software and business.
                 </p>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+
+  const VenturesSection = () => (
+    <section id="ventures" className="py-16 bg-white border-t border-b border-[#421b4a]/10 font-sans">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="mb-8">
+          <span className="text-xs font-black uppercase tracking-widest text-cyan-600">
+            In the Field
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#421b4a]">
+            Ventures &amp; Active Operations
+          </h2>
+          <p className="text-sm text-slate-600 mt-1">
+            Building organizations, deploying infrastructure, and running real-world athletic systems.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <a
+            href="https://www.polarathleticgroup.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group p-6 bg-slate-50 border-2 border-[#421b4a] shadow-[4px_4px_0px_#421b4a] hover:shadow-[6px_6px_0px_#00D8F6] hover:-translate-y-0.5 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-600">
+                  Fractional Front Office
+                </span>
+                <span className="text-xs font-bold text-[#421b4a] group-hover:translate-x-1 transition-transform">
+                  Visit Site &rarr;
+                </span>
+              </div>
+              <h3 className="text-xl font-black text-[#421b4a] mb-2">
+                Polar Athletic Group
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Deploying the operational infrastructure required to scale schools, clubs, and sports organizations. We handle the business, tech, and administrative backend so coaches and administrators can focus on competing.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-slate-200/60 text-xs font-sans text-slate-400">
+              polarathleticgroup.com
+            </div>
+          </a>
+
+          <a
+            href="https://www.tripointapp.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group p-6 bg-slate-50 border-2 border-[#421b4a] shadow-[4px_4px_0px_#421b4a] hover:shadow-[6px_6px_0px_#00D8F6] hover:-translate-y-0.5 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-600">
+                  Sports Tech Platform
+                </span>
+                <span className="text-xs font-bold text-[#421b4a] group-hover:translate-x-1 transition-transform">
+                  Launch App &rarr;
+                </span>
+              </div>
+              <h3 className="text-xl font-black text-[#421b4a] mb-2">
+                Tripoint
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                All-in-one league management software built to eliminate administrative friction. Schedule games, assign officials, collect team payments, and manage league-wide communications from a single interface.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-slate-200/60 text-xs font-sans text-slate-400">
+              tripointapp.com
+            </div>
+          </a>
         </div>
       </div>
     </section>
@@ -975,6 +1050,7 @@ const CampaignImage = ({ src, alt, className }) => {
             <Hero />
             <SubstackFeed />
             <AboutSection />
+            <VenturesSection />
             <ServiceSection />
           </>
         )}
