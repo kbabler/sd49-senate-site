@@ -18,14 +18,13 @@ import {
   Award,
   Zap,
   Star,
-  Newspaper,
-  ExternalLink,
   Phone,
   Mail,
   Facebook
 } from 'lucide-react';
 import LogoRotator from './components/LogoRotator';
 import AlertBanner from './components/AlertBanner';
+import SubstackFeed from './components/SubstackFeed';
 
 /** * BRAND CONFIGURATION */
 const BRAND_COLOR = "#00c2cc";
@@ -57,47 +56,6 @@ const SITE_CONTENT = {
     name: "KRIS BABLER",
     title: "Independent for Senate SD49",
     shortName: "KB"
-  },
-  news: {
-    substackUrl: "https://krisbabler.substack.com/",
-    items: [
-      {
-        title: "On Policy: The Tax the Rich Deceit",
-        description: "A direct look at the current state of Minnesota governance and what voters should expect from real leadership.",
-        source: "Substack",
-        href: "https://krisbabler.substack.com/p/on-policy-the-tax-the-rich-deceit?r=1i94n6"
-      },
-      {
-        title: "On Policy #2: The $168 Billion Healthcare Question",
-        description: "A closer look at the growing healthcare cost crisis and the reforms Minnesota needs to protect families and taxpayers.",
-        source: "Substack",
-        href: "https://krisbabler.substack.com/p/on-policy-2-the-168-billion-healthcare?r=1i94n6"
-      },
-      {
-        title: "On Policy #4: Demand Local Accountability",
-        description: "A practical look at why meaningful accountability starts with the people closest to the decisions and the neighborhoods they affect.",
-        source: "Substack",
-        href: "https://krisbabler.substack.com/p/on-policy-4-demand-local-accountability?r=1i94n6"
-      },
-      {
-        title: "You Are Not Alone",
-        description: "A message for neighbors who feel left out of the partisan noise and are looking for a more grounded path forward.",
-        source: "Substack",
-        href: "https://krisbabler.substack.com/p/you-are-not-alone?r=1i94n6"
-      },
-      {
-        title: "On Policy: People Need Jobs",
-        description: "A clear look at how workforce and economic policy shape opportunity for families and communities across Minnesota.",
-        source: "Substack",
-        href: "https://open.substack.com/pub/krisbabler/p/people-need-jobs?r=1i94n6&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true"
-      },
-      {
-        title: "On Policy #6: Stop Shorting Our Schools",
-        description: "A closer look at the consequences of shortchanging Minnesota schools and the need to put students first.",
-        source: "Substack",
-        href: "https://krisbabler.substack.com/p/on-policy-6-stop-shorting-our-schools?r=1i94n6&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true"
-      }
-    ]
   },
   issues: [
     {
@@ -356,7 +314,6 @@ const CampaignImage = ({ src, alt, className }) => {
         
         {/* NAVIGATION LINKS & SOCIALS */}
         <div className="nav-links hidden lg:flex gap-8 items-center text-[11px] font-black uppercase tracking-widest text-slate-400">
-          <button onClick={() => scrollToSection('issues')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Playbook</button>
           <button onClick={() => scrollToSection('about')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>The Man</button>
           <button onClick={() => scrollToSection('endorsements')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Endorsements</button>
           <button onClick={() => scrollToSection('service')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Service in Action</button>
@@ -447,11 +404,11 @@ const CampaignImage = ({ src, alt, className }) => {
             </ul>
             <button
               type="button"
-              onClick={() => setActiveTab('issues')}
+              onClick={() => scrollToSection('about')}
               className="inline-flex items-center rounded-xl px-7 py-4 text-sm font-black uppercase tracking-widest text-brand-navy shadow-lg transition-transform hover:scale-105"
               style={{ backgroundColor: BRAND_COLOR }}
             >
-              Explore the Playbook
+              Meet Kris
               <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
             </button>
           </div>
@@ -505,14 +462,6 @@ const CampaignImage = ({ src, alt, className }) => {
                 <p>
                   <span className="font-black">Protecting the Bottom Line</span> As a Business Owner, I know the weight of a budget. Every dollar St. Paul spends comes out of your pocket. I will treat your tax dollars with the same respect I treat my own bottom line—because you've earned it.
                 </p>
-              </div>
-              <div className="flex gap-4 pt-4">
-                <button 
-                  onClick={() => setActiveTab('issues')}
-                  className="bg-brand-navy text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg"
-                >
-                  View the Playbook
-                </button>
               </div>
             </div>
           </div>
@@ -739,66 +688,6 @@ const CampaignImage = ({ src, alt, className }) => {
           </div>
         </div>
         <p className="text-slate-500 text-sm mt-8 text-center">Kris Babler is a former member of the U.S. Army. Use of his military rank, job titles, and photographs in uniform does not imply endorsement by the Department of the Army or the Department of Defense.</p>
-      </div>
-    </section>
-  );
-
-  const NewsSection = () => (
-    <section className="py-24 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white border border-slate-100 rounded-[2rem] shadow-xl p-8 md:p-12">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest mb-5 border bg-slate-50 text-slate-600 border-slate-200 shadow-sm">
-                <Newspaper size={14} style={{ color: BRAND_COLOR }} /> Articles & News
-              </div>
-              <h2 className="text-4xl lg:text-5xl font-black tracking-tighter text-brand-navy leading-tight mb-4">
-                Step out of the partisan echo chamber.
-              </h2>
-              <p className="text-lg text-slate-600 font-medium leading-relaxed max-w-2xl">
-                I&apos;m breaking down the truth about Minnesota governance and the path to fixing our state. Join for a neighbor&apos;s take on the issues at my Substack.
-              </p>
-            </div>
-
-            <a
-              href={SITE_CONTENT.news.substackUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl text-white font-black text-xs uppercase tracking-widest shadow-lg hover:scale-105 transition-all"
-              style={{ backgroundColor: BRAND_COLOR }}
-            >
-              Follow Me <ExternalLink size={16} />
-            </a>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 mt-8">
-            {SITE_CONTENT.news.items.map((item, idx) => (
-              <div key={idx} className="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-6 flex flex-col justify-between gap-4">
-                <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-3">{item.source}</p>
-                  <h3 className="text-2xl font-black text-brand-navy mb-3">{item.title}</h3>
-                  <p className="text-slate-600 font-medium leading-relaxed">{item.description}</p>
-                </div>
-
-                {item.href !== '#' ? (
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide"
-                    style={{ color: BRAND_COLOR }}
-                  >
-                    Open link <ArrowRight size={16} />
-                  </a>
-                ) : (
-                  <span className="text-sm font-black uppercase tracking-wide text-slate-400">
-                    Paste URL here
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -1085,22 +974,15 @@ const CampaignImage = ({ src, alt, className }) => {
         {activeTab === 'home' && (
           <>
             <Hero />
+            <SubstackFeed />
             <AboutSection />
-            <IssuesSection />
             <LogoRotator />
             <ServiceSection />
-            <NewsSection />
           </>
         )}
         
         {activeTab === 'about' && <AboutSection />}
         {activeTab === 'privacy' && <PrivacyPolicySection />}
-        {activeTab === 'issues' && (
-          <>
-            <IssuesSection />
-            <NewsSection />
-          </>
-        )}
         {activeTab === 'volunteer' && <VolunteerPortal />}
         {activeTab === 'pcr' && <DonationPortal />}
       </main>
