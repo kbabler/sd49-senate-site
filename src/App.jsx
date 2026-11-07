@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
   ShieldCheck, 
-  ArrowRight,
   Calculator,
   GraduationCap,
   Home,
@@ -359,6 +358,22 @@ const CampaignImage = ({ src, alt, className }) => {
                 <path d="M19.589 6.686a4.793 4.793 0 01-3.77-3.77A4.793 4.793 0 0115.684 2h-3.292v13.333a2.916 2.916 0 11-2.917-2.916c.245 0 .484.03.711.087v-3.36a6.294 6.294 0 00-.711-.04A6.23 6.23 0 1015.704 15V8.236a8.057 8.057 0 004.71 1.517V6.46a4.8 4.8 0 01-.825.226z" />
               </svg>
             </a>
+            <a
+              href="https://linkedin.com/in/krisbabler"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-[#00D8F6] transition-colors"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://bablerparty.substack.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-[#00D8F6] transition-colors"
+            >
+              Substack Dispatch
+            </a>
           </div>
         </div>
       </div>
@@ -402,15 +417,6 @@ const CampaignImage = ({ src, alt, className }) => {
                 <span>Practical, non-partisan solutions for suburban families</span>
               </li>
             </ul>
-            <button
-              type="button"
-              onClick={() => scrollToSection('about')}
-              className="inline-flex items-center rounded-xl px-7 py-4 text-sm font-black uppercase tracking-widest text-brand-navy shadow-lg transition-transform hover:scale-105"
-              style={{ backgroundColor: BRAND_COLOR }}
-            >
-              Meet Kris
-              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-            </button>
           </div>
         </div>
       </div>
@@ -1077,9 +1083,17 @@ const CampaignImage = ({ src, alt, className }) => {
             </div>
             <div>
               <p className="text-[10px] font-black uppercase tracking-wider mb-4 text-slate-400">Follow</p>
-              <a href="https://www.facebook.com/profile.php?id=61572137380455" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-slate-300 transition-colors text-sm">
-                <Facebook size={16} /> Facebook
-              </a>
+              <div className="flex flex-col items-start gap-3 text-sm">
+                <a href="https://www.facebook.com/profile.php?id=61572137380455" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-slate-300 transition-colors">
+                  <Facebook size={16} /> Facebook
+                </a>
+                <a href="https://linkedin.com/in/krisbabler" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-[#00D8F6] transition-colors">
+                  LinkedIn
+                </a>
+                <a href="https://bablerparty.substack.com" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-[#00D8F6] transition-colors">
+                  Substack Dispatch
+                </a>
+              </div>
             </div>
             <div>
               <p className="text-[10px] font-black uppercase tracking-wider mb-4 text-slate-400">About</p>
@@ -1097,9 +1111,6 @@ const CampaignImage = ({ src, alt, className }) => {
             >
               Privacy Policy
             </button>
-            <p className="text-[9px] text-slate-400 font-medium uppercase tracking-[0.22em] mt-4">
-              Disclaimer: Some campaign B-roll footage was produced with AI tools for storytelling.
-            </p>
             <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-4">© 2026 Kris Babler · BablerParty. All rights reserved.</p>
           </div>
         </div>
