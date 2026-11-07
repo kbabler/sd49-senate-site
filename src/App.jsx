@@ -22,7 +22,6 @@ import {
   Mail,
   Facebook
 } from 'lucide-react';
-import LogoRotator from './components/LogoRotator';
 import AlertBanner from './components/AlertBanner';
 import SubstackFeed from './components/SubstackFeed';
 
@@ -315,7 +314,7 @@ const CampaignImage = ({ src, alt, className }) => {
         {/* NAVIGATION LINKS & SOCIALS */}
         <div className="nav-links hidden lg:flex gap-8 items-center text-[11px] font-black uppercase tracking-widest text-slate-400">
           <button onClick={() => scrollToSection('about')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>The Man</button>
-          <button onClick={() => scrollToSection('endorsements')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Endorsements</button>
+          <button onClick={() => scrollToSection('newsletter')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Newsletter</button>
           <button onClick={() => scrollToSection('service')} className={activeTab === 'home' ? 'text-brand-navy' : 'hover:text-slate-600'}>Service in Action</button>
           
           {/* SOCIAL MEDIA ICONS (With vertical divider line) */}
@@ -442,25 +441,25 @@ const CampaignImage = ({ src, alt, className }) => {
 
           <div className="space-y-8">
             <h2 className="text-4xl lg:text-5xl font-black tracking-tighter text-brand-navy leading-tight">
-              A Neighbor Running To <br/>
-              <span style={{ color: BRAND_COLOR }}>Make A Difference.</span>
+              Service in the Field. <br/>
+              <span style={{ color: BRAND_COLOR }}>Accountability at Home.</span>
             </h2>
             <div className="space-y-6 text-lg text-slate-600 font-medium leading-relaxed">
               <p>
-                I'm a dad, a local business owner, and a neighbor who believes that if you see a problem, you step up. My path to this campaign wasn't through politics; it was through service.
+                Dad, business founder, and Army veteran. If there’s a problem, you roll up your sleeves and fix it.
               </p>
               <div className="space-y-6">
                 <p>
-                  <span className="font-black">Leadership Under Pressure</span> As a U.S. Army Captain, I learned that leadership isn't about rank—it's about the mission and the people. When a plan fails in the field, you don't point fingers; you adapt and get the job done. I'm bringing that same "mission-first" accountability to St. Paul.
+                  <span className="font-black">Leadership Under Pressure</span> As an Army Reserve Captain deployed during Operation Inherent Resolve, I learned that real leadership is about the mission and the people. When systems fail under pressure, you don’t point fingers; you adapt, enforce accountability, and get the job done.
                 </p>
                 <p>
-                  <span className="font-black">Cutting the Red Tape</span> Working in School Administration, I saw how top-down mandates from the state get in the way of actual learning. We need to stop the experiments and start supporting our teachers and parents so our kids can thrive.
+                  <span className="font-black">Cutting Red Tape</span> Directing school athletic programs showed me firsthand how bureaucracies get in the way of actual results. Good governance isn't about passing more rules; it's about clearing obstacles so teachers, coaches, and local administrators can succeed.
                 </p>
                 <p>
-                  <span className="font-black">Building the Team</span> Coaching basketball is where I've seen the real Minnesota. It's about discipline and showing up for each other. I'm not a career politician—I'm running to be a teammate for Eden Prairie and Minnetonka.
+                  <span className="font-black">Building the Team</span> Whether building athletic ventures from scratch or coaching college athletes, real progress comes from accountability and showing up for each other. I build alliances to win in mission-first environments. Different people have different strengths.
                 </p>
                 <p>
-                  <span className="font-black">Protecting the Bottom Line</span> As a Business Owner, I know the weight of a budget. Every dollar St. Paul spends comes out of your pocket. I will treat your tax dollars with the same respect I treat my own bottom line—because you've earned it.
+                  <span className="font-black">Protecting the Bottom Line</span> As a business owner, I know the weight of a balance sheet. Every single dollar the state or school district spends comes out of a taxpayer’s pocket. I evaluate public spending with the exact same fiscal discipline I bring to my own operations.
                 </p>
               </div>
             </div>
@@ -976,7 +975,6 @@ const CampaignImage = ({ src, alt, className }) => {
             <Hero />
             <SubstackFeed />
             <AboutSection />
-            <LogoRotator />
             <ServiceSection />
           </>
         )}
@@ -1009,13 +1007,10 @@ const CampaignImage = ({ src, alt, className }) => {
             </div>
             <div>
               <p className="text-[10px] font-black uppercase tracking-wider mb-4 text-slate-400">About</p>
-              <p className="text-sm text-slate-300 leading-relaxed">Kris Babler is a candidate for the Minnesota State Senate in District 49. Our work is focused on providing the residents of Eden Prairie and Minnetonka with a professional, results-oriented choice that prioritizes local impact over partisan interests.</p>
+              <p className="text-sm text-slate-300 leading-relaxed">Kris Babler is an independent civic analyst, business founder, and former legislative candidate based in Eden Prairie, Minnesota. BablerParty provides non-partisan oversight, budget scrutiny, and public policy commentary.</p>
             </div>
           </div>
           <div className="border-t border-slate-700 pt-8 text-center">
-            <p className="text-[9px] text-slate-400 uppercase font-black tracking-[0.4em] mb-4">
-              Prepared and paid for by Babler for Senate (SD49)
-            </p>
             <button
               type="button"
               onClick={() => {
@@ -1029,7 +1024,7 @@ const CampaignImage = ({ src, alt, className }) => {
             <p className="text-[9px] text-slate-400 font-medium uppercase tracking-[0.22em] mt-4">
               Disclaimer: Some campaign B-roll footage was produced with AI tools for storytelling.
             </p>
-            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-4">© 2025 Kris Babler for State Senate</p>
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-4">© 2026 Kris Babler · BablerParty. All rights reserved.</p>
           </div>
         </div>
       </footer>

@@ -69,7 +69,7 @@ export default function SubstackFeed() {
   }, []);
 
   return (
-    <section className="py-16 bg-slate-50">
+    <section id="newsletter" className="py-16 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white border border-slate-100 rounded-[2rem] shadow-xl p-8 md:p-12">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 mb-8 border-b border-slate-200 pb-6">
