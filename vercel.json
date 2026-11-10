@@ -6,7 +6,6 @@
   ],
   "rewrites": [
     { "source": "/receipts", "destination": "/receipts/index.html" },
-    { "source": "/receipts/(.*)", "destination": "/receipts/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/receipts/(.*)", "destination": "/receipts/index.html" }
   ]
 }
