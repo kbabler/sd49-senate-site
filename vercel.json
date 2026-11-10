@@ -1,9 +1,7 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "api/substack-feed.js", "use": "@vercel/node" },
-    { "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
-  ],
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "rewrites": [
     { "source": "/receipts", "destination": "/receipts/index.html" },
     { "source": "/receipts/(.*)", "destination": "/receipts/index.html" }
