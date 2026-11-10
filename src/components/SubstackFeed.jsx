@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const SUBSTACK_URL = 'https://krisbabler.substack.com';
 const API_ENDPOINT = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`${SUBSTACK_URL}/feed`)}`;
+const REFRESH_INTERVAL = 15 * 60 * 1000;
 
 const getSafePostUrl = (value) => {
   if (typeof value !== 'string') return null;
@@ -23,6 +24,11 @@ const getExcerpt = (description) => {
     .trim() || '';
 };
 
+const getPublicationTime = (post) => {
+  const timestamp = Date.parse(post.pubDate);
+  return Number.isNaN(timestamp) ? Number.NEGATIVE_INFINITY : timestamp;
+};
+
 export default function SubstackFeed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -30,10 +36,19 @@ export default function SubstackFeed() {
 
   useEffect(() => {
     const controller = new AbortController();
+    let requestInProgress = false;
 
     const loadPosts = async () => {
+      if (requestInProgress) return;
+      requestInProgress = true;
+
       try {
-        const response = await fetch(API_ENDPOINT, { signal: controller.signal });
+        const requestUrl = new URL(API_ENDPOINT);
+        requestUrl.searchParams.set('_', String(Date.now()));
+        const response = await fetch(requestUrl, {
+          signal: controller.signal,
+          cache: 'no-store',
+        });
         if (!response.ok) {
           throw new Error(`Substack feed request failed with status ${response.status}`);
         }
@@ -51,21 +66,36 @@ export default function SubstackFeed() {
             safeLink: getSafePostUrl(post.link),
           }))
           .filter((post) => typeof post.title === 'string' && post.safeLink)
+          .sort((first, second) => getPublicationTime(second) - getPublicationTime(first))
           .slice(0, 2);
 
         setPosts(latestPosts);
+        setFeedError(false);
       } catch (error) {
         if (error.name !== 'AbortError') {
           console.error('Failed to fetch Substack feed:', error);
           setFeedError(true);
         }
       } finally {
-        if (!controller.signal.aborted) setLoading(false);
+        if (!controller.signal.aborted) {
+          requestInProgress = false;
+          setLoading(false);
+        }
       }
     };
 
     loadPosts();
-    return () => controller.abort();
+    const intervalId = window.setInterval(loadPosts, REFRESH_INTERVAL);
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') loadPosts();
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      controller.abort();
+      window.clearInterval(intervalId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, []);
 
   return (
@@ -78,7 +108,7 @@ export default function SubstackFeed() {
                 What is BablerParty?
               </h2>
               <p className="text-base text-slate-600 leading-relaxed mt-3">
-                It’s a party of one. Launched before my independent run for office, <strong>BablerParty</strong> is a dedicated journal for civic oversight, policy analysis, and the occasional musing on sports. Drawing on my <strong>Public Affairs</strong> background, I publish unflinching deep dives into state and local governance—tracking public dollars, examining policy mechanics, and calling out what party caucuses prefer to ignore.
+                Launched before my independent run for office, BablerParty is a dedicated journal for policy analysis and the occasional musing on sports. Drawing on my Public Affairs background, I look at every issue through a simple formula: fact plus message equals truth.
               </p>
             </div>
             <div className="flex shrink-0 flex-col items-start gap-4 sm:items-end">
