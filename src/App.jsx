@@ -388,7 +388,7 @@ const CampaignImage = ({ src, alt, className }) => {
       <div className="relative mx-auto flex min-h-[600px] w-full max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="max-w-3xl lg:w-[60%]">
           <p className="mb-4 text-xs font-black uppercase tracking-[0.24em] text-white/80">
-            Eden Prairie &amp; Minnetonka <span className="px-2 text-brand-teal" aria-hidden="true">·</span> Independent Civic Voice
+            Eden Prairie &amp; Minnetonka <span className="px-2 text-brand-teal" aria-hidden="true">·</span> Independent · Minnesotan · Veteran
           </p>
           <h1 className="mb-6 text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
             <span style={{ color: BRAND_COLOR, fontFamily: '"Poller One", cursive' }}>MOVING FORWARD</span>
