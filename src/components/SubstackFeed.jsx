@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 const SUBSTACK_URL = 'https://krisbabler.substack.com';
-const API_ENDPOINT = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`${SUBSTACK_URL}/feed`)}`;
-const REFRESH_INTERVAL = 15 * 60 * 1000;
+const API_ENDPOINT = '/api/substack-feed';
+const REFRESH_INTERVAL = 5 * 60 * 1000;
 
 const getSafePostUrl = (value) => {
   if (typeof value !== 'string') return null;
@@ -43,27 +43,23 @@ export default function SubstackFeed() {
       requestInProgress = true;
 
       try {
-        const requestUrl = new URL(API_ENDPOINT);
-        requestUrl.searchParams.set('_', String(Date.now()));
-        const response = await fetch(requestUrl, {
-          signal: controller.signal,
-          cache: 'no-store',
-        });
+        const response = await fetch(API_ENDPOINT, { signal: controller.signal, cache: 'no-store' });
         if (!response.ok) {
           throw new Error(`Substack feed request failed with status ${response.status}`);
         }
 
         const data = await response.json();
-        if (data.status !== 'ok') {
-          throw new Error(data.message || 'Substack feed service returned an error');
+        if (!Array.isArray(data.items)) {
+          throw new Error(data.message || 'Substack feed service returned an invalid response');
         }
 
-        const items = Array.isArray(data.items) ? data.items : [];
-        const latestPosts = items
+        const latestPosts = data.items
           .filter((post) => post && typeof post === 'object')
           .map((post) => ({
             ...post,
-            safeLink: getSafePostUrl(post.link),
+            pubDate: post.pubDate || post.date_published,
+            description: post.description || post.summary || post.content_text || post.content_html,
+            safeLink: getSafePostUrl(post.link || post.url),
           }))
           .filter((post) => typeof post.title === 'string' && post.safeLink)
           .sort((first, second) => getPublicationTime(second) - getPublicationTime(first))
